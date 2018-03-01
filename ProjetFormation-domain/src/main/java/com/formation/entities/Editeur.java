@@ -22,6 +22,7 @@ public class Editeur implements Serializable {
 	@OneToMany(mappedBy = "editeur")
 	private List<Livre> livres;
 
+
 	public Editeur() {
 
 	}
