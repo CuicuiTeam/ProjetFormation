@@ -18,7 +18,7 @@ public class Livre implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	//test
+
 	private String titre;
 	private String description;
 	private double prix;

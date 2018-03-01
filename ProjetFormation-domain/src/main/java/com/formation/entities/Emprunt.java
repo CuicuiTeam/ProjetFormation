@@ -2,12 +2,14 @@ package com.formation.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Emprunt implements Serializable{
@@ -20,6 +22,9 @@ public class Emprunt implements Serializable{
 	@ManyToOne
 	private Membre membre;
 	
+	@OneToMany
+	private List<Exemplaire> exemplaires;
+
 	private Date dateEmprunt, dateRetour;
 	
 	public Emprunt() {

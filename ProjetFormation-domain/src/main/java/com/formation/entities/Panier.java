@@ -2,12 +2,14 @@ package com.formation.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Panier implements Serializable{
@@ -22,6 +24,9 @@ public class Panier implements Serializable{
 	@ManyToMany
 	private Membre membre;
 	
+	@OneToMany(mappedBy = "panier")
+	private List<Livre> livres;
+
 	public Panier() {
 	}
 
