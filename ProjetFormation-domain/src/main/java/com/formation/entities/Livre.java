@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Livre implements Serializable {
@@ -35,6 +36,12 @@ public class Livre implements Serializable {
 
 	@ManyToOne
 	private Categorie categorie;
+
+	@OneToMany(mappedBy = "livre")
+	private List<Exemplaire> exemplaires;
+
+	@ManyToOne
+	private Panier panier;
 
 	public Editeur getEditeur() {
 		return editeur;
