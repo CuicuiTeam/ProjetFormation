@@ -31,7 +31,7 @@ public class ConteneurSpringFullJava {
         sessionFactory.setDataSource(restDataSource());
         sessionFactory.setPackagesToScan(new String[] { "com.formation.entities" });
         sessionFactory.setHibernateProperties(hibernateProperties());
-
+//test
         return sessionFactory;
     }
 
