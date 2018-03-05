@@ -1,5 +1,5 @@
 
-package com.formation.dao;
+package com.formation.implementation;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -9,6 +9,8 @@ import javax.persistence.EntityManager;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.formation.dao.DAOPrincipal;
 
 public abstract class DAOPrincipalImpl<T> implements DAOPrincipal<T>{
 	
