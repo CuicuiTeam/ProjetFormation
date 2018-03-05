@@ -9,11 +9,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<title>Bibliothèques</title>
+<title><c:out value="${titre}"></c:out></title>
 <body>
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Bibliothèques</h1>
+			<h1><c:out value="${titre}"></c:out></h1>
 			<p>Pas seulement des livres sur les cuicui</p>
 		</div>
 	</div>
@@ -25,24 +25,11 @@
 					<a class="navbar-brand">Accueil</a>
 				</div>
 				<ul class="nav navbar-nav">
-					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#">Employés<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Liste des employés</a></li>
-							<li><a href="#">Ajouter un employé</a></li>
-						</ul></li>
-					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#">Entreprises<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Liste des entreprises</a></li>
-							<li><a href="#">Ajouter un entreprise</a></li>
-						</ul></li>
-					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#">Factures<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Liste des factures</a></li>
-							<li><a href="#">Ajouter une facture</a></li>
-						</ul></li>
+					<li><a href="#">Auteurs</a></li>
+					<li><a href="#">Catégories</a></li>
+					<li><a href="#">Jeunesse</a></li>
+					<li><a href="#">Périodiques</a></li>
+					<li><a href="#">Bibliothèques</a></li>
 				</ul>
 			</div>
 			</nav>
