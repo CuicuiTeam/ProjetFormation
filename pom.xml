@@ -114,6 +114,6 @@
   <module>ProjetFormation-domain</module>
   	<module>ProjetFormation-dao</module>
   	<module>ProjetFormation-web</module>
-  	
+  	<module>ProjectFormation-service</module>
   </modules>
 </project>
