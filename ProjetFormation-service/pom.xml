@@ -5,7 +5,7 @@
     <artifactId>ProjetFormation</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>ProjectFormation-service</artifactId>
+  <artifactId>ProjetFormation-service</artifactId>
   <dependencies>
 		<dependency>
 			<groupId>com.formation.infotel</groupId>
