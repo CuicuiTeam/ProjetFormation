@@ -21,6 +21,9 @@ public class Membre implements Serializable{
 	@OneToMany(mappedBy="membre")
 	private List<Emprunt> emprunts;
 	
+	@OneToMany(mappedBy="membre")
+	private List<Inscription> inscriptions;
+	
 	@ManyToMany
 	private List<Exemplaire> exemplaires;
 

@@ -1,16 +1,27 @@
+
 package com.formation.dao;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class DAOPrincipalImpl<T> implements DAOPrincipal<T>{
+public abstract class DAOPrincipalImpl<T> implements DAOPrincipal<T>{
+	
+	private Class<T> type;
 	
 	@Autowired
 	private SessionFactory sessionFactory;
-
-	private Class<T> type;
+	
+	public DAOPrincipalImpl() {
+		Type t = getClass().getGenericSuperclass();
+		ParameterizedType pt = (ParameterizedType) t;
+		type = (Class) pt.getActualTypeArguments()[0];
+	}
 	@Override
 	public void save(T t) {
 		sessionFactory.getCurrentSession().saveOrUpdate(t);
@@ -18,12 +29,12 @@ public class DAOPrincipalImpl<T> implements DAOPrincipal<T>{
 
 	@Override
 	public List<T> getAll() {
-		return (List<T>)sessionFactory.getCurrentSession().createQuery("from "+ type.getClass().getComponentType()).getResultList();
+		return (List<T>)sessionFactory.getCurrentSession().createQuery("from "+ type.getName());
 	}
 
 	@Override
 	public T get(int id) {
-		return (T)sessionFactory.getCurrentSession().get(this.getClass(), id);
+		return (T)sessionFactory.getCurrentSession().get(type, id);
 	}
 
 	@Override

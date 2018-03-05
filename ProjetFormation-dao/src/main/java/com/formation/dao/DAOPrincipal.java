@@ -1,3 +1,5 @@
+
+
 package com.formation.dao;
 
 import java.util.List;
@@ -10,3 +12,4 @@ public interface DAOPrincipal<T> {
 	public void delete(T t);
 
 }
+
