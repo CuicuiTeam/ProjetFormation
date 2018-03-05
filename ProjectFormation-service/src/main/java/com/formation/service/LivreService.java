@@ -1,5 +1,4 @@
-
-package com.formation.dao;
+package com.formation.service;
 
 import java.util.List;
 
@@ -7,7 +6,7 @@ import com.formation.entities.Auteur;
 import com.formation.entities.Categorie;
 import com.formation.entities.Livre;
 
-public interface LivreDAO extends DAOPrincipal<Livre> {
+public interface LivreService {
 
 	public List<Livre> getLivreByCat(Categorie cat);
 

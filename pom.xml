@@ -118,11 +118,11 @@
 			</plugin>
 		</plugins>
 	</build>
-
 	<modules>
 		<module>ProjetFormation-domain</module>
 		<module>ProjetFormation-dao</module>
+		<module>ProjetFormation-service</module>
 		<module>ProjetFormation-web</module>
-
 	</modules>
+  	
 </project>
