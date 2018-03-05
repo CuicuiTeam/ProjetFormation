@@ -5,12 +5,16 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.formation.dao.LivreDAO;
 import com.formation.entities.Auteur;
 import com.formation.entities.Categorie;
 import com.formation.entities.Livre;
 
+@Repository
+@Transactional
 public class LivreDAOImpl extends DAOPrincipalImpl<Livre> implements LivreDAO {
 
 	@Autowired
