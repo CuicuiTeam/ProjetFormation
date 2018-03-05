@@ -27,6 +27,8 @@ public class Bibliotheque implements Serializable {
 	@ManyToMany
 	private List<Membre> membres;
 
+	@OneToMany(mappedBy="bibliotheque")
+	private List<Inscription> inscriptions;
 
 	public Bibliotheque() {
 	}
