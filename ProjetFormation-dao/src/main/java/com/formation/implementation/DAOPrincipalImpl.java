@@ -31,7 +31,7 @@ public abstract class DAOPrincipalImpl<T> implements DAOPrincipal<T>{
 
 	@Override
 	public List<T> getAll() {
-		return (List<T>)sessionFactory.getCurrentSession().createQuery("from "+ type.getName());
+		return (List<T>)sessionFactory.getCurrentSession().createQuery("from "+ type.getName()).getResultList();
 	}
 
 	@Override
