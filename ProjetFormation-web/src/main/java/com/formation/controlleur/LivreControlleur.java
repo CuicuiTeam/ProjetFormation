@@ -3,8 +3,11 @@ package com.formation.controlleur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.formation.service.AuteurService;
+import com.formation.service.CategorieService;
 import com.formation.service.LivreService;
 
 @Controller
@@ -12,6 +15,12 @@ public class LivreControlleur {
 
 	@Autowired
 	private LivreService livreService;
+
+	@Autowired
+	private AuteurService auteurService;
+
+	@Autowired
+	private CategorieService categorieService;
 
 	@RequestMapping("/")
 	private String accueil(Model model) {
@@ -27,12 +36,27 @@ public class LivreControlleur {
 		return "periodiques";
 	}
 
-	// @RequestMapping("/bycategorie/{cat}")
-	// private String listeByCategorie(@PathVariable String cat, Model model) {
-	//
-	//
-	// model.addAttribute("livres", livreService.getLivreByCat(cat));
-	//
-	// }
+	@RequestMapping("/bycategorie/{cat}")
+	private String listeByCategorie(@PathVariable String cat, Model model) {
+
+		model.addAttribute("livres", livreService.getLivreByCat(categorieService.getCategorieByNom(cat)));
+		return "categorie";
+
+	}
+
+	@RequestMapping("/byauteur/{aut}")
+	private String listeByAuteur(@PathVariable String aut, Model model) {
+
+		model.addAttribute("livres", livreService.getLivreByAuteur(auteurService.getAuteurByNom(aut)));
+		return "auteur";
+
+	}
+
+	@RequestMapping("/recherche/{rech}")
+	private String listeRecherche(@PathVariable String rech, Model model) {
+
+		model.addAttribute("livres", livreService.getLivreByRecherche(rech));
+		return "recherche";
+	}
 
 }
