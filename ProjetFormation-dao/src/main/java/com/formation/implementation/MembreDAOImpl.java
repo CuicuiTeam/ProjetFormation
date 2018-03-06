@@ -21,4 +21,9 @@ public class MembreDAOImpl extends DAOPrincipalImpl<Membre> implements MembreDAO
 		return (Membre)sessionFactory.getCurrentSession().createQuery("FROM Membre m WHERE m.email = :email AND m.password = :password").setParameter("email", email).setParameter("password",password);
 	}
 	
+	@Override
+	public void save(Membre m) {
+
+		sessionFactory.getCurrentSession().saveOrUpdate(m);
+	}
 }
