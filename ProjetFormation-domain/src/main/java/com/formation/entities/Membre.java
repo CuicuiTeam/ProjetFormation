@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -26,6 +27,9 @@ public class Membre implements Serializable{
 	
 	@ManyToMany
 	private List<Exemplaire> exemplaires;
+	
+	@OneToMany(mappedBy="membre")
+	private List<Panier> paniers;
 
 	@ManyToMany
 	private List<Bibliotheque> bibliotheques;
