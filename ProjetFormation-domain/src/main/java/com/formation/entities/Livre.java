@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.github.slugify.Slugify;
+
 @Entity
 public class Livre implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,7 +22,7 @@ public class Livre implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	// test
+	
 	private String titre;
 	private String description;
 	private double prix;
@@ -28,6 +30,31 @@ public class Livre implements Serializable {
 	private String imagePath;
 	private boolean isPopular;
 	private boolean isPeriodic;
+	private String slug;
+
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+
+	public List<Exemplaire> getExemplaires() {
+		return exemplaires;
+	}
+
+	public void setExemplaires(List<Exemplaire> exemplaires) {
+		this.exemplaires = exemplaires;
+	}
+
+	public Panier getPanier() {
+		return panier;
+	}
+
+	public void setPanier(Panier panier) {
+		this.panier = panier;
+	}
 
 	@ManyToMany(mappedBy="livres")
 	private List<Auteur> auteurs;
@@ -58,7 +85,6 @@ public class Livre implements Serializable {
 
 	public Livre(String titre, String description, float prix, Date datePublication, String imagePath,
 			boolean isPopular, boolean isPeriodic) {
-
 		this.titre = titre;
 		this.description = description;
 		this.prix = prix;
@@ -66,6 +92,7 @@ public class Livre implements Serializable {
 		this.imagePath = imagePath;
 		this.isPopular = isPopular;
 		this.isPeriodic = isPeriodic;
+		this.slug = new Slugify().slugify(titre);
 	}
 
 	public String getTitre() {
