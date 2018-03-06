@@ -16,7 +16,7 @@ public class CategorieDAOImpl extends DAOPrincipalImpl<Categorie> implements Cat
 private SessionFactory sessionFactory;
 
 public Categorie getCategorieByNom(String nom) {
-	return (Categorie)sessionFactory.getCurrentSession().createQuery("FROM Categorie C WHERE C.nom = :nom ORDER BY C.nom").setParameter("nom", nom);
+	return (Categorie)sessionFactory.getCurrentSession().createQuery("FROM Categorie C WHERE C.nom = :nom ORDER BY C.nom").setParameter("nom", nom).getSingleResult();
 }
 	
 }

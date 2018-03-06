@@ -12,5 +12,4 @@ import com.formation.entities.Bibliotheque;
 @Transactional
 public class BibliothequeDAOImpl extends DAOPrincipalImpl<Bibliotheque> implements BibliothequeDAO {
 
-
 }
