@@ -29,7 +29,7 @@ public class Livre implements Serializable {
 	private boolean isPopular;
 	private boolean isPeriodic;
 
-	@ManyToMany
+	@ManyToMany(mappedBy="livres")
 	private List<Auteur> auteurs;
 
 	@ManyToOne

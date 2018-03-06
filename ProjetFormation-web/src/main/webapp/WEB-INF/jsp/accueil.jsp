@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="titre" value="Accueil" scope="session"></c:set>
 <jsp:include page="template/header.jsp" />
 <div class="row">
 	<c:forEach items="${livres}" var="livre">
@@ -8,7 +7,7 @@
 				<div class="caption">
 					<h3>${livre.titre}</h3>
 					<p>${livre.description}</p>
-					<p>${livre.prix} €</p>
+					<p>${livre.prix} &euro;</p>
 					<p>${livre.datePublication}</p>
 				</div>
 			</div>

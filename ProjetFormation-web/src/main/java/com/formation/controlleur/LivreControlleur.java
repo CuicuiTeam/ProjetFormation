@@ -26,6 +26,7 @@ public class LivreControlleur {
 	private String accueil(Model model) {
 
 		model.addAttribute("livres", livreService.getLivreRecommandes());
+		model.addAttribute("titre", "Accueil");
 		return "accueil";
 	}
 

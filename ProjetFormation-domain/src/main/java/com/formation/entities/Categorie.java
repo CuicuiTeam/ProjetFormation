@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.github.slugify.Slugify;
+
 @Entity
 public class Categorie implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -17,7 +19,7 @@ public class Categorie implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private String nom, description;
+	private String nom, description, slug;
 
 	@OneToMany
 	private List<Livre> livres;
@@ -27,10 +29,9 @@ public class Categorie implements Serializable {
 	}
 
 	public Categorie(String nom, String description) {
-
 		this.nom = nom;
 		this.description = description;
-
+		this.slug = new Slugify().slugify(nom);
 }
 
 	public String getNom() {
@@ -55,6 +56,14 @@ public class Categorie implements Serializable {
 
 	public void setLivres(List<Livre> livres) {
 		this.livres = livres;
+	}
+
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 
 

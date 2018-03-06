@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import com.github.slugify.Slugify;
@@ -22,6 +24,7 @@ public class Auteur implements Serializable {
 	private String nom, prenom, slug;
 
 	@ManyToMany
+	@JoinTable(name = "livre_auteur", joinColumns = { @JoinColumn(name = "auteur_id") }, inverseJoinColumns = { @JoinColumn(name = "livre_id") })
 	private List<Livre> livres;
 
 	public Auteur() {
@@ -29,10 +32,9 @@ public class Auteur implements Serializable {
 	}
 
 	public Auteur(String nom, String prenom) {
-		Slugify slg = new Slugify();
 		this.nom = nom;
 		this.prenom = prenom;
-		this.slug = slg.slugify(this.prenom +" "+ this.nom);
+		this.slug = new Slugify().slugify(this.prenom +" "+ this.nom);
 	}
 
 	public String getNom() {

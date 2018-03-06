@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -34,10 +34,10 @@
 				</div>
 				<ul class="nav navbar-nav">
 					<li><a href="#">Auteurs</a></li>
-					<li><a href="#">Catégories</a></li>
+					<li><a href="#">CatÃ©gories</a></li>
 					<li><a href="#">Jeunesse</a></li>
-					<li><a href="#">Périodiques</a></li>
-					<li><a href="#">Bibliothèques</a></li>
+					<li><a href="#">PÃ©riodiques</a></li>
+					<li><a href="#">BibliothÃ¨ques</a></li>
 				</ul>
 			</div>
 			</nav>
