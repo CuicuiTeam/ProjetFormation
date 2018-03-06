@@ -33,14 +33,14 @@ public class LivreControlleur {
 	private String listePeriodiques(Model model) {
 
 		model.addAttribute("listePeriodiques", livreService.getPeriodiques());
-		return "periodiques";
+		return "accueil";
 	}
 
-	@RequestMapping("/bycategorie/{cat}")
+	@RequestMapping("/categorie/{cat}")
 	private String listeByCategorie(@PathVariable String cat, Model model) {
 
 		model.addAttribute("livres", livreService.getLivreByCat(categorieService.getCategorieByNom(cat)));
-		return "categorie";
+		return "accueil";
 
 	}
 
@@ -48,7 +48,7 @@ public class LivreControlleur {
 	private String listeByAuteur(@PathVariable String aut, Model model) {
 
 		model.addAttribute("livres", livreService.getLivreByAuteur(auteurService.getAuteurByNom(aut)));
-		return "auteur";
+		return "accueil";
 
 	}
 

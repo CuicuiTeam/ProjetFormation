@@ -17,7 +17,7 @@ public abstract class DAOPrincipalImpl<T> implements DAOPrincipal<T>{
 	private Class<T> type;
 	
 	@Autowired
-	private SessionFactory sessionFactory;
+	protected SessionFactory sessionFactory;
 	
 	public DAOPrincipalImpl() {
 		Type t = getClass().getGenericSuperclass();
