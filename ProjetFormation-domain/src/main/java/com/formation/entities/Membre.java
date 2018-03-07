@@ -1,13 +1,17 @@
 package com.formation.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -30,6 +34,10 @@ public class Membre implements Serializable{
 	
 	@OneToMany(mappedBy="membre")
 	private List<Panier> paniers;
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name = "membre_userprofile", joinColumns = { @JoinColumn(name="membre_id")}, inverseJoinColumns = { @JoinColumn(name="userprofile_id")})
+	private Set<UserProfile> userProfiles = new HashSet<>();
 
 	private String nom, prenom, password, adresse, ville, codePostal, telephone;
 	
@@ -137,5 +145,39 @@ public class Membre implements Serializable{
 		this.emprunts = emprunts;
 		this.emprunts.forEach((e)-> e.setMembre(this));
 	}
+
+	public List<Inscription> getInscriptions() {
+		return inscriptions;
+	}
+
+	public void setInscriptions(List<Inscription> inscriptions) {
+		this.inscriptions = inscriptions;
+	}
+
+	public List<Exemplaire> getExemplaires() {
+		return exemplaires;
+	}
+
+	public void setExemplaires(List<Exemplaire> exemplaires) {
+		this.exemplaires = exemplaires;
+	}
+
+	public List<Panier> getPaniers() {
+		return paniers;
+	}
+
+	public void setPaniers(List<Panier> paniers) {
+		this.paniers = paniers;
+	}
+
+	public Set<UserProfile> getUserProfiles() {
+		return userProfiles;
+	}
+
+	public void setUserProfiles(Set<UserProfile> userProfiles) {
+		this.userProfiles = userProfiles;
+	}
+	
+	
 
 }

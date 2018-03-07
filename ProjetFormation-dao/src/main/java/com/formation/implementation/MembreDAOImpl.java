@@ -16,6 +16,7 @@ public class MembreDAOImpl extends DAOPrincipalImpl<Membre> implements MembreDAO
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Membre identification(String email, String password) {
 		return (Membre) sessionFactory.getCurrentSession()
@@ -29,13 +30,10 @@ public class MembreDAOImpl extends DAOPrincipalImpl<Membre> implements MembreDAO
 		sessionFactory.getCurrentSession().saveOrUpdate(m);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public boolean getMembreByMail(String email) {
-		if (sessionFactory.getCurrentSession().createQuery("FROM Membre m WHERE m.email = :email").setParameter("email",
-				email) == null) {
-			return false;
-		} else {
-			return true;
-		}
+	public Membre findMembreByEmail(String email) {
+		return (Membre)sessionFactory.getCurrentSession().createQuery("FROM Membre m WHERE m.email = :email").setParameter("email",
+				email).getResultList().stream().findFirst().orElse(null);
 	}
 }

@@ -28,8 +28,8 @@ public class MembreControlleur {
 	private String ajoutMembre(@ModelAttribute("newMembre") Membre newMembre, Model model) {
 		String pass = membreService.cryptageMdp(newMembre);
 		newMembre.setPassword(pass);
-		if (membreService.getMembreByMail(newMembre.getEmail()) == true) {
-			model.addAttribute("msgErreur", "Cet email est dÈj‡† utilisÈ");
+		if (membreService.findByEmail(newMembre.getEmail()) != null) {
+			model.addAttribute("msgErreur", "Cet email est d√©j√† utilis√©");
 			newMembre.setPassword("");
 			return "inscription";
 		} else {

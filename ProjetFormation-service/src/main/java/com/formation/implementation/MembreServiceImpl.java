@@ -47,13 +47,18 @@ public class MembreServiceImpl implements MembreService{
 	}
 
 	@Override
-	public boolean getMembreByMail(String email) {
-		// TODO Auto-generated method stub
-		if (membreDAO.getMembreByMail(email) == false) {
-			return false;
-		} else {
-			return true;
-		}
+	public Membre get(int id) {
+		return membreDAO.get(id);
+	}
+
+	@Override
+	public Membre findByEmail(String email) {
+		return membreDAO.findMembreByEmail(email);
+	}
+
+	@Override
+	public void delete(Membre m) {
+		membreDAO.delete(m);
 	}
 
 }

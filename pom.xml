@@ -14,7 +14,7 @@
 
 		<!-- Spring -->
 		<spring-framework.version>4.3.14.RELEASE</spring-framework.version>
-
+		<spring-security.version>4.2.3.RELEASE</spring-security.version>
 		<!-- Hibernate / JPA -->
 		<hibernate.version>5.2.12.Final</hibernate.version>
 
@@ -53,6 +53,27 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring-framework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring-security.version}</version>
 		</dependency>
 
 		<dependency>
@@ -114,6 +135,7 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -134,5 +156,5 @@
 		<module>ProjetFormation-service</module>
 		<module>ProjetFormation-web</module>
 	</modules>
-  	
+
 </project>
