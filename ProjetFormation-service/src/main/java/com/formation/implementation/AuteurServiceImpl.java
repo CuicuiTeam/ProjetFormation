@@ -1,5 +1,7 @@
 package com.formation.implementation;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +10,7 @@ import com.formation.entities.Auteur;
 import com.formation.service.AuteurService;
 
 @Service
+@Transactional
 public class AuteurServiceImpl implements AuteurService {
 
 	@Autowired
@@ -18,5 +21,12 @@ public class AuteurServiceImpl implements AuteurService {
 		// TODO Auto-generated method stub
 		return auteurDAO.getAuteurByNom(nom);
 	}
+	
+	@Override
+	public Auteur getAuteurBySlug(String slug) {
+		// TODO Auto-generated method stub
+		return auteurDAO.getAuteurBySlug(slug);
+	}
+	
 
 }
