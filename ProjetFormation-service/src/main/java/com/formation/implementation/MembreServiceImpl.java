@@ -1,5 +1,9 @@
 package com.formation.implementation;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +26,34 @@ public class MembreServiceImpl implements MembreService{
 	public void save(Membre m) {
 		// TODO Auto-generated method stub
 		membreDAO.save(m);
+	}
+
+	public String cryptageMdp(Membre membre) {
+
+		String generatedPassword = null;
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-512");
+			byte[] bytes = md.digest(membre.getPassword().getBytes(StandardCharsets.UTF_8));
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < bytes.length; i++) {
+				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+			}
+			generatedPassword = sb.toString();
+		} catch (NoSuchAlgorithmException e) {
+			System.out.println(e);
+		}
+		return generatedPassword;
+
+	}
+
+	@Override
+	public boolean getMembreByMail(String email) {
+		// TODO Auto-generated method stub
+		if (membreDAO.getMembreByMail(email) == false) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 }

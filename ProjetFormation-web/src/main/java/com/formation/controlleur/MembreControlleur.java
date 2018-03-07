@@ -25,9 +25,18 @@ public class MembreControlleur {
 	}
 
 	@RequestMapping(value = "/inscription", method = RequestMethod.POST)
-	private String ajoutMembre(@ModelAttribute("newMembre") Membre newMembre) {
+	private String ajoutMembre(@ModelAttribute("newMembre") Membre newMembre, Model model) {
+		String pass;
+		pass = membreService.cryptageMdp(newMembre);
+		newMembre.setPassword(pass);
+		if (membreService.getMembreByMail(newMembre.getEmail()) == true) {
+			model.addAttribute("msgErreur", "Cet email est déjà utilisé");
+			newMembre.setPassword("");
+			return "inscription";
+		} else {
 		membreService.save(newMembre);
 		return "redirect:/";
+		}
 	}
 
 	@RequestMapping(value = "/connexion", method = RequestMethod.GET)
@@ -40,6 +49,10 @@ public class MembreControlleur {
 
 	@RequestMapping(value = "/connexion", method = RequestMethod.POST)
 	private String connexionMembre(@ModelAttribute("newMembre") Membre newMembre, Model model) {
+
+		String pass;
+		pass = membreService.cryptageMdp(newMembre);
+		newMembre.setPassword(pass);
 		if (membreService.identification(newMembre.getEmail(), newMembre.getPassword()) == null) {
 			model.addAttribute("msgErreur", "Veuillez saisir un identifiant et un mot de passe valide");
 			return "connexion";
