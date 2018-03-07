@@ -8,4 +8,8 @@ public interface MembreService {
 
 	public void save(Membre m);
 
+	public String cryptageMdp(Membre membre);
+
+	public boolean getMembreByMail(String email);
+
 }

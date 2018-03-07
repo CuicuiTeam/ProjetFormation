@@ -9,14 +9,14 @@
 		<div class="form-group">
 			<label class="control-label col-lg-2" for="email">Email</label>
 			<div class="col-lg-10">
-				<form:input id="email" path="email" type="email"
+				<form:input id="email" path="email" type="email" required="required"
 					class="form:input-large" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-lg-2" for="mdp">Mot de passe</label>
 			<div class="col-lg-10">
-				<form:input id="mdp" path="password" type="password"
+				<form:input id="mdp" path="password" type="password" required="required"
 					class="form:input-large" />
 			</div>
 		</div>
