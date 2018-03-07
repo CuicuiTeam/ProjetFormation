@@ -68,6 +68,12 @@ public class Auteur implements Serializable {
 	public void setSlug(String slug) {
 		this.slug = slug;
 	}
+
+	public int getId() {
+		return id;
+	}
+	
+	
 	
 
 }

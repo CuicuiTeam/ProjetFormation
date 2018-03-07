@@ -19,7 +19,14 @@ public class AuteurDAOImpl extends DAOPrincipalImpl<Auteur> implements AuteurDAO
 	public Auteur getAuteurByNom(String nom) {
 		// TODO Auto-generated method stub
 		return (Auteur) sessionFactory.getCurrentSession().createQuery("FROM Auteur A WHERE A.nom = :nom")
-				.setParameter("nom", nom);
+				.setParameter("nom", nom).getSingleResult();
+	}
+	
+	@Override
+	public Auteur getAuteurBySlug(String slug) {
+		// TODO Auto-generated method stub
+		return (Auteur) sessionFactory.getCurrentSession().createQuery("FROM Auteur A WHERE A.slug = :slug")
+				.setParameter("slug", slug).getSingleResult();
 	}
 
 }

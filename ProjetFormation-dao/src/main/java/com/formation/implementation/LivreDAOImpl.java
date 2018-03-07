@@ -40,7 +40,7 @@ public class LivreDAOImpl extends DAOPrincipalImpl<Livre> implements LivreDAO {
 	public List<Livre> getLivreByAuteur(Auteur auteur) {
 		// TODO Auto-generated method stub
 		return (List<Livre>) sessionFactory.getCurrentSession()
-				.createQuery("FROM Livre L WHERE L.auteur =:auteur ORDER BY L.titre").setParameter("auteur", auteur).getResultList();
+				.createQuery("SELECT L FROM Livre L JOIN L.auteurs a WHERE a.id =:idAuteur").setParameter("idAuteur", auteur.getId()).getResultList();
 	}
 
 	@SuppressWarnings("unchecked")

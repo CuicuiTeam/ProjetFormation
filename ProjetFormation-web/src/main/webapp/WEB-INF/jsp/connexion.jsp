@@ -19,6 +19,12 @@
 					class="form:input-large" />
 			</div>
 		</div>
+		<div class="form-group">
+			<div class="col-lg-10 col-lg-offset-2">
+				<input type="submit" id="btnAdd" class="btn btn-primary"
+					value="Connexion" />
+			</div>
+		</div>
 	</fieldset>
 </form:form>
 <jsp:include page="template/footer.jsp" />
