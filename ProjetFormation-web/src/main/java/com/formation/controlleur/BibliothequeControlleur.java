@@ -16,6 +16,7 @@ public class BibliothequeControlleur {
 	@RequestMapping("/bibliotheques")
 	private String bibliotheques (Model model) {
 		model.addAttribute("bibliotheques", bibliothequeService.getAll());
+		model.addAttribute("titre", "Bibliotheques");
 		return "bibliotheques";
 	}
 

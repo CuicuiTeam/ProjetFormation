@@ -42,6 +42,7 @@ public class LivreControlleur {
 	private String listeByCategorie(@PathVariable String cat, Model model) {
 
 		model.addAttribute("livres", livreService.getLivreByCat(categorieService.getCategorieByNom(cat)));
+		model.addAttribute("titre", categorieService.getCategorieByNom(cat).getNom());
 		return "accueil";
 
 	}
