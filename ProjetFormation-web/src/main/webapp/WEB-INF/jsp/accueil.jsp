@@ -9,6 +9,7 @@
 					<p>${livre.description}</p>
 					<p>${livre.prix} &euro;</p>
 					<p>${livre.datePublication}</p>
+					<img src="<c:url value="/ressources/${livre.imagePath}"/>" width="100px" height="150px">
 				</div>
 			</div>
 		</div>
