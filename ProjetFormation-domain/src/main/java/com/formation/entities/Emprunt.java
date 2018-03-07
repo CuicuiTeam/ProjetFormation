@@ -22,7 +22,7 @@ public class Emprunt implements Serializable{
 	@ManyToOne
 	private Membre membre;
 	
-	@OneToMany
+	@OneToMany(mappedBy="emprunt")
 	private List<Exemplaire> exemplaires;
 
 	private Date dateEmprunt, dateRetour;
