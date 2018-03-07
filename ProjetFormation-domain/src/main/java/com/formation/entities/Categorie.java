@@ -21,7 +21,7 @@ public class Categorie implements Serializable {
 
 	private String nom, description, slug;
 
-	@OneToMany
+	@OneToMany(mappedBy="categorie")
 	private List<Livre> livres;
 
 	public Categorie() {

@@ -15,8 +15,9 @@ public class CategorieDAOImpl extends DAOPrincipalImpl<Categorie> implements Cat
 @Autowired
 private SessionFactory sessionFactory;
 
+@SuppressWarnings("unchecked")
 public Categorie getCategorieByNom(String nom) {
-	return (Categorie)sessionFactory.getCurrentSession().createQuery("FROM Categorie C WHERE C.nom = :nom ORDER BY C.nom").setParameter("nom", nom).getSingleResult();
+	return (Categorie)sessionFactory.getCurrentSession().createQuery("FROM Categorie C WHERE C.nom = :nom ORDER BY C.nom").setParameter("nom", nom).getResultList().stream().findFirst().orElse(null);
 }
 	
 }

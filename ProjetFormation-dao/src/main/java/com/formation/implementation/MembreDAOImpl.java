@@ -20,7 +20,7 @@ public class MembreDAOImpl extends DAOPrincipalImpl<Membre> implements MembreDAO
 	public Membre identification(String email, String password) {
 		return (Membre) sessionFactory.getCurrentSession()
 				.createQuery("FROM Membre m WHERE m.email = :email AND m.password = :password")
-				.setParameter("email", email).setParameter("password", password).getSingleResult();
+				.setParameter("email", email).setParameter("password", password).getResultList().stream().findFirst().orElse(null);
 	}
 
 	@Override
