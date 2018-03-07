@@ -36,14 +36,26 @@
 				</div>
 				<ul class="nav navbar-nav">
 					<li><a href="${baseurl}auteurs">Auteurs</a></li>
-					<li><a href="${baseurl}categorie">Catégories</a></li>
+
+					<li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Catégories<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="${baseurl}categorie/roman">Roman</a></li>
+							<li><a href="${baseurl}categorie/biographie">Biographie</a></li>
+							<li><a href="${baseurl}categorie/jeunesse">Jeunesse</a></li>
+						</ul></li>
+
 					<li><a href="${baseurl}categorie/jeunesse">Jeunesse</a></li>
 					<li><a href="${baseurl}periodiques">Périodiques</a></li>
 					<li><a href="${baseurl}bibliotheques">Bibliothèques</a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></li>
-					<li><button class="btn btn-outline-success my-2 my-sm-0" type="submit"><span class="glyphicon-search"></span></button></li>
+					<li><input class="form-control mr-sm-2" type="search"
+						placeholder="Search" aria-label="Search"></li>
+					<li><button class="btn btn-outline-success my-2 my-sm-0"
+							type="submit">
+							<span class="glyphicon-search"></span>
+						</button></li>
 				</ul>
 				<ul class="nav navbar-nav pull-right">
 					<li><a href="${baseurl}connexion">Connexion</a></li>

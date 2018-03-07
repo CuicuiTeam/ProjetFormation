@@ -50,7 +50,8 @@ public class LivreControlleur {
 
 		model.addAttribute("livres", livreService.getLivreByAuteur(auteurService.getAuteurBySlug(aut)));
 		model.addAttribute("titre", "Recherche par auteur");
-		return "accueil";
+		model.addAttribute("auteur", auteurService.getAuteurBySlug(aut));
+		return "auteur";
 
 	}
 
