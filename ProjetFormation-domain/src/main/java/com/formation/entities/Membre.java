@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -30,10 +31,10 @@ public class Membre implements Serializable{
 	@OneToMany(mappedBy="membre")
 	private List<Panier> paniers;
 
-	@ManyToMany
-	private List<Bibliotheque> bibliotheques;
-
-	private String nom, prenom, email, password, adresse, ville, codePostal, telephone;
+	private String nom, prenom, password, adresse, ville, codePostal, telephone;
+	
+	@JoinColumn(unique=true)
+	private String email;
 	private boolean isAdmin;
 	
 	public Membre() {

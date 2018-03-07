@@ -28,10 +28,6 @@ public class Bibliotheque implements Serializable {
 	@OneToMany(mappedBy="bibliotheque")
 	private List<Rayon> rayons;
 
-	@ManyToMany
-	@JoinTable(name = "membre_bibliotheque", joinColumns = { @JoinColumn(name = "bibliotheque_id") }, inverseJoinColumns = { @JoinColumn(name = "membre_id") })
-	private List<Membre> membres;
-
 	@OneToMany(mappedBy="bibliotheque")
 	private List<Inscription> inscriptions;
 
