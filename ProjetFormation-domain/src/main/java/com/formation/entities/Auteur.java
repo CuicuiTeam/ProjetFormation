@@ -3,6 +3,7 @@ package com.formation.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+
+import org.hibernate.annotations.Type;
 
 import com.github.slugify.Slugify;
 
@@ -22,6 +25,8 @@ public class Auteur implements Serializable {
 	private int id;
 
 	private String nom, prenom, slug;
+	@Type(type="text")
+	private String biographie;
 
 	@ManyToMany
 	@JoinTable(name = "livre_auteur", joinColumns = { @JoinColumn(name = "auteur_id") }, inverseJoinColumns = { @JoinColumn(name = "livre_id") })
@@ -31,9 +36,10 @@ public class Auteur implements Serializable {
 
 	}
 
-	public Auteur(String nom, String prenom) {
+	public Auteur(String nom, String prenom, String biographie) {
 		this.nom = nom;
 		this.prenom = prenom;
+		this.biographie = biographie;
 		this.slug = new Slugify().slugify(this.prenom +" "+ this.nom);
 	}
 
@@ -71,6 +77,14 @@ public class Auteur implements Serializable {
 
 	public int getId() {
 		return id;
+	}
+
+	public String getBiographie() {
+		return biographie;
+	}
+
+	public void setBiographie(String biographie) {
+		this.biographie = biographie;
 	}
 	
 	

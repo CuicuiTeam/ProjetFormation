@@ -5,8 +5,11 @@
 		<div class="col-md-3" style="padding-bottom: 15px">
 			<div class="thumbnail">
 				<div class="caption">
-					<h3>${auteur.nom}</h3>
-					<p>${auteur.prenom}</p>
+					<h3>${auteur.prenom} ${auteur.nom}</h3>
+					<button type="button"
+						class="btn btn-outline-success and-all-other-classes">
+						<a href="${baseurl}auteur/${auteur.slug}" style="color: inherit"> Plus d'info </a>
+					</button>
 				</div>
 			</div>
 		</div>
