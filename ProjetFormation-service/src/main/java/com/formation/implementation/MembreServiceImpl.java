@@ -5,14 +5,20 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.User.UserBuilder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.formation.dao.MembreDAO;
 import com.formation.entities.Membre;
 import com.formation.service.MembreService;
 
 @Service
-public class MembreServiceImpl implements MembreService{
+public class MembreServiceImpl implements MembreService, UserDetailsService{
 	
 	@Autowired
 	private MembreDAO membreDAO;
@@ -59,6 +65,24 @@ public class MembreServiceImpl implements MembreService{
 	@Override
 	public void delete(Membre m) {
 		membreDAO.delete(m);
+	}
+
+	@Transactional(readOnly=true)
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		Membre membre = membreDAO.findMembreByEmail(email);
+		UserBuilder builder = null;
+		if(membre != null) {
+			builder = User.withUsername(email);
+			builder.disabled(false);
+			builder.password(membre.getPassword());
+			String[] authorities = membre.getAuthorities().stream().map(a -> a.getAuthority()).toArray(String[]::new);
+			
+			builder.authorities(authorities);
+		} else {
+			throw new UsernameNotFoundException("User not found.");
+		}
+		return builder.build();
 	}
 
 }

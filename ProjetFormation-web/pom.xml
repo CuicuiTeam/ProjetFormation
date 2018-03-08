@@ -8,6 +8,9 @@
 	</parent>
 	<artifactId>ProjetFormation-web</artifactId>
 	<packaging>war</packaging>
+	<properties>
+		<failOnMissingWebXml>false</failOnMissingWebXml>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -32,4 +35,9 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<finalName>ProjetFormation</finalName>
+
+	</build>
 </project>

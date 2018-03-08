@@ -2,6 +2,7 @@
 
 package com.formation.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 public interface DAOPrincipal<T> {

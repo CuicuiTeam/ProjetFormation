@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -34,10 +35,9 @@ public class Membre implements Serializable{
 	
 	@OneToMany(mappedBy="membre")
 	private List<Panier> paniers;
-	
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name = "membre_userprofile", joinColumns = { @JoinColumn(name="membre_id")}, inverseJoinColumns = { @JoinColumn(name="userprofile_id")})
-	private Set<UserProfile> userProfiles = new HashSet<>();
+
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="membre")
+	private Set<Authorities> authorities = new HashSet<>();
 
 	private String nom, prenom, password, adresse, ville, codePostal, telephone;
 	
@@ -170,14 +170,13 @@ public class Membre implements Serializable{
 		this.paniers = paniers;
 	}
 
-	public Set<UserProfile> getUserProfiles() {
-		return userProfiles;
+	public Set<Authorities> getAuthorities() {
+		return authorities;
 	}
 
-	public void setUserProfiles(Set<UserProfile> userProfiles) {
-		this.userProfiles = userProfiles;
+	public void setAuthorities(Set<Authorities> authorities) {
+		this.authorities = authorities;
 	}
-	
 	
 
 }
