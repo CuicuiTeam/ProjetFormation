@@ -3,9 +3,12 @@ package com.formation.controlleur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.formation.entities.Livre;
 import com.formation.service.AuteurService;
 import com.formation.service.CategorieService;
 import com.formation.service.LivreService;
@@ -62,4 +65,27 @@ public class LivreControlleur {
 		return "recherche";
 	}
 
+	@RequestMapping(value = "/ajoutlivre", method = RequestMethod.GET)
+	private String ajouterLivre(Model model) {
+		
+		Livre newLivre = new Livre();
+		model.addAttribute("livre", newLivre);
+		return "adminaddlivre";
+	}
+
+	@RequestMapping(value = "/ajoutlivre", method = RequestMethod.POST, params = "btnadd=Ajouter et revenir à l'accueil")
+	private String ajouterLivre(@ModelAttribute("livre") Livre newLivre, Model model) {
+
+		livreService.save(newLivre);
+		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/ajoutlivre", method = RequestMethod.POST, params = "btnadd=Ajouter puis créer un nouveau livre")
+	private String ajouterNewLivre(@ModelAttribute("livre") Livre newLivre, Model model) {
+
+		livreService.save(newLivre);
+		return "adminaddlivre";
+	}
+
 }
+

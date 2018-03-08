@@ -47,4 +47,10 @@ public class LivreServiceImpl implements LivreService {
 		return livreDAO.getLivreRecommandes();
 	}
 
+	@Override
+	public void save(Livre livre) {
+		// TODO Auto-generated method stub
+		livreDAO.save(livre);
+	}
+
 }

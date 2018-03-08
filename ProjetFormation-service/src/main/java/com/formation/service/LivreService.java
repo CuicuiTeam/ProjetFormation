@@ -18,4 +18,6 @@ public interface LivreService {
 
 	public List<Livre> getLivreRecommandes();
 
+	public void save(Livre livre);
+
 }

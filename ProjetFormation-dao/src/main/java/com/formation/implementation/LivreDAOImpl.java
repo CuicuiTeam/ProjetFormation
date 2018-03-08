@@ -59,4 +59,10 @@ public class LivreDAOImpl extends DAOPrincipalImpl<Livre> implements LivreDAO {
 		return (List<Livre>) sessionFactory.getCurrentSession().createQuery("FROM Livre L WHERE L.isPopular = 1").getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public void save(Livre livre) {
+		sessionFactory.getCurrentSession().saveOrUpdate(livre);
+	}
+
 }
