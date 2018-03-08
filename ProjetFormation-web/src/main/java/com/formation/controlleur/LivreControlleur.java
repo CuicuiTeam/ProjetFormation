@@ -64,6 +64,20 @@ public class LivreControlleur {
 		model.addAttribute("livres", livreService.getLivreByRecherche(rech));
 		return "recherche";
 	}
+	
+	///////////////////////////////////////////////
+	@RequestMapping(value = "/recherche/{rech}", method = RequestMethod.GET)
+	private String recupRecherche(@PathVariable String motRecherche, Model model) {
+		model.addAttribute("motRecherche", motRecherche);
+		return "accueil";
+	}
+	
+	@RequestMapping(value = "/recherche/{rech}", method = RequestMethod.POST)
+	private String resultatRecherche(@ModelAttribute("motRecherche") String motRecherche, Model model) {
+		model.addAttribute("livres", livreService.getLivreByRecherche(motRecherche));
+		model.addAttribute("titre", "Recherche : " + motRecherche);
+		return "accueil";
+		}
 
 	@RequestMapping(value = "/ajoutlivre", method = RequestMethod.GET)
 	private String ajouterLivre(Model model) {
