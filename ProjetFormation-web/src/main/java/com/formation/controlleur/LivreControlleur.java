@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.formation.entities.Livre;
 import com.formation.service.AuteurService;
 import com.formation.service.CategorieService;
+import com.formation.service.EditeurService;
 import com.formation.service.LivreService;
 
 @Controller
@@ -26,6 +27,9 @@ public class LivreControlleur {
 
 	@Autowired
 	private CategorieService categorieService;
+
+	@Autowired
+	private EditeurService editeurService;
 
 	@RequestMapping("/")
 	private String accueil(Model model) {
@@ -73,21 +77,24 @@ public class LivreControlleur {
 
 		Livre newLivre = new Livre();
 		model.addAttribute("livre", newLivre);
+		model.addAttribute("editeurs", editeurService.getAll());
 		return "adminaddlivre";
 	}
 
-	@RequestMapping(value = "/ajoutlivre", method = RequestMethod.POST, params = "btnadd=Ajouter et revenir à l'accueil")
-	private String ajouterLivre(@ModelAttribute("livre") Livre newLivre, Model model) {
-
+	@RequestMapping(value = "/ajoutlivre", method = RequestMethod.POST, params = "btnAddexit=AddExit")
+	private String ajouterLivre(@ModelAttribute("livre") Livre newLivre, HttpServletRequest request) {
+		// newLivre.setEditeur(editeurService.get(Integer.parseInt(request.getParameter("editeur"))));
+		// System.out.println(request.getParameter("editeur"));
 		livreService.save(newLivre);
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = "/ajoutlivre", method = RequestMethod.POST, params = "btnadd=Ajouter puis créer un nouveau livre")
+	@RequestMapping(value = "/ajoutlivre", method = RequestMethod.POST, params = "btnAdd=Ajouter puis créer un nouveau livre")
 	private String ajouterNewLivre(@ModelAttribute("livre") Livre newLivre, Model model) {
-
 		livreService.save(newLivre);
+		model.addAttribute("livre", new Livre());
 		return "adminaddlivre";
 	}
+
 
 }
