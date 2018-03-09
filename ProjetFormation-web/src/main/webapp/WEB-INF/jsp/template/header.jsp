@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <c:set var="baseurl" value="http://localhost:8080/ProjetFormation/" />
 <html>
@@ -16,7 +17,7 @@
 <title><c:out value="${titre}"></c:out></title>
 </head>
 <body>
-	<div class="jumbotron">
+	<div class="jumbotron" style="padding-bottom: 5px">
 		<div class="container">
 			<c:if test="${!empty msgErreur}">
 				<div class="alert alert-danger" role="alert">${msgErreur}</div>
@@ -25,6 +26,18 @@
 				<c:out value="${titre}"></c:out>
 			</h2>
 			<p>Pas seulement des livres sur les cuicui</p>
+		
+		<ul class="nav navbar-nav pull-right">
+		<form class="form-horizontal" method="POST"
+			action="${baseurl}recherche">
+			<ul class="nav navbar-nav">
+				<li><input class="form-control mr-sm-2" placeholder="Search"
+					id="motRecherche" name="motRecherche" /></li>
+				<li><input type="submit" id="btnAdd"
+					class="btn btn-default value=" Ok" /></li>
+			</ul>
+		</form>
+		</ul>
 		</div>
 	</div>
 	<div class="container">
@@ -48,14 +61,6 @@
 					<li><a href="${baseurl}categorie/jeunesse">Jeunesse</a></li>
 					<li><a href="${baseurl}periodiques">Périodiques</a></li>
 					<li><a href="${baseurl}bibliotheques">Bibliothèques</a></li>
-				</ul>
-				<ul class="nav navbar-nav">
-					<li><input class="form-control mr-sm-2" type="search"
-						placeholder="Search" aria-label="Search"></li>
-					<li><button class="btn btn-outline-success my-2 my-sm-0"
-							type="submit">
-							<span class="glyphicon-search"></span>
-						</button></li>
 				</ul>
 				<ul class="nav navbar-nav pull-right">
 					<li><a href="${baseurl}connexion">Connexion</a></li>

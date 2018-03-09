@@ -15,7 +15,7 @@ public interface LivreDAO extends DAOPrincipal<Livre> {
 
 	public List<Livre> getLivreByAuteur(Auteur auteur);
 
-	public List<Livre> getLivreByRecherche(String recherche);
+	public List<Livre> getLivreByRecherche(String recherche) ;
 
 	public List<Livre> getLivreRecommandes();
 

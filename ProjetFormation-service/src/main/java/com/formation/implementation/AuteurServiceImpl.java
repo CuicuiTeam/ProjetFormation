@@ -35,5 +35,9 @@ public class AuteurServiceImpl implements AuteurService {
 	public List<Auteur> getAll() {
 		return auteurDAO.getAll();
 	} 
+	
+	public List<Auteur> getAuteurAll() {
+		return auteurDAO.getAuteurAll();
+	}
 
 }

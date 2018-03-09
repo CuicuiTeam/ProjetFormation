@@ -48,7 +48,7 @@ public class LivreDAOImpl extends DAOPrincipalImpl<Livre> implements LivreDAO {
 	public List<Livre> getLivreByRecherche(String recherche) {
 		// TODO Auto-generated method stub
 		return (List<Livre>) sessionFactory.getCurrentSession()
-				.createQuery("FROM Livre L WHERE L.titre LIKE :recherche OR L.description LIKE :recherche")
+				.createQuery("SELECT L FROM Livre L JOIN L.auteurs a WHERE L.titre LIKE :recherche OR L.description LIKE :recherche OR a.nom LIKE :recherche OR a.prenom LIKE :recherche ORDER BY a.nom ASC")
 				.setParameter("recherche", "%" + recherche + "%").getResultList();
 	}
 
@@ -56,7 +56,7 @@ public class LivreDAOImpl extends DAOPrincipalImpl<Livre> implements LivreDAO {
 	@Override
 	public List<Livre> getLivreRecommandes() {
 		// TODO Auto-generated method stub
-		return (List<Livre>) sessionFactory.getCurrentSession().createQuery("FROM Livre L WHERE L.isPopular = 1").getResultList();
+		return (List<Livre>) sessionFactory.getCurrentSession().createQuery("FROM Livre L WHERE L.isPopular = 1 ORDER BY L.titre ASC").getResultList();
 	}
 
 	@SuppressWarnings("unchecked")

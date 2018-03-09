@@ -14,7 +14,7 @@ public interface LivreService {
 
 	public List<Livre> getLivreByAuteur(Auteur auteur);
 
-	public List<Livre> getLivreByRecherche(String recherche);
+	public List<Livre> getLivreByRecherche(String recherche) ;
 
 	public List<Livre> getLivreRecommandes();
 

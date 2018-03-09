@@ -1,5 +1,7 @@
 package com.formation.controlleur;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,30 +60,17 @@ public class LivreControlleur {
 
 	}
 
-	@RequestMapping("/recherche/{rech}")
-	private String listeRecherche(@PathVariable String rech, Model model) {
-
-		model.addAttribute("livres", livreService.getLivreByRecherche(rech));
-		return "recherche";
-	}
-	
-	///////////////////////////////////////////////
-	@RequestMapping(value = "/recherche/{rech}", method = RequestMethod.GET)
-	private String recupRecherche(@PathVariable String motRecherche, Model model) {
-		model.addAttribute("motRecherche", motRecherche);
-		return "accueil";
-	}
-	
-	@RequestMapping(value = "/recherche/{rech}", method = RequestMethod.POST)
-	private String resultatRecherche(@ModelAttribute("motRecherche") String motRecherche, Model model) {
+	@RequestMapping(value = "/recherche", method = RequestMethod.POST)
+	private String resultatRecherche(HttpServletRequest request, Model model) {
+		String motRecherche = request.getParameter("motRecherche");
 		model.addAttribute("livres", livreService.getLivreByRecherche(motRecherche));
 		model.addAttribute("titre", "Recherche : " + motRecherche);
 		return "accueil";
-		}
+	}
 
 	@RequestMapping(value = "/ajoutlivre", method = RequestMethod.GET)
 	private String ajouterLivre(Model model) {
-		
+
 		Livre newLivre = new Livre();
 		model.addAttribute("livre", newLivre);
 		return "adminaddlivre";
@@ -102,4 +91,3 @@ public class LivreControlleur {
 	}
 
 }
-

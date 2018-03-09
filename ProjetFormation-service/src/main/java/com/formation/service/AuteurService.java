@@ -10,5 +10,6 @@ public interface AuteurService {
 	public Auteur getAuteurByNom(String nom);
 	public Auteur getAuteurBySlug(String slug);
 	public List<Auteur> getAll();
+	public List<Auteur> getAuteurAll();
 
 }

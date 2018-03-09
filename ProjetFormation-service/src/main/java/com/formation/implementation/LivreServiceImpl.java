@@ -36,7 +36,7 @@ public class LivreServiceImpl implements LivreService {
 	}
 
 	@Override
-	public List<Livre> getLivreByRecherche(String recherche) {
+	public List<Livre> getLivreByRecherche(String recherche)  {
 		// TODO Auto-generated method stub
 		return livreDAO.getLivreByRecherche(recherche);
 	}
