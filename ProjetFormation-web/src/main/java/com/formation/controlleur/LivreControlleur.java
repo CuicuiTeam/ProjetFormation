@@ -42,14 +42,14 @@ public class LivreControlleur {
 	}
 
 	@RequestMapping("/categorie/{cat}")
-	private String listeByCategorie(@PathVariable String cat, Model model) {
+	private String listeByCategorie(@PathVariable(value="cat")String cat, Model model) {
 		model.addAttribute("livres", livreService.getLivreByCat(categorieService.getCategorieByNom(cat)));
 		model.addAttribute("titre", categorieService.getCategorieByNom(cat).getNom());
 		return "accueil";
 	}
 
 	@RequestMapping("/auteur/{aut}")
-	private String listeByAuteur(@PathVariable String aut, Model model) {
+	private String listeByAuteur(@PathVariable(value="aut") String aut, Model model) {
 
 		model.addAttribute("livres", livreService.getLivreByAuteur(auteurService.getAuteurBySlug(aut)));
 		model.addAttribute("titre", "Recherche par auteur");

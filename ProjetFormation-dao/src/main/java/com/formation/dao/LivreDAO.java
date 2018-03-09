@@ -19,6 +19,4 @@ public interface LivreDAO extends DAOPrincipal<Livre> {
 
 	public List<Livre> getLivreRecommandes();
 
-	public void save(Livre livre);
-
 }

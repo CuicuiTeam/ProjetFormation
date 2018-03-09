@@ -54,7 +54,7 @@ public class WebConfig implements WebMvcConfigurer{
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+		registry.addResourceHandler("/ressources/**").addResourceLocations("/ressources/");
 	}
 
 	@Override
@@ -106,7 +106,7 @@ public class WebConfig implements WebMvcConfigurer{
 
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
-		registry.jsp().prefix("WEB-INF/jsp/").suffix(".jsp");
+		registry.jsp().prefix("/WEB-INF/jsp/").suffix(".jsp");
 	}
 
 	@Override
