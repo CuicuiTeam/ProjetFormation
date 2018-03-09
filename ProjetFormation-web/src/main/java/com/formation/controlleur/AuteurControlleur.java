@@ -14,7 +14,7 @@ public class AuteurControlleur {
 	
 	@RequestMapping("/auteurs")
 	private String auteurs (Model model) {
-		model.addAttribute("auteurs", auteurService.getAll());
+		model.addAttribute("auteurs", auteurService.getAuteurAll());
 		model.addAttribute("titre", "Auteurs");
 		return "auteurs";
 }

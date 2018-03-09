@@ -6,6 +6,7 @@
 			<div class="thumbnail">
 				<div class="caption">
 					<h3>${livre.titre}</h3>
+					<p><c:forEach items="${livre.auteurs}" var="auteur"><b><i>${auteur.prenom}  ${auteur.nom}</i></b></c:forEach></p>
 					<p>${livre.description}</p>
 					<p>${livre.prix} &euro;</p>
 					<p>${livre.datePublication}</p>
