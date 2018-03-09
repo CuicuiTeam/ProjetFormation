@@ -35,6 +35,10 @@ public class Editeur implements Serializable {
 		this.slug = new Slugify().slugify(nom);
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	public String getNom() {
 		return nom;
 	}
