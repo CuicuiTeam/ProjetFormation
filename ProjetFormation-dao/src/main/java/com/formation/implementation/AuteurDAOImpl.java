@@ -32,7 +32,7 @@ public class AuteurDAOImpl extends DAOPrincipalImpl<Auteur> implements AuteurDAO
 	}
 
 	public List<Auteur> getAuteurAll() {
-		return (List<Auteur>) sessionFactory.getCurrentSession().createQuery("FROM Auteur A ORDER BY A.nom ASC").getResultList();
+		return (List<Auteur>) sessionFactory.getCurrentSession().createQuery("SELECT A FROM Auteur A ORDER BY A.nom ASC").getResultList();
  	}
 	
 }

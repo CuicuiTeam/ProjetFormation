@@ -96,5 +96,12 @@ public class LivreControlleur {
 		return "adminaddlivre";
 	}
 
+	@RequestMapping("/livre/{livre}")
+	private String listePeriodiques2(@PathVariable(value="livre")String livre, Model model) {
+
+		model.addAttribute("livres", livreService.getPeriodiques());
+		model.addAttribute("titre", "Périodiques");
+		return "livre";
+	}
 
 }
