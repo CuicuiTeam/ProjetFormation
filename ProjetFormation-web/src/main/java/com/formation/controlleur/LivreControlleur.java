@@ -71,6 +71,12 @@ public class LivreControlleur {
 		model.addAttribute("titre", "Recherche : " + motRecherche);
 		return "accueil";
 	}
+	
+	@ModelAttribute("Livre")
+	public Livre getLivre() {
+		
+		return new Livre();
+	}
 
 	@RequestMapping(value = "/ajoutlivre", method = RequestMethod.GET)
 	private String ajouterLivre(Model model) {
@@ -81,20 +87,20 @@ public class LivreControlleur {
 		return "adminaddlivre";
 	}
 
-	@RequestMapping(value = "/ajoutlivre", method = RequestMethod.POST, params = "btnAddexit=AddExit")
-	private String ajouterLivre(@ModelAttribute("livre") Livre newLivre, HttpServletRequest request) {
-		// newLivre.setEditeur(editeurService.get(Integer.parseInt(request.getParameter("editeur"))));
+	@RequestMapping(value = "/ajoutlivre", method = RequestMethod.POST)
+	private String ajouterLivre(Livre newLivre, HttpServletRequest request) {
+		//newLivre.setEditeur(editeurService.get(Integer.parseInt(request.getParameter("editeur"))));
 		// System.out.println(request.getParameter("editeur"));
 		livreService.save(newLivre);
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = "/ajoutlivre", method = RequestMethod.POST, params = "btnAdd=Ajouter puis créer un nouveau livre")
-	private String ajouterNewLivre(@ModelAttribute("livre") Livre newLivre, Model model) {
-		livreService.save(newLivre);
-		model.addAttribute("livre", new Livre());
-		return "adminaddlivre";
-	}
+//	@RequestMapping(value = "/ajoutlivre", method = RequestMethod.POST, params = "btnAdd=Ajouter puis créer un nouveau livre")
+//	private String ajouterNewLivre(@ModelAttribute("livre") Livre newLivre, Model model) {
+//		livreService.save(newLivre);
+//		model.addAttribute("livre", new Livre());
+//		return "adminaddlivre";
+//	}
 
 
 }

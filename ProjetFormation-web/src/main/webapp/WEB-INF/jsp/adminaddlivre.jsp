@@ -4,7 +4,7 @@
 <c:set var="titre" value="Ajouter un livre" scope="session"></c:set>
 <jsp:include page="template/header.jsp" />
 <form:form name="creerlivre" modelAttribute="livre"
-	class="form-horizontal">
+	class="form-horizontal" >
 	<fieldset>
 		<legend>Ajouter un livre </legend>
 		<div class="form-group">
@@ -55,28 +55,33 @@
 				<form:checkbox id="periodique" path="periodic" />
 			</div>
 		</div>
-		<%-- <div class="form-group">
+
+		<div class="form-group">
 			<label class="control-label col-lg-2" for="editeur">Editeur</label>
 			<div class="col-lg-10">
-				<select name="editeur" id="editeur">
+				<form:select path="editeur" id="editeur" itemLabel="editeur" >
 					<c:forEach items="${editeurs}" var="edit">
-						<option value="${edit.id}">${edit.nom}</option>
+						<form:option value="${edit.nom}" >${edit.nom}</form:option>
 					</c:forEach>
-				</select>
+				</form:select>
 			</div>
-		</div>  --%>
+		</div>
+
+		
+		<!-- </div>
+		</div> -->
 		<div class="form-group">
 			<div class="col-lg-10 col-lg-offset-2">
 				<input type="submit" name="btnAddexit" class="btn btn-primary"
 					value="AddExit" />
 			</div>
 		</div>
-		<div class="form-group">
+		<!-- <div class="form-group">
 			<div class="col-lg-10 col-lg-offset-2">
 				<input type="submit" name="btnAdd" class="btn btn-primary"
 					value="Ajouter puis créer un nouveau livre" />
 			</div>
-		</div>
+		</div> -->
 	</fieldset>
 </form:form>
 <jsp:include page="template/footer.jsp" />

@@ -3,6 +3,7 @@ package com.formation.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +20,10 @@ public class Editeur implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private String nom, adresse, slug;
+	@Column(unique=true)
+	private String nom;
+	
+	private String adresse, slug;
 
 	@OneToMany(mappedBy = "editeur")
 	private List<Livre> livres;

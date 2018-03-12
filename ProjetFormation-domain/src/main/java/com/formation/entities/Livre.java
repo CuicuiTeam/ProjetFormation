@@ -23,7 +23,6 @@ public class Livre implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
 	private String titre;
 	private String description;
 	private double prix;
@@ -33,6 +32,21 @@ public class Livre implements Serializable {
 	private boolean isPeriodic;
 	private String slug;
 
+	@ManyToMany(fetch=FetchType.EAGER, mappedBy="livres")
+	private List<Auteur> auteurs;
+
+	@ManyToOne
+	private Editeur editeur;
+
+	@ManyToOne
+	private Categorie categorie;
+
+	@OneToMany(mappedBy = "livre")
+	private List<Exemplaire> exemplaires;
+
+	@ManyToOne
+	private Panier panier;
+	
 	public String getSlug() {
 		return slug;
 	}
@@ -56,21 +70,6 @@ public class Livre implements Serializable {
 	public void setPanier(Panier panier) {
 		this.panier = panier;
 	}
-
-	@ManyToMany(fetch=FetchType.EAGER, mappedBy="livres")
-	private List<Auteur> auteurs;
-
-	@ManyToOne
-	private Editeur editeur;
-
-	@ManyToOne
-	private Categorie categorie;
-
-	@OneToMany(mappedBy = "livre")
-	private List<Exemplaire> exemplaires;
-
-	@ManyToOne
-	private Panier panier;
 
 	public Editeur getEditeur() {
 		return editeur;

@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<c:set var="baseurl" value="http://localhost:8080/ProjetFormation/" />
+
+<c:set var="baseurl" value="http://localhost:8080/ProjetFormation/" scope="application"/>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -34,7 +35,7 @@
 				<li><input class="form-control mr-sm-2" placeholder="Search"
 					id="motRecherche" name="motRecherche" /></li>
 				<li><input type="submit" id="btnAdd"
-					class="btn btn-default value=" Ok" /></li>
+					class="btn btn-default" /></li>
 			</ul>
 		</form>
 		</ul>

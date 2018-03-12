@@ -16,7 +16,7 @@ public class MembreControlleur {
 	@Autowired
 	private MembreService membreService;
 
-	@RequestMapping(value = "/inscription", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/inscription", method = RequestMethod.GET)
 	private String ajoutMembre(Model model) {
 
 		Membre newMembre = new Membre();
@@ -24,7 +24,7 @@ public class MembreControlleur {
 		return "inscription";
 	}
 
-	@RequestMapping(value = "/inscription", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/inscription", method = RequestMethod.POST)
 	private String ajoutMembre(@ModelAttribute("newMembre") Membre newMembre, Model model) {
 		String pass = membreService.cryptageMdp(newMembre);
 		newMembre.setPassword(pass);
