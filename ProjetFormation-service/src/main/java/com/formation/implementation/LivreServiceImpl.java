@@ -2,6 +2,8 @@ package com.formation.implementation;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,7 @@ import com.formation.entities.Livre;
 import com.formation.service.LivreService;
 
 @Service
+@Transactional
 public class LivreServiceImpl implements LivreService {
 
 	@Autowired
@@ -51,6 +54,24 @@ public class LivreServiceImpl implements LivreService {
 	public void save(Livre livre) {
 		// TODO Auto-generated method stub
 		livreDAO.save(livre);
+	}
+
+	@Override
+	public void delete(Livre livre) {
+		// TODO Auto-generated method stub
+		livreDAO.delete(livre);
+	}
+
+	@Override
+	public List<Livre> getAll() {
+		// TODO Auto-generated method stub
+		return livreDAO.getAll();
+	}
+
+	@Override
+	public Livre get(int id) {
+		// TODO Auto-generated method stub
+		return livreDAO.get(id);
 	}
 
 }

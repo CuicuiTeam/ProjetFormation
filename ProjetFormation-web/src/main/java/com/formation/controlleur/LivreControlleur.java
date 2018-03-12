@@ -77,7 +77,7 @@ public class LivreControlleur {
 
 		Livre newLivre = new Livre();
 		model.addAttribute("livre", newLivre);
-		model.addAttribute("editeurs", editeurService.getAll());
+		// model.addAttribute("editeurs", editeurService.getAll());
 		return "adminaddlivre";
 	}
 
@@ -96,5 +96,20 @@ public class LivreControlleur {
 		return "adminaddlivre";
 	}
 
+	@RequestMapping(value = "/supprimer", method = RequestMethod.GET)
+	private String supprLivre(Model model) {
+
+		model.addAttribute("livres", livreService.getAll());
+		return "adminsuppr";
+	}
+
+	@RequestMapping(value = "/supprimer", method = RequestMethod.POST)
+	private String supprLivre(HttpServletRequest request) {
+		System.out.println(request.getParameter("livreId"));
+		Livre livre = livreService.get(Integer.parseInt(request.getParameter("livreId")));
+		livreService.delete(livre);
+		return "redirect:/supprimer";
+
+	}
 
 }

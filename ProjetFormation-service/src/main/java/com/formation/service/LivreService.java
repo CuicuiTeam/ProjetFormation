@@ -20,4 +20,10 @@ public interface LivreService {
 
 	public void save(Livre livre);
 
+	public void delete(Livre livre);
+
+	public List<Livre> getAll();
+
+	public Livre get(int id);
+
 }
