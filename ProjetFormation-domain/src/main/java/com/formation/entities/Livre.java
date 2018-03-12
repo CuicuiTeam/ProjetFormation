@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Type;
+
 import com.github.slugify.Slugify;
 
 @Entity
@@ -25,6 +27,7 @@ public class Livre implements Serializable {
 	private int id;
 	
 	private String titre;
+	@Type(type="text")
 	private String description;
 	private double prix;
 	private Date datePublication;

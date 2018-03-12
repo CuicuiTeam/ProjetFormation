@@ -31,6 +31,7 @@ public class Auteur implements Serializable {
 	@ManyToMany
 	@JoinTable(name = "livre_auteur", joinColumns = { @JoinColumn(name = "auteur_id") }, inverseJoinColumns = { @JoinColumn(name = "livre_id") })
 	private List<Livre> livres;
+	private String imagePath;
 
 	public Auteur() {
 
@@ -85,6 +86,14 @@ public class Auteur implements Serializable {
 
 	public void setBiographie(String biographie) {
 		this.biographie = biographie;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 	
 	

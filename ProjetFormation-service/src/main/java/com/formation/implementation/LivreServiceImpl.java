@@ -23,37 +23,47 @@ public class LivreServiceImpl implements LivreService {
 	@Override
 	public List<Livre> getLivreByCat(Categorie cat) {
 		// TODO Auto-generated method stub
-		return livreDAO.getLivreByCat(cat);
+		return reductionDescription(livreDAO.getLivreByCat(cat));
 	}
 
 	@Override
 	public List<Livre> getPeriodiques() {
 		// TODO Auto-generated method stub
-		return livreDAO.getPeriodiques();
+		return reductionDescription(livreDAO.getPeriodiques());
 	}
 
 	@Override
 	public List<Livre> getLivreByAuteur(Auteur auteur) {
 		// TODO Auto-generated method stub
-		return livreDAO.getLivreByAuteur(auteur);
+		return reductionDescription(livreDAO.getLivreByAuteur(auteur));
 	}
 
 	@Override
 	public List<Livre> getLivreByRecherche(String recherche)  {
 		// TODO Auto-generated method stub
-		return livreDAO.getLivreByRecherche(recherche);
+		return reductionDescription(livreDAO.getLivreByRecherche(recherche));
 	}
 
 	@Override
 	public List<Livre> getLivreRecommandes() {
 		// TODO Auto-generated method stub
-		return livreDAO.getLivreRecommandes();
+		return reductionDescription(livreDAO.getLivreRecommandes());
 	}
 
 	@Override
 	public void save(Livre livre) {
 		// TODO Auto-generated method stub
 		livreDAO.save(livre);
+	}
+	
+	private List<Livre> reductionDescription(List<Livre> liste) {
+		liste.forEach((l) ->{
+			if (l.getDescription().length() > 250) 
+		l.setDescription(l.getDescription().substring(0, 250) + " ...");
+		});
+		
+		return liste;	
+		
 	}
 
 	@Override
