@@ -1,14 +1,13 @@
 package com.formation.controlleur;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpSession;import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.formation.entities.Membre;
 import com.formation.service.MembreService;
@@ -35,8 +34,8 @@ public class MembreControlleur {
 			newMembre.setPassword("");
 			return "inscription";
 		} else {
-		membreService.save(newMembre);
-		return "redirect:/";
+			membreService.save(newMembre);
+			return "redirect:/";
 		}
 	}
 
@@ -61,4 +60,34 @@ public class MembreControlleur {
 		}
 	}
 
+	@RequestMapping(value = "/supprimerMembre", method = RequestMethod.GET)
+	private String supprMembre(Model model) {
+
+		model.addAttribute("membres", membreService.getAll());
+		return "adminmembresuppr";
+	}
+
+	@RequestMapping(value = "/supprimerMembre", method = RequestMethod.POST)
+	private String supprMembre(HttpServletRequest request) {
+		Membre membre = membreService.get(Integer.parseInt(request.getParameter("membreId")));
+		membreService.delete(membre);
+		return "redirect:/supprimerMembre";
+
+	}
+
+	@RequestMapping(value = "/editmembre", method = RequestMethod.GET)
+	private String editMembre(HttpServletRequest request, Model model) {
+		Membre membre = membreService.get(Integer.parseInt(request.getParameter("idMembre")));
+		model.addAttribute("edit", membre);
+		return "admineditmembre";
+
+	}
+
+	@RequestMapping(value = "/editmembre", method = RequestMethod.POST)
+	private String editMembre(@ModelAttribute("edit") Membre membre, @RequestParam(value = "idMembre") int idMembre) {
+		membre.setId(idMembre);
+		membreService.save(membre);
+		return "redirect:/supprimerMembre";
+
+	}
 }

@@ -27,31 +27,31 @@ public class LivreServiceImpl implements LivreService {
 	@Override
 	public List<Livre> getLivreByCat(Categorie cat) {
 		// TODO Auto-generated method stub
-		return reductionDescription(livreDAO.getLivreByCat(cat));
+		return livreDAO.getLivreByCat(cat);
 	}
 
 	@Override
 	public List<Livre> getPeriodiques() {
 		// TODO Auto-generated method stub
-		return reductionDescription(livreDAO.getPeriodiques());
+		return livreDAO.getPeriodiques();
 	}
 
 	@Override
 	public List<Livre> getLivreByAuteur(Auteur auteur) {
 		// TODO Auto-generated method stub
-		return reductionDescription(livreDAO.getLivreByAuteur(auteur));
+		return livreDAO.getLivreByAuteur(auteur);
 	}
 
 	@Override
 	public List<Livre> getLivreByRecherche(String recherche)  {
 		// TODO Auto-generated method stub
-		return reductionDescription(livreDAO.getLivreByRecherche(recherche));
+		return livreDAO.getLivreByRecherche(recherche);
 	}
 
 	@Override
 	public List<Livre> getLivreRecommandes() {
 		// TODO Auto-generated method stub
-		return reductionDescription(livreDAO.getLivreRecommandes());
+		return livreDAO.getLivreRecommandes();
 	}
 
 	@Override
@@ -60,16 +60,16 @@ public class LivreServiceImpl implements LivreService {
 		livre.setEditeur(editeurDAO.get(livre.getEditeur().getId()));
 		livreDAO.save(livre);
 	}
-	
-	private List<Livre> reductionDescription(List<Livre> liste) {
-		liste.forEach((l) ->{
-			if (l.getDescription().length() > 250) 
-		l.setDescription(l.getDescription().substring(0, 250) + " ...");
-		});
-		
-		return liste;	
-		
-	}
+
+//	private List<Livre> reductionDescription(List<Livre> liste) {
+//		liste.forEach((l) ->{
+//			if (l.getDescription().length() > 250) 
+//				l.setDescription(l.getDescription().substring(0, 250) + " ...");
+//		});
+//
+//		return liste;	
+//
+//	}
 
 	@Override
 	public void delete(Livre livre) {
@@ -87,6 +87,10 @@ public class LivreServiceImpl implements LivreService {
 	public Livre get(int id) {
 		// TODO Auto-generated method stub
 		return livreDAO.get(id);
+	}
+
+	public Livre getLivreBySlug(String slug) {
+		return livreDAO.getLivreBySlug(slug);
 	}
 
 }

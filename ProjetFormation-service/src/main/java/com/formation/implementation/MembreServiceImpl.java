@@ -1,5 +1,10 @@
 package com.formation.implementation;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.User.UserBuilder;
@@ -15,6 +20,7 @@ import com.formation.entities.Membre;
 import com.formation.service.MembreService;
 
 @Service
+@Transactional
 public class MembreServiceImpl implements MembreService, UserDetailsService{
 	
 	@Autowired
@@ -66,6 +72,12 @@ public class MembreServiceImpl implements MembreService, UserDetailsService{
 			throw new UsernameNotFoundException("User not found.");
 		}
 		return builder.build();
+	}
+
+	@Override
+	public List<Membre> getAll() {
+		// TODO Auto-generated method stub
+		return membreDAO.getAll();
 	}
 
 }

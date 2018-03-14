@@ -4,7 +4,7 @@
 <div class="row">
 	<c:forEach items="${bibliotheques}" var="bibliotheque">
 		<div class="col-md-3" style="padding-bottom: 15px">
-			<div class="thumbnail">
+			<div class="thumbnail" style="min-height:180px">
 				<div class="caption">
 					<h3>${bibliotheque.nom}</h3>
 					<p>${bibliotheque.adresse}</p>

@@ -56,17 +56,16 @@
 			</div>
 		</div>
 
-		<div class="form-group">
-			<label class="control-label col-lg-2" for="editeur">Editeur</label>
-			<div class="col-lg-10">
-				<form:select path="editeur" items="${editeurs}" itemValue="id" itemLabel="nom" id="editeur" />
+<!-- 		<div class="form-group"> -->
+<!-- 			<label class="control-label col-lg-2" for="editeur">Editeur</label> -->
+<!-- 			<div class="col-lg-10"> -->
+<%-- 				<form:select path="editeur" id="editeur" itemLabel="editeur" > --%>
 <%-- 					<c:forEach items="${editeurs}" var="edit"> --%>
-<%-- 						<form:option value="${edit.id}" >${edit.nom}</form:option> --%>
+<%-- 						<form:option value="1" >${edit.nom}</form:option> --%>
 <%-- 					</c:forEach> --%>
-<%-- 					<form:options items="${editeurs}" itemValue="id" itemLabel="nom" /> --%> --%>
 <%-- 				</form:select> --%>
-			</div>
-		</div>
+<!-- 			</div> -->
+<!-- 		</div> -->
 
 		
 		<!-- </div>

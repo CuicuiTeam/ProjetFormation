@@ -25,5 +25,7 @@ public interface LivreService {
 	public List<Livre> getAll();
 
 	public Livre get(int id);
+	
+	public Livre getLivreBySlug(String slug);
 
 }
