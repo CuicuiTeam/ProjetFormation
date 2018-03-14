@@ -48,17 +48,17 @@ public class LivreControlleur {
 	}
 
 	@RequestMapping("/categorie/{cat}")
-	private String listeByCategorie(@PathVariable(value="cat")String cat, Model model) {
+	private String listeByCategorie(@PathVariable(value = "cat") String cat, Model model) {
 		model.addAttribute("livres", livreService.getLivreByCat(categorieService.getCategorieByNom(cat)));
 		model.addAttribute("titre", categorieService.getCategorieByNom(cat).getNom());
 		return "accueil";
 	}
 
 	@RequestMapping("/auteur/{aut}")
-	private String listeByAuteur(@PathVariable(value="aut") String aut, Model model) {
+	private String listeByAuteur(@PathVariable(value = "aut") String aut, Model model) {
 
 		model.addAttribute("livres", livreService.getLivreByAuteur(auteurService.getAuteurBySlug(aut)));
-		model.addAttribute("titre", "Recherche par auteur");
+		model.addAttribute("titre",auteurService.getAuteurBySlug(aut).getPrenom() + " " +  auteurService.getAuteurBySlug(aut).getNom() );
 		model.addAttribute("auteur", auteurService.getAuteurBySlug(aut));
 		return "auteur";
 
@@ -71,10 +71,10 @@ public class LivreControlleur {
 		model.addAttribute("titre", "Recherche : " + motRecherche);
 		return "accueil";
 	}
-	
+
 	@ModelAttribute("Livre")
 	public Livre getLivre() {
-		
+
 		return new Livre();
 	}
 
@@ -89,18 +89,20 @@ public class LivreControlleur {
 
 	@RequestMapping(value = "/ajoutlivre", method = RequestMethod.POST)
 	private String ajouterLivre(Livre newLivre, HttpServletRequest request) {
-		//newLivre.setEditeur(editeurService.get(Integer.parseInt(request.getParameter("editeur"))));
+		// newLivre.setEditeur(editeurService.get(Integer.parseInt(request.getParameter("editeur"))));
 		// System.out.println(request.getParameter("editeur"));
 		livreService.save(newLivre);
 		return "redirect:/";
 	}
 
-//	@RequestMapping(value = "/ajoutlivre", method = RequestMethod.POST, params = "btnAdd=Ajouter puis créer un nouveau livre")
-//	private String ajouterNewLivre(@ModelAttribute("livre") Livre newLivre, Model model) {
-//		livreService.save(newLivre);
-//		model.addAttribute("livre", new Livre());
-//		return "adminaddlivre";
-//	}
+	// @RequestMapping(value = "/ajoutlivre", method = RequestMethod.POST, params =
+	// "btnAdd=Ajouter puis créer un nouveau livre")
+	// private String ajouterNewLivre(@ModelAttribute("livre") Livre newLivre, Model
+	// model) {
+	// livreService.save(newLivre);
+	// model.addAttribute("livre", new Livre());
+	// return "adminaddlivre";
+	// }
 
 	@RequestMapping(value = "/supprimer", method = RequestMethod.GET)
 	private String supprLivre(Model model) {
@@ -118,9 +120,12 @@ public class LivreControlleur {
 
 	}
 
-	@RequestMapping("/livre/{livre}")
-	private String listePeriodiques2(@PathVariable(value="livre")String livre, Model model) {
-		model.addAttribute("livres", livreService.getPeriodiques());
-		model.addAttribute("titre", "Périodiques");
+	@RequestMapping("/livre/{liv}")
+	private String Livre(@PathVariable(value = "liv") String liv, Model model) {
+
+		model.addAttribute("livre", livreService.getLivreBySlug(liv));
+		model.addAttribute("titre", livreService.getLivreBySlug(liv).getTitre());
 		return "livre";
-	}}
+
+	}
+}

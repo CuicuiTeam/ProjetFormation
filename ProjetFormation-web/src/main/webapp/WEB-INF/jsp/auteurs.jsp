@@ -18,9 +18,10 @@
 						<img src="<c:url value="/ressources/images/imageVide.jpg"/>" width="75px" height="125px" class="rounded text-center center-block">
 						</c:if>
 						<button type="button"
-							class="btn btn-outline-success and-all-other-classes center-block" style="background-color:#d9edf7" >
-							<a href="${baseurl}auteur/${auteur.slug}" style="color: inherit">
-								Plus d'info </a>
+							class="btn btn-default center-block" >
+							<a href="${baseurl}auteur/${auteur.slug}"><span
+								class="glyphicon glyphicon-info-sign"></span>
+								Plus d'information </a>
 						</button>
 					</div>
 					<!-- </div> -->
