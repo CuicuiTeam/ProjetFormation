@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import com.formation.dao.LivreDAO;
 import com.formation.entities.Auteur;
 import com.formation.entities.Categorie;
