@@ -1,5 +1,8 @@
 package com.formation.controlleur;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,8 +29,7 @@ public class MembreControlleur {
 
 	@RequestMapping(value = "/admin/inscription", method = RequestMethod.POST)
 	private String ajoutMembre(@ModelAttribute("newMembre") Membre newMembre, Model model) {
-		String pass = membreService.cryptageMdp(newMembre);
-		newMembre.setPassword(pass);
+		newMembre.setPassword(membreService.cryptageMdp(newMembre.getPassword()));
 		if (membreService.findByEmail(newMembre.getEmail()) != null) {
 			model.addAttribute("msgErreur", "Cet email est déjà utilisé");
 			newMembre.setPassword("");
@@ -47,15 +49,15 @@ public class MembreControlleur {
 	}
 
 	@RequestMapping(value = "/connexion", method = RequestMethod.POST)
-	private String connexionMembre(@ModelAttribute("login") Membre newMembre, Model model) {
-
-		String pass = membreService.cryptageMdp(newMembre);
-		newMembre.setPassword(pass);
-		if (membreService.identification(newMembre.getEmail(), newMembre.getPassword()) == null) {
+	private String connexionMembre(@ModelAttribute("login") Membre newMembre, Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Membre membre = membreService.identification(newMembre.getEmail(), newMembre.getPassword());
+		if(membre != null) {
+			session.setAttribute("user", membre);
+			return "redirect:/";
+		} else {
 			model.addAttribute("msgErreur", "Veuillez saisir un identifiant et un mot de passe valide");
 			return "connexion";
-		} else {
-			return "redirect:/";
 		}
 	}
 

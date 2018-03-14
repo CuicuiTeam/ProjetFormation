@@ -14,6 +14,6 @@ public interface MembreService {
 	
 	public void delete(Membre m);
 
-	public String cryptageMdp(Membre membre);
+	public String cryptageMdp(String password);
 
 }

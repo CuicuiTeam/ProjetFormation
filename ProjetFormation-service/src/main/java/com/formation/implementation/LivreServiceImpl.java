@@ -6,6 +6,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.formation.dao.EditeurDAO;
 import com.formation.dao.LivreDAO;
 import com.formation.entities.Auteur;
 import com.formation.entities.Categorie;
@@ -18,6 +20,9 @@ public class LivreServiceImpl implements LivreService {
 
 	@Autowired
 	private LivreDAO livreDAO;
+
+	@Autowired
+	private EditeurDAO editeurDAO;
 
 	@Override
 	public List<Livre> getLivreByCat(Categorie cat) {
@@ -52,6 +57,7 @@ public class LivreServiceImpl implements LivreService {
 	@Override
 	public void save(Livre livre) {
 		// TODO Auto-generated method stub
+		livre.setEditeur(editeurDAO.get(livre.getEditeur().getId()));
 		livreDAO.save(livre);
 	}
 	

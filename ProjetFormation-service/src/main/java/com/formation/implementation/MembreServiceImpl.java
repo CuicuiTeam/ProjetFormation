@@ -1,15 +1,12 @@
 package com.formation.implementation;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,30 +22,16 @@ public class MembreServiceImpl implements MembreService, UserDetailsService{
 	
 	@Override
 	public Membre identification(String email, String password) {
-		return membreDAO.identification(email, password);
+		return membreDAO.identification(email, cryptageMdp(password));
 	}
 
 	@Override
 	public void save(Membre m) {
-		// TODO Auto-generated method stub
 		membreDAO.save(m);
 	}
 
-	public String cryptageMdp(Membre membre) {
-
-		String generatedPassword = null;
-		try {
-			MessageDigest md = MessageDigest.getInstance("SHA-512");
-			byte[] bytes = md.digest(membre.getPassword().getBytes(StandardCharsets.UTF_8));
-			StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < bytes.length; i++) {
-				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-			}
-			generatedPassword = sb.toString();
-		} catch (NoSuchAlgorithmException e) {
-			System.out.println(e);
-		}
-		return generatedPassword;
+	public String cryptageMdp(String password) {
+		return new BCryptPasswordEncoder().encode(password);
 
 	}
 

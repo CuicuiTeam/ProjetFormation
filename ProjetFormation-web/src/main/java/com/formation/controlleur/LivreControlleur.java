@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.formation.entities.Livre;
+import com.formation.entities.Membre;
 import com.formation.service.AuteurService;
 import com.formation.service.CategorieService;
 import com.formation.service.EditeurService;
@@ -83,15 +84,15 @@ public class LivreControlleur {
 
 		Livre newLivre = new Livre();
 		model.addAttribute("livre", newLivre);
-		// model.addAttribute("editeurs", editeurService.getAll());
+		model.addAttribute("editeurs", editeurService.getAll());
 		return "adminaddlivre";
 	}
 
 	@RequestMapping(value = "/ajoutlivre", method = RequestMethod.POST)
-	private String ajouterLivre(Livre newLivre, HttpServletRequest request) {
-		//newLivre.setEditeur(editeurService.get(Integer.parseInt(request.getParameter("editeur"))));
+	private String ajouterLivre(@ModelAttribute("livre") Livre livre, HttpServletRequest request) {
+		//livre.setEditeur(editeurService.get(Integer.parseInt(request.getParameter("editeur"))));
 		// System.out.println(request.getParameter("editeur"));
-		livreService.save(newLivre);
+		livreService.save(livre);
 		return "redirect:/";
 	}
 
