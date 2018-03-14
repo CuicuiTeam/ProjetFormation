@@ -1,5 +1,7 @@
 package com.formation.service;
 
+import java.util.List;
+
 import com.formation.entities.Membre;
 
 public interface MembreService {
@@ -15,5 +17,7 @@ public interface MembreService {
 	public void delete(Membre m);
 
 	public String cryptageMdp(Membre membre);
+
+	public List<Membre> getAll();
 
 }

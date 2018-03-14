@@ -83,13 +83,13 @@ public class LivreControlleur {
 
 		Livre newLivre = new Livre();
 		model.addAttribute("livre", newLivre);
-		// model.addAttribute("editeurs", editeurService.getAll());
+		model.addAttribute("editeurs", editeurService.getAll());
 		return "adminaddlivre";
 	}
 
 	@RequestMapping(value = "/ajoutlivre", method = RequestMethod.POST)
-	private String ajouterLivre(Livre newLivre, HttpServletRequest request) {
-		//newLivre.setEditeur(editeurService.get(Integer.parseInt(request.getParameter("editeur"))));
+	private String ajouterLivre(@ModelAttribute("livre") Livre newLivre) {
+		// newLivre.setEditeur(editeurService.get());
 		// System.out.println(request.getParameter("editeur"));
 		livreService.save(newLivre);
 		return "redirect:/";
