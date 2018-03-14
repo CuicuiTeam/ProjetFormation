@@ -83,7 +83,7 @@ public class LivreControlleur {
 
 		Livre newLivre = new Livre();
 		model.addAttribute("livre", newLivre);
-		// model.addAttribute("editeurs", editeurService.getAll());
+		model.addAttribute("editeurs", editeurService.getAll());
 		return "adminaddlivre";
 	}
 

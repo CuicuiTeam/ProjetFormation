@@ -7,13 +7,10 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -115,6 +112,10 @@ public class Membre implements Serializable{
 
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getTelephone() {
