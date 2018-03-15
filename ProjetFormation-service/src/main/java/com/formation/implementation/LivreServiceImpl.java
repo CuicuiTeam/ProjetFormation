@@ -57,7 +57,7 @@ public class LivreServiceImpl implements LivreService {
 	@Override
 	public void save(Livre livre) {
 		// TODO Auto-generated method stub
-		livre.setEditeur(editeurDAO.get(livre.getEditeur().getId()));
+		// livre.setEditeur(editeurDAO.get(livre.getEditeur().getId()));
 		livreDAO.save(livre);
 	}
 
