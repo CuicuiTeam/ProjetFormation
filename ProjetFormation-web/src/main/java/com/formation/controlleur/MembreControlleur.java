@@ -47,7 +47,7 @@ public class MembreControlleur {
 		return "connexion";
 	}
 
-	@RequestMapping(value = "/connexion", method = RequestMethod.POST)
+	@RequestMapping(value = "/connexioncheck", method = RequestMethod.POST)
 	private String connexionMembre(@ModelAttribute("login") Membre newMembre, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Membre membre = membreService.identification(newMembre.getEmail(), newMembre.getPassword());

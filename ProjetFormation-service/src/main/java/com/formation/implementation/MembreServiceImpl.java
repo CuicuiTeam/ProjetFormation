@@ -1,8 +1,5 @@
 package com.formation.implementation;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +73,6 @@ public class MembreServiceImpl implements MembreService, UserDetailsService{
 
 	@Override
 	public List<Membre> getAll() {
-		// TODO Auto-generated method stub
 		return membreDAO.getAll();
 	}
 

@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="titre" value="Connexion" scope="session"></c:set>
 <jsp:include page="template/header.jsp" />
-<form:form modelAttribute="login" class="form-horizontal">
+<form:form modelAttribute="login" action="${baseurl}connexioncheck" class="form-horizontal">
 	<fieldset>
 		<legend>Accedez à votre compte</legend>
 		<div class="form-group">
@@ -21,7 +21,7 @@
 		</div>
 		<div class="form-group">
 			<div class="col-lg-10 col-lg-offset-2">
-				<input type="submit" class="btn btn-primary"
+				<input type="submit" id="btnAdd" class="btn btn-primary"
 					value="Connexion" />
 			</div>
 		</div>

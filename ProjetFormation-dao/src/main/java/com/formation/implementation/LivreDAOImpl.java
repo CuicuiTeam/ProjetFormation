@@ -59,7 +59,6 @@ public class LivreDAOImpl extends DAOPrincipalImpl<Livre> implements LivreDAO {
 		return (List<Livre>) sessionFactory.getCurrentSession().createQuery("FROM Livre L WHERE L.isPopular = 1 ORDER BY L.titre ASC").getResultList();
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public Livre getLivreBySlug(String slug) {
 		// TODO Auto-generated method stub
