@@ -91,7 +91,7 @@ public class Livre implements Serializable {
 
 	}
 
-	public Livre(String titre, String description, float prix, Date datePublication, String imagePath,
+	public Livre(String titre, String description, double prix, Date datePublication, String imagePath,
 			boolean isPopular, boolean isPeriodic) {
 		this.titre = titre;
 		this.description = description;

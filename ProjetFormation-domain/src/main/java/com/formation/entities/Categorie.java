@@ -66,5 +66,8 @@ public class Categorie implements Serializable {
 		this.slug = slug;
 	}
 
+	public int getId() {
+		return id;
+	}
 
 }
