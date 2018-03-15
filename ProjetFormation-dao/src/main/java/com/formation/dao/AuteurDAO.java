@@ -10,4 +10,5 @@ public interface AuteurDAO extends DAOPrincipal<Auteur> {
 	public Auteur getAuteurBySlug(String slug);
 	public List<Auteur> getAuteurAll();
 
+
 }

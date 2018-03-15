@@ -1,6 +1,7 @@
 package com.formation.implementation;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.formation.dao.AuteurDAO;
 import com.formation.entities.Auteur;
-import com.formation.entities.Bibliotheque;
 import com.formation.service.AuteurService;
 
 @Service
@@ -38,6 +38,12 @@ public class AuteurServiceImpl implements AuteurService {
 	
 	public List<Auteur> getAuteurAll() {
 		return auteurDAO.getAuteurAll();
+	}
+
+	@Override
+	public List<Auteur> getAuteursById(List<Integer> ids) {
+		// TODO Auto-generated method stub
+		return auteurDAO.getAll().stream().filter(a -> ids.contains(a.getId())).collect(Collectors.toList());
 	}
 
 }
