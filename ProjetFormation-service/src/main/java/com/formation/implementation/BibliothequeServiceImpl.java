@@ -21,6 +21,14 @@ public class BibliothequeServiceImpl implements BibliothequeService {
 	@Override
 	public List<Bibliotheque> getAll() {
 		return bibliothequeDAO.getAll();
+	}
+
+	@Override
+	public void save(Bibliotheque biblio) {
+		// TODO Auto-generated method stub
+		bibliothequeDAO.save(biblio);
 	} 
 	
+
+
 }

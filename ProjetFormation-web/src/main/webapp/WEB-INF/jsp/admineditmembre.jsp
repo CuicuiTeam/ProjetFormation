@@ -5,7 +5,7 @@
 <jsp:include page="template/header.jsp" />
 <form:form modelAttribute="edit" class="form-horizontal">
 	<fieldset>
-		<legend>Créez votre compte</legend>
+		<legend>Modifiez votre compte</legend>
 		<div class="form-group">
 			<label class="control-label col-lg-2" for="email">Email*</label>
 			<div class="col-lg-10">

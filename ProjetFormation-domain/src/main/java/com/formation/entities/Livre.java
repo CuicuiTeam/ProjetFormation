@@ -1,4 +1,5 @@
 
+
 package com.formation.entities;
 
 import java.io.Serializable;
@@ -80,6 +81,10 @@ public class Livre implements Serializable {
 
 	public void setEditeur(Editeur editeur) {
 		this.editeur = editeur;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Livre() {

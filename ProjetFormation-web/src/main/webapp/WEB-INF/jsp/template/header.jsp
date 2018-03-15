@@ -27,16 +27,42 @@
 				<c:out value="${titre}"></c:out>
 			</h2>
 			<p>Pas seulement des livres sur les cuicui</p>
+			<!-- //////////////Recherche /////////////////////// -->
 			<form class="form-horizontal" method="POST"
 				action="${baseurl}recherche" class="pull-right" />
-
 			<input class="form-control mr-sm-2" placeholder="Recherche"
 				id="motRecherche" name="motRecherche"
-				style="width: 20%; float: right" />
-			<button type="submit" class="btn btn-info" style="font-size: 20px; float: right">
+				style="width: 20%; float: right" autocomplete="off" />
+			<button type="submit" class="btn btn-info"
+				style="font-size: 20px; float: right">
 				<span class="glyphicon glyphicon-search"></span>
 			</button>
-			</form>
+			<div>
+				<button type="button" class="btn btn-info" data-toggle="collapse"
+					data-target="#demo" style="float: right">Recherche avancée</button>
+				<div id="demo" class="collapse">
+					<div class="container">
+						<form role="form">
+							<div class="form-group">
+								<label for="sel1">Auteur :</label> <select class="form-control"
+									id="sel1" style="width: 10%">
+									<option>
+										<c:forEach items="${editeurs}" var="edit">
+											<form:option value="1">${edit.nom}</form:option>
+										</c:forEach>
+									</option>
+								</select> <label for="sel1">Categorie :</label> <select
+									class="form-control" id="sel1" style="width: 10%">
+									<option>1</option>
+								</select> <label for="sel1">Editeur :</label> <select
+									class="form-control" id="sel1" style="width: 10%">
+									<option>1</option>
+								</select>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="container">

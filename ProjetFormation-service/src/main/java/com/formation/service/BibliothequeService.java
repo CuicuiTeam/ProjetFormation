@@ -7,4 +7,6 @@ import com.formation.entities.Bibliotheque;
 public interface BibliothequeService {
 	public List<Bibliotheque> getAll();
 
+	public void save(Bibliotheque biblio);
+
 }

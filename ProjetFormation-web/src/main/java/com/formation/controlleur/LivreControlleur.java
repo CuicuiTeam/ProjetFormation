@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.formation.entities.Livre;
-import com.formation.entities.Membre;
 import com.formation.service.AuteurService;
 import com.formation.service.CategorieService;
 import com.formation.service.EditeurService;
@@ -127,6 +127,22 @@ public class LivreControlleur {
 		model.addAttribute("livre", livreService.getLivreBySlug(liv));
 		model.addAttribute("titre", livreService.getLivreBySlug(liv).getTitre());
 		return "livre";
+
+	}
+
+	@RequestMapping(value = "/editlivre", method = RequestMethod.GET)
+	private String editMembre(HttpServletRequest request, Model model) {
+		Livre livre = livreService.get(Integer.parseInt(request.getParameter("idLivre")));
+		model.addAttribute("edit", livre);
+		return "admineditlivre";
+
+	}
+
+	@RequestMapping(value = "/editlivre", method = RequestMethod.POST)
+	private String editMembre(@ModelAttribute("edit") Livre livre, @RequestParam(value = "idLivre") int idLivre) {
+		livre.setId(idLivre);
+		livreService.save(livre);
+		return "redirect:/supprimer";
 
 	}
 }

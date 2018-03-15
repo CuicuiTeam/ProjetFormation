@@ -24,12 +24,19 @@
 				<td>${livre.datePublication}</td>
 				<td>${livre.popular}</td>
 				<td>${livre.periodic}</td>
-				<td><a href="#" class="btn btn-primary"><span
-						class="glyphicon glyphicon-pencil"></span></a>
-					<button onclick="loadDel(${livre.id})" class="btn btn-danger"
-						data-toggle="modal" data-target="#modalDel">
-						<span class="glyphicon glyphicon-trash"></span>
-					</button></td>
+				<td><form method="GET" action="${baseurl}editlivre"
+						style="display: inline;">
+
+						<input type="hidden" id="idLivre" name="idLivre"
+							value="${livre.id}" />
+						<button type="submit" class="btn btn-primary">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button>
+						</form>
+						<button onclick="loadDel(${livre.id})" class="btn btn-danger"
+							data-toggle="modal" data-target="#modalDel">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button></td>
 			</tr>
 		</c:forEach>
 	</table>
