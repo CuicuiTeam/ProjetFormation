@@ -16,9 +16,6 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.formation.entities.Authorities;
-import com.formation.entities.Membre;
-
 @Configuration
 @EnableTransactionManagement
 @PropertySource({ "classpath:persistence-mysql.properties" })
@@ -34,7 +31,6 @@ public class ConteneurSpringFullJava {
         sessionFactory.setDataSource(restDataSource());
         sessionFactory.setPackagesToScan(new String[] { "com.formation.entities" });
         sessionFactory.setHibernateProperties(hibernateProperties());
-        sessionFactory.setAnnotatedClasses(Membre.class, Authorities.class);
         return sessionFactory;
     }
 

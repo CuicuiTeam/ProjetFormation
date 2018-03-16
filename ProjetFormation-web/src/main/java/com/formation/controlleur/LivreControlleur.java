@@ -64,11 +64,6 @@ public class LivreControlleur {
 
 	@RequestMapping("/auteur/{aut}")
 	private String listeByAuteur(@PathVariable(value = "aut") String aut, Model model) {
-
-		model.addAttribute("livres", livreService.getLivreByAuteur(auteurService.getAuteurBySlug(aut)));
-		model.addAttribute("titre",
-				auteurService.getAuteurBySlug(aut).getPrenom() + " " + auteurService.getAuteurBySlug(aut).getNom());
-		model.addAttribute("auteur", auteurService.getAuteurBySlug(aut));
 		return "auteur";
 
 	}

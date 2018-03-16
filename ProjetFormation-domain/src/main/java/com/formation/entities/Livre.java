@@ -34,7 +34,6 @@ public class Livre implements Serializable {
 	private String imagePath;
 	private boolean isPopular;
 	private boolean isPeriodic;
-	private String slug;
 
 	@ManyToMany(fetch=FetchType.EAGER, mappedBy="livres")
 	private List<Auteur> auteurs;
@@ -50,14 +49,6 @@ public class Livre implements Serializable {
 
 	@ManyToOne
 	private Panier panier;
-	
-	public String getSlug() {
-		return slug;
-	}
-
-	public void setSlug(String slug) {
-		this.slug = slug;
-	}
 
 	public List<Exemplaire> getExemplaires() {
 		return exemplaires;
@@ -100,7 +91,6 @@ public class Livre implements Serializable {
 		this.imagePath = imagePath;
 		this.isPopular = isPopular;
 		this.isPeriodic = isPeriodic;
-		this.slug = new Slugify().slugify(titre);
 	}
 
 	public String getTitre() {

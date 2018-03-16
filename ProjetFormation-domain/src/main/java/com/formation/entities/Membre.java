@@ -33,9 +33,6 @@ public class Membre implements Serializable{
 	@OneToMany(mappedBy="membre")
 	private List<Panier> paniers;
 
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="membre")
-	private Set<Authorities> authorities = new HashSet<>();
-
 	private String nom, prenom, password, adresse, ville, codePostal, telephone;
 	
 	@JoinColumn(unique=true)
@@ -170,14 +167,5 @@ public class Membre implements Serializable{
 	public void setPaniers(List<Panier> paniers) {
 		this.paniers = paniers;
 	}
-
-	public Set<Authorities> getAuthorities() {
-		return authorities;
-	}
-
-	public void setAuthorities(Set<Authorities> authorities) {
-		this.authorities = authorities;
-	}
-	
 
 }

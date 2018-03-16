@@ -6,7 +6,7 @@ public class MvcWebApplicationInitializer extends AbstractAnnotationConfigDispat
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] { ConteneurSpringFullJava.class, WebSecurityConfig.class};
+		return new Class[] { ConteneurSpringFullJava.class};
 	}
 
 	@Override

@@ -1,15 +1,9 @@
 package com.formation.dto;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-public class LivreDTO implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class LivreDTO {
 	private String titre;
 	private String description;
 	private double prix;
@@ -36,7 +30,6 @@ public class LivreDTO implements Serializable {
 		this.isPeriodic = isPeriodic;
 		this.editeurId = editeurId;
 		this.categorieId = categorieId;
-		this.auteursId = auteursId;
 	}
 
 	public String getTitre() {

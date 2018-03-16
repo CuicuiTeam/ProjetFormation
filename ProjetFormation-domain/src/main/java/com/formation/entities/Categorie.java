@@ -19,7 +19,7 @@ public class Categorie implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private String nom, description, slug;
+	private String nom, description;
 
 	@OneToMany(mappedBy="categorie")
 	private List<Livre> livres;
@@ -31,7 +31,6 @@ public class Categorie implements Serializable {
 	public Categorie(String nom, String description) {
 		this.nom = nom;
 		this.description = description;
-		this.slug = new Slugify().slugify(nom);
 }
 
 	public String getNom() {
@@ -56,14 +55,6 @@ public class Categorie implements Serializable {
 
 	public void setLivres(List<Livre> livres) {
 		this.livres = livres;
-	}
-
-	public String getSlug() {
-		return slug;
-	}
-
-	public void setSlug(String slug) {
-		this.slug = slug;
 	}
 
 	public int getId() {

@@ -60,4 +60,38 @@ public class Emprunt implements Serializable{
 		this.dateRetour = dateRetour;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public List<Exemplaire> getExemplaires() {
+		return exemplaires;
+	}
+
+	public void setExemplaires(List<Exemplaire> exemplaires) {
+		this.exemplaires = exemplaires;
+	}
+
+	public Date getDateEmprunt() {
+		return dateEmprunt;
+	}
+
+	public void setDateEmprunt(Date dateEmprunt) {
+		this.dateEmprunt = dateEmprunt;
+	}
+
+	public Date getDateRetour() {
+		return dateRetour;
+	}
+
+	public void setDateRetour(Date dateRetour) {
+		this.dateRetour = dateRetour;
+	}
+	
+	
+
 }

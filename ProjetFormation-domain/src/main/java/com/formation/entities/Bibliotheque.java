@@ -23,7 +23,7 @@ public class Bibliotheque implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private String nom, adresse, slug;
+	private String nom, adresse;
 
 	@OneToMany(mappedBy="bibliotheque")
 	private List<Rayon> rayons;
@@ -38,7 +38,6 @@ public class Bibliotheque implements Serializable {
 	public Bibliotheque(String nom, String adresse) {
 		this.nom = nom;
 		this.adresse = adresse;
-		this.slug = new Slugify().slugify(nom);
 	}
 
 
@@ -75,19 +74,5 @@ public class Bibliotheque implements Serializable {
 	public void setRayons(List<Rayon> rayons) {
 		this.rayons = rayons;
 	}
-
-
-	public String getSlug() {
-		return slug;
-	}
-
-
-	public void setSlug(String slug) {
-		this.slug = slug;
-	}
-
-
-
-
 
 }
