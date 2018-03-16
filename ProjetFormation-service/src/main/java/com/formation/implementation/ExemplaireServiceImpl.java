@@ -1,6 +1,7 @@
 package com.formation.implementation;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,6 +32,12 @@ public class ExemplaireServiceImpl implements ExemplaireService{
 	@Override
 	public List<Exemplaire> getAll() {
 		return exemplaireDao.getAll();
+	}
+
+
+	@Override
+	public List<Exemplaire> getExemplaireById(List<Integer> ids) {
+		return exemplaireDao.getAll().stream().filter(a -> ids.contains(a.getId())).collect(Collectors.toList());
 	}
 
 }

@@ -91,43 +91,7 @@ public class LivreControlleur {
 	// }
 
 
-	@RequestMapping("/periodiques")
-	private String listePeriodiques(Model model) {
-
-		model.addAttribute("livres", livreService.getPeriodiques());
-		model.addAttribute("titre", "Périodiques");
-		return "accueil";
-	}
-
-	@RequestMapping("/categorie/{cat}")
-	private String listeByCategorie(@PathVariable(value = "cat") String cat, Model model) {
-		model.addAttribute("livres", livreService.getLivreByCat(categorieService.getCategorieByNom(cat)));
-		model.addAttribute("titre", categorieService.getCategorieByNom(cat).getNom());
-		return "accueil";
-	}
-
-	@RequestMapping("/auteur/{aut}")
-	private String listeByAuteur(@PathVariable(value = "aut") String aut, Model model) {
-		return "auteur";
-
-	}
-
-	@RequestMapping(value = "/recherche", method = RequestMethod.POST)
-	private String resultatRecherche(HttpServletRequest request, Model model) {
-		String motRecherche = request.getParameter("motRecherche");
-		model.addAttribute("livres", livreService.getLivreByRecherche(motRecherche));
-		model.addAttribute("titre", "Recherche : " + motRecherche);
-		return "accueil";
-	}
-
-	@ModelAttribute("Livre")
-	public Livre getLivre() {
-
-		return new Livre();
-	}
-
-
-	@GetMapping(value = "/livres")
+	@GetMapping(value = "/livre")
 	public List<LivreDTO> listerLivres() {
 		List<LivreDTO> resultats = new ArrayList<LivreDTO>();
 		List<Livre> listeLivres = livreService.getAll();
@@ -138,8 +102,6 @@ public class LivreControlleur {
 					livre.getEditeur().getId(), livre.getCategorie().getId());
 			livreDto.setId(livre.getId());
 			List<Integer> authorIds = new ArrayList<Integer>();
-
-
 			livre.getAuteurs().forEach(auteur -> authorIds.add(auteur.getId()));
 			livreDto.setAuteursId(authorIds);
 

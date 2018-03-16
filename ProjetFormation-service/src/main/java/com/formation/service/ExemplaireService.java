@@ -11,4 +11,6 @@ public interface ExemplaireService {
 	public void save(Exemplaire exemplaire);
 	public void delete(Exemplaire exemplaire);
 	public List<Exemplaire> getAll();
+
+	public List<Exemplaire> getExemplaireById(List<Integer> ids);
 }
