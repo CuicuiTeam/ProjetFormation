@@ -1,15 +1,13 @@
 package com.formation.dto;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-public class LivreDTO implements Serializable {
+public class LivreDTO {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	private String titre;
 	private String description;
 	private double prix;
@@ -20,6 +18,7 @@ public class LivreDTO implements Serializable {
 	private int editeurId;
 	private int categorieId;
 	private List<Integer> auteursId;
+	private int id;
 
 	public LivreDTO() {
 		// TODO Auto-generated constructor stub
@@ -49,6 +48,14 @@ public class LivreDTO implements Serializable {
 
 	public String getDescription() {
 		return description;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public void setDescription(String description) {

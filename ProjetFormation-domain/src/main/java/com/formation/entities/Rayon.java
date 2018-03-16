@@ -109,4 +109,9 @@ public class Rayon implements Serializable {
 	public void setSlug(String slug) {
 		this.slug = slug;
 	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 }

@@ -9,4 +9,8 @@ public interface BibliothequeService {
 
 	public void save(Bibliotheque biblio);
 
+	public Bibliotheque get(int id);
+
+	public void delete(Bibliotheque biblio);
+
 }

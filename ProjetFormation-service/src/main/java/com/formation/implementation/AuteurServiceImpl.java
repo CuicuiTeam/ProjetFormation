@@ -46,4 +46,10 @@ public class AuteurServiceImpl implements AuteurService {
 		return auteurDAO.getAll().stream().filter(a -> ids.contains(a.getId())).collect(Collectors.toList());
 	}
 
+	@Override
+	public Auteur get(int id) {
+		// TODO Auto-generated method stub
+		return auteurDAO.get(id);
+	}
+
 }

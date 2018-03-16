@@ -1,39 +1,63 @@
 package com.formation.controlleur;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.formation.dto.BibliothequeDTO;
 import com.formation.entities.Bibliotheque;
 import com.formation.service.BibliothequeService;
 
-@Controller
+@RestController
 public class BibliothequeControlleur {
-	
+
 	@Autowired
 	private BibliothequeService bibliothequeService;
-	
-	@RequestMapping("/bibliotheques")
-	private String bibliotheques (Model model) {
-		model.addAttribute("bibliotheques", bibliothequeService.getAll());
-		model.addAttribute("titre", "Bibliotheques");
-		return "bibliotheques";
+
+	@GetMapping("/admin/bibliotheque")
+	public List<BibliothequeDTO> listerBibliotheque() {
+		List<BibliothequeDTO> resultats = new ArrayList<BibliothequeDTO>();
+		List<Bibliotheque> bibliotheques = bibliothequeService.getAll();
+
+		bibliotheques.forEach(bibliotheque -> {
+
+			BibliothequeDTO biblioDto = new BibliothequeDTO(bibliotheque.getNom(), bibliotheque.getAdresse());
+			biblioDto.setId(bibliotheque.getId());
+			resultats.add(biblioDto);
+		});
+		return resultats;
+
 	}
 
-	@RequestMapping(value = "/admin/ajoutBibliotheque", method = RequestMethod.GET)
-	private String ajoutBibliotheque(Model model) {
-		Bibliotheque biblio = new Bibliotheque();
-		model.addAttribute("newBiblio", biblio);
-		return "adminbiblio";
-	}
-
-	@RequestMapping(value = "/admin/ajoutBibliotheque", method = RequestMethod.POST)
-	private String ajoutBibliotheque(@ModelAttribute("newBiblio") Bibliotheque biblio, Model model) {
+	@PutMapping(value = "/admin/bibliotheque", consumes = MediaType.APPLICATION_JSON_VALUE)
+	private void ajouterBibliotheque(@RequestBody BibliothequeDTO biblioDto) {
+		Bibliotheque biblio = new Bibliotheque(biblioDto.getNom(), biblioDto.getAdresse());
 		bibliothequeService.save(biblio);
-		return "redirect:/";
+	}
+
+	@PostMapping(value = "/admin/bibliotheque")
+	private void editerBibliotheque(@RequestBody BibliothequeDTO biblioDto) {
+		Bibliotheque bibliotheque = new Bibliotheque();
+		bibliotheque.setId(biblioDto.getId());
+		bibliotheque.setNom(biblioDto.getNom());
+		bibliotheque.setAdresse(biblioDto.getAdresse());
+
+		bibliothequeService.save(bibliotheque);
+	}
+
+	@DeleteMapping(value = "/admin/bibliotheque")
+	private void supprBibliotheque(@RequestBody BibliothequeDTO biblioDto) {
+		Bibliotheque bibliotheque = new Bibliotheque();
+		bibliotheque = bibliothequeService.get(biblioDto.getId());
+		bibliothequeService.delete(bibliotheque);
 
 	}
 
