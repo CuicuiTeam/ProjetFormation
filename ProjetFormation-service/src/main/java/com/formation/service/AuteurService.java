@@ -13,4 +13,5 @@ public interface AuteurService {
 	public List<Auteur> getAll();
 	public List<Auteur> getAuteurAll();
 	public List<Auteur> getAuteursById(List<Integer> ids);
+
 }
