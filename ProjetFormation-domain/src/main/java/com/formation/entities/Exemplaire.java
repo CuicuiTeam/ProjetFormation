@@ -29,7 +29,18 @@ private static final long serialVersionUID = 1L;
 	private Emprunt emprunt;
 
 	public Exemplaire() {
-		super();
+	}
+
+	public Exemplaire(Rayon rayon, Livre livre, Membre membre, Emprunt emprunt) {
+		this.rayon = rayon;
+		this.livre = livre;
+		this.membre = membre;
+		this.emprunt = emprunt;
+	}
+	
+	public Exemplaire(Rayon rayon, Livre livre) {
+		this.rayon = rayon;
+		this.livre = livre;
 	}
 
 	public Rayon getRayon() {
@@ -44,7 +55,33 @@ private static final long serialVersionUID = 1L;
 		return id;
 	}
 
-	
-	
+	public Livre getLivre() {
+		return livre;
+	}
+
+	public void setLivre(Livre livre) {
+		this.livre = livre;
+	}
+
+	public Membre getMembre() {
+		return membre;
+	}
+
+	public void setMembre(Membre membre) {
+		this.membre = membre;
+	}
+
+	public Emprunt getEmprunt() {
+		return emprunt;
+	}
+
+	public void setEmprunt(Emprunt emprunt) {
+		this.emprunt = emprunt;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	
 }

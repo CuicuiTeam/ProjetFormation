@@ -23,7 +23,7 @@ public class Editeur implements Serializable {
 	@Column(unique=true)
 	private String nom;
 	
-	private String adresse, slug;
+	private String adresse;
 
 	@OneToMany(mappedBy = "editeur")
 	private List<Livre> livres;
@@ -36,7 +36,6 @@ public class Editeur implements Serializable {
 	public Editeur(String nom, String adresse) {
 		this.nom = nom;
 		this.adresse = adresse;
-		this.slug = new Slugify().slugify(nom);
 	}
 
 	public int getId() {
@@ -66,14 +65,5 @@ public class Editeur implements Serializable {
 	public void setLivres(List<Livre> livres) {
 		this.livres = livres;
 	}
-
-	public String getSlug() {
-		return slug;
-	}
-
-	public void setSlug(String slug) {
-		this.slug = slug;
-	}
-
 
 }

@@ -24,7 +24,7 @@ public class Auteur implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private String nom, prenom, slug;
+	private String nom, prenom;
 	@Type(type="text")
 	private String biographie;
 
@@ -37,11 +37,11 @@ public class Auteur implements Serializable {
 
 	}
 
-	public Auteur(String nom, String prenom, String biographie) {
+	public Auteur(String nom, String prenom, String biographie, String imagePath) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.biographie = biographie;
-		this.slug = new Slugify().slugify(this.prenom +" "+ this.nom);
+		this.imagePath = imagePath;
 	}
 
 	public String getNom() {
@@ -68,14 +68,6 @@ public class Auteur implements Serializable {
 		this.livres = livres;
 	}
 
-	public String getSlug() {
-		return slug;
-	}
-
-	public void setSlug(String slug) {
-		this.slug = slug;
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -96,7 +88,4 @@ public class Auteur implements Serializable {
 		this.imagePath = imagePath;
 	}
 	
-	
-	
-
 }

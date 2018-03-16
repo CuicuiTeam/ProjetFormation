@@ -21,14 +21,7 @@ public class AuteurServiceImpl implements AuteurService {
 
 	@Override
 	public Auteur getAuteurByNom(String nom) {
-		// TODO Auto-generated method stub
 		return auteurDAO.getAuteurByNom(nom);
-	}
-	
-	@Override
-	public Auteur getAuteurBySlug(String slug) {
-		// TODO Auto-generated method stub
-		return auteurDAO.getAuteurBySlug(slug);
 	}
 	
 	@Override
@@ -42,14 +35,21 @@ public class AuteurServiceImpl implements AuteurService {
 
 	@Override
 	public List<Auteur> getAuteursById(List<Integer> ids) {
-		// TODO Auto-generated method stub
 		return auteurDAO.getAll().stream().filter(a -> ids.contains(a.getId())).collect(Collectors.toList());
 	}
 
 	@Override
 	public Auteur get(int id) {
-		// TODO Auto-generated method stub
 		return auteurDAO.get(id);
+	}
+
+	@Override
+	public void save(Auteur auteur) {
+		auteurDAO.save(auteur);
+	}
+	
+	public void delete(Auteur auteur) {
+		auteurDAO.delete(auteur);
 	}
 
 }

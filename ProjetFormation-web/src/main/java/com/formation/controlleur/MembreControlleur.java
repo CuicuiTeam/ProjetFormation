@@ -1,7 +1,8 @@
 package com.formation.controlleur;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -39,26 +40,31 @@ public class MembreControlleur {
 		}
 	}
 
-	@RequestMapping(value = "/connexion", method = RequestMethod.GET)
-	private String connexionMembre(Model model) {
-
-		Membre newMembre = new Membre();
-		model.addAttribute("login", newMembre);
-		return "connexion";
-	}
-
-	@RequestMapping(value = "/connexioncheck", method = RequestMethod.POST)
-	private String connexionMembre(@ModelAttribute("login") Membre newMembre, Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		Membre membre = membreService.identification(newMembre.getEmail(), newMembre.getPassword());
-		if(membre != null) {
-			session.setAttribute("user", membre);
-			return "redirect:/";
-		} else {
-			model.addAttribute("msgErreur", "Veuillez saisir un identifiant et un mot de passe valide");
-			return "connexion";
-		}
-	}
+//	@RequestMapping(value = "/connexion", method = RequestMethod.GET)
+//	private String connexionMembre(Model model) {
+//
+//		Membre newMembre = new Membre();
+//		model.addAttribute("login", newMembre);
+//		return "connexion";
+//	}
+//
+//	@RequestMapping(value = "/connexioncheck", method = RequestMethod.POST)
+//	private String connexionMembre(@ModelAttribute("login") Membre newMembre, Model model, HttpServletRequest request) {
+//		HttpSession session = request.getSession();
+//		try {
+//			Membre membre = membreService.identification(newMembre.getEmail(), newMembre.getPassword());
+//		} catch (ServiceException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		if(membre != null) {
+//			session.setAttribute("user", membre);
+//			return "redirect:/";
+//		} else {
+//			model.addAttribute("msgErreur", "Veuillez saisir un identifiant et un mot de passe valide");
+//			return "connexion";
+//		}
+//	}
 
 	@RequestMapping(value = "/supprimerMembre", method = RequestMethod.GET)
 	private String supprMembre(Model model) {

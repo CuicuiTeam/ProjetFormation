@@ -4,10 +4,6 @@ import java.sql.Date;
 import java.util.List;
 
 public class LivreDTO {
-
-	/**
-	 * 
-	 */
 	private String titre;
 	private String description;
 	private double prix;
@@ -35,7 +31,6 @@ public class LivreDTO {
 		this.isPeriodic = isPeriodic;
 		this.editeurId = editeurId;
 		this.categorieId = categorieId;
-		this.auteursId = auteursId;
 	}
 
 	public String getTitre() {
