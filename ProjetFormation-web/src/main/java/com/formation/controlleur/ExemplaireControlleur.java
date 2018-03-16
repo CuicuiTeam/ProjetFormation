@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.formation.dto.ExemplaireDTO;
-import com.formation.entities.Auteur;
 import com.formation.entities.Exemplaire;
+import com.formation.service.EmpruntService;
 import com.formation.service.ExemplaireService;
 import com.formation.service.LivreService;
 import com.formation.service.MembreService;
+import com.formation.service.RayonService;
 
 @RestController
 public class ExemplaireControlleur {
