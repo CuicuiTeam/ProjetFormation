@@ -27,6 +27,19 @@ public class BibliothequeServiceImpl implements BibliothequeService {
 	public void save(Bibliotheque biblio) {
 		// TODO Auto-generated method stub
 		bibliothequeDAO.save(biblio);
+	}
+
+	@Override
+	public Bibliotheque get(int id) {
+		// TODO Auto-generated method stub
+		return bibliothequeDAO.get(id);
+	}
+
+	@Override
+	public void delete(Bibliotheque biblio) {
+		// TODO Auto-generated method stub
+		bibliothequeDAO.delete(biblio);
+
 	} 
 	
 

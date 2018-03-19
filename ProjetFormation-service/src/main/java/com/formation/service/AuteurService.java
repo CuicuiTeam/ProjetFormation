@@ -7,10 +7,11 @@ import com.formation.entities.Auteur;
 public interface AuteurService {
 
 	public Auteur getAuteurByNom(String nom);
-	public Auteur getAuteurBySlug(String slug);
+	public Auteur get(int id);
+	public void save(Auteur auteur);
+	public void delete(Auteur auteur);
 	public List<Auteur> getAll();
 	public List<Auteur> getAuteurAll();
-
 	public List<Auteur> getAuteursById(List<Integer> ids);
 
 }

@@ -24,10 +24,6 @@ public class Rayon implements Serializable {
 	private String description;
 	private int nbrLivres;
 	
-
-
-	private String slug;
-	
 	@OneToMany(mappedBy="rayon")
 	private List<Exemplaire> exemplaires;
 	
@@ -43,7 +39,6 @@ public class Rayon implements Serializable {
 		this.nom = nom;
 		this.description = description;
 		this.nbrLivres = nbrLivres;
-		this.slug = new Slugify().slugify(nom);
 	}
 
 
@@ -101,12 +96,8 @@ public class Rayon implements Serializable {
 		this.bibliotheque = bibliotheque;
 	}
 
-	public String getSlug() {
-		return slug;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-
-	public void setSlug(String slug) {
-		this.slug = slug;
-	}
 }

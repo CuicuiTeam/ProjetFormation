@@ -8,9 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.github.slugify.Slugify;
@@ -23,7 +20,7 @@ public class Bibliotheque implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private String nom, adresse, slug;
+	private String nom, adresse;
 
 	@OneToMany(mappedBy="bibliotheque")
 	private List<Rayon> rayons;
@@ -38,7 +35,6 @@ public class Bibliotheque implements Serializable {
 	public Bibliotheque(String nom, String adresse) {
 		this.nom = nom;
 		this.adresse = adresse;
-		this.slug = new Slugify().slugify(nom);
 	}
 
 
@@ -76,18 +72,17 @@ public class Bibliotheque implements Serializable {
 		this.rayons = rayons;
 	}
 
+	public List<Inscription> getInscriptions() {
+		return inscriptions;
+	}
 
-	public String getSlug() {
-		return slug;
+	public void setInscriptions(List<Inscription> inscriptions) {
+		this.inscriptions = inscriptions;
 	}
 
 
-	public void setSlug(String slug) {
-		this.slug = slug;
+	public void setId(int id) {
+		this.id = id;
 	}
-
-
-
-
 
 }
