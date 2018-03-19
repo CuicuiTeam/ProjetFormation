@@ -19,5 +19,7 @@ public interface MembreService {
 	public String cryptageMdp(String password);
 
 	public List<Membre> getAll();
+	
+
 
 }

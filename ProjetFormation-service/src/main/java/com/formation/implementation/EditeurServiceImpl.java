@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.formation.dao.EditeurDAO;
+import com.formation.entities.Categorie;
 import com.formation.entities.Editeur;
 import com.formation.service.EditeurService;
 
@@ -28,4 +29,11 @@ public class EditeurServiceImpl implements EditeurService {
 		return editeurDAO.get(id);
 	}
 
+	public void save(Editeur e) {
+		editeurDAO.save(e);
+	}
+	
+	public void delete(Editeur e) {
+		editeurDAO.delete(e);
+	}
 }

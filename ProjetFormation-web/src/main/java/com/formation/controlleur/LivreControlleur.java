@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -88,7 +89,7 @@ public class LivreControlleur {
 	}
 
 
-	@GetMapping(value = "/livres")
+	@GetMapping(value = "/livre")
 	public List<LivreDTO> listerLivres() {
 		List<LivreDTO> resultats = new ArrayList<LivreDTO>();
 		List<Livre> listeLivres = livreService.getAll();
@@ -108,7 +109,8 @@ public class LivreControlleur {
 		return resultats;
 	}
 
-	@PostMapping(value = "/ajoutlivre")
+
+	@PutMapping(value = "/livre")
 	public void ajouterLivre(@RequestBody LivreDTO livreDto) {
 
 		Livre newLivre = new Livre(livreDto.getTitre(), livreDto.getDescription(), livreDto.getPrix(),

@@ -75,5 +75,7 @@ public class MembreServiceImpl implements MembreService, UserDetailsService{
 	public List<Membre> getAll() {
 		return membreDAO.getAll();
 	}
+	
+	
 
 }
