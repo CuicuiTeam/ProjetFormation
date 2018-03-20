@@ -7,15 +7,10 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.formation.dao.ExemplaireDAO;
 import com.formation.entities.Exemplaire;
 import com.formation.service.ExemplaireService;
-@Service
-@Transactional
-@Service
-@Transactional
 @Service
 @Transactional
 public class ExemplaireServiceImpl implements ExemplaireService{
