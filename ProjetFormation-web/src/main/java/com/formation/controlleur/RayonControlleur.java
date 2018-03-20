@@ -48,7 +48,7 @@ public class RayonControlleur {
 				rayonDto.setId(rayon.getId());
 				List<Integer> exemplaires = new ArrayList<Integer>();
 				rayon.getExemplaires().forEach(ex -> exemplaires.add(ex.getId()));
-				rayonDto.setExemlplairesId(exemplaires);
+				rayonDto.setExemplairesId(exemplaires);
 				listeRayons.add(rayonDto);
 				resultat.setPayload(listeRayons);
 			});
@@ -72,7 +72,7 @@ public class RayonControlleur {
 		try {
 			Rayon rayon = new Rayon(rayonDto.getNom(),rayonDto.getDescription(),rayonDto.getNbrLivres());
 			rayon.setBibliotheque(bibliothequeService.get(rayonDto.getId()));
-			rayon.setExemplaires(exemplaireService.getExemplaireById(rayonDto.getExemlplairesId()));
+			rayon.setExemplaires(exemplaireService.getExemplaireById(rayonDto.getExemplairesId()));
 			rayon.setBibliotheque(bibliothequeService.get(rayonDto.getBibliothequeId()));
 			rayonService.save(rayon);
 			resultat.setSuccess(true);
@@ -100,7 +100,7 @@ public class RayonControlleur {
 			rayon.setNbrLivres(rayonDto.getNbrLivres());
 			rayon.setBibliotheque(bibliothequeService.get(rayonDto.getBibliothequeId()));
 			List<Exemplaire> exemplaires = new ArrayList<>();
-			for (int i = 0; i < rayonDto.getExemlplairesId().size(); i++) {
+			for (int i = 0; i < rayonDto.getExemplairesId().size(); i++) {
 				exemplaires.add(exemplaireService.get(i));
 			}
 			rayon.setExemplaires(exemplaires);

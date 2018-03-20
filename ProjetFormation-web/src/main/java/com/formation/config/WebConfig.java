@@ -31,25 +31,24 @@ public class WebConfig implements WebMvcConfigurer{
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**").allowedOrigins("http://localhost:4200");
-		
 	}
 
 	@Override
 	public void addFormatters(FormatterRegistry arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addInterceptors(InterceptorRegistry arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -60,7 +59,7 @@ public class WebConfig implements WebMvcConfigurer{
 	@Override
 	public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -71,37 +70,37 @@ public class WebConfig implements WebMvcConfigurer{
 	@Override
 	public void configureAsyncSupport(AsyncSupportConfigurer arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void configureContentNegotiation(ContentNegotiationConfigurer arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void configurePathMatch(PathMatchConfigurer arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -112,13 +111,13 @@ public class WebConfig implements WebMvcConfigurer{
 	@Override
 	public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void extendMessageConverters(List<HttpMessageConverter<?>> arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
