@@ -8,24 +8,24 @@ import com.formation.entities.Livre;
 
 public interface LivreService {
 
-	public List<Livre> getLivreByCat(Categorie cat);
+	public List<Livre> getLivreByCat(Categorie cat) throws Exception;
 
-	public List<Livre> getPeriodiques();
+	public List<Livre> getPeriodiques() throws Exception;
 
-	public List<Livre> getLivreByAuteur(Auteur auteur);
+	public List<Livre> getLivreByAuteur(Auteur auteur) throws Exception;
 
-	public List<Livre> getLivreByRecherche(String recherche) ;
+	public List<Livre> getLivreByRecherche(String recherche)  throws Exception;
 
-	public List<Livre> getLivreRecommandes();
+	public List<Livre> getLivreRecommandes() throws Exception;
 
-	public void save(Livre livre);
+	public void save(Livre livre) throws Exception;
 
-	public void delete(Livre livre);
+	public void delete(Livre livre) throws Exception;
 
-	public List<Livre> getAll();
+	public List<Livre> getAll() throws Exception;
 
-	public Livre get(int id);
+	public Livre get(int id) throws Exception;
 	
-	public Livre getLivreBySlug(String slug);
+	public Livre getLivreBySlug(String slug) throws Exception;
 
 }

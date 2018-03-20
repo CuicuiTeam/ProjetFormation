@@ -25,37 +25,37 @@ public class LivreServiceImpl implements LivreService {
 	private EditeurDAO editeurDAO;
 
 	@Override
-	public List<Livre> getLivreByCat(Categorie cat) {
+	public List<Livre> getLivreByCat(Categorie cat) throws Exception {
 		// TODO Auto-generated method stub
 		return livreDAO.getLivreByCat(cat);
 	}
 
 	@Override
-	public List<Livre> getPeriodiques() {
+	public List<Livre> getPeriodiques() throws Exception {
 		// TODO Auto-generated method stub
 		return livreDAO.getPeriodiques();
 	}
 
 	@Override
-	public List<Livre> getLivreByAuteur(Auteur auteur) {
+	public List<Livre> getLivreByAuteur(Auteur auteur)  throws Exception{
 		// TODO Auto-generated method stub
 		return livreDAO.getLivreByAuteur(auteur);
 	}
 
 	@Override
-	public List<Livre> getLivreByRecherche(String recherche)  {
+	public List<Livre> getLivreByRecherche(String recherche)  throws Exception {
 		// TODO Auto-generated method stub
 		return livreDAO.getLivreByRecherche(recherche);
 	}
 
 	@Override
-	public List<Livre> getLivreRecommandes() {
+	public List<Livre> getLivreRecommandes() throws Exception {
 		// TODO Auto-generated method stub
 		return livreDAO.getLivreRecommandes();
 	}
 
 	@Override
-	public void save(Livre livre) {
+	public void save(Livre livre) throws Exception {
 		// TODO Auto-generated method stub
 		// livre.setEditeur(editeurDAO.get(livre.getEditeur().getId()));
 		livreDAO.save(livre);
@@ -72,24 +72,24 @@ public class LivreServiceImpl implements LivreService {
 //	}
 
 	@Override
-	public void delete(Livre livre) {
+	public void delete(Livre livre) throws Exception {
 		// TODO Auto-generated method stub
 		livreDAO.delete(livre);
 	}
 
 	@Override
-	public List<Livre> getAll() {
+	public List<Livre> getAll()  throws Exception{
 		// TODO Auto-generated method stub
 		return livreDAO.getAll();
 	}
 
 	@Override
-	public Livre get(int id) {
+	public Livre get(int id)  throws Exception{
 		// TODO Auto-generated method stub
 		return livreDAO.get(id);
 	}
 
-	public Livre getLivreBySlug(String slug) {
+	public Livre getLivreBySlug(String slug)  throws Exception{
 		return livreDAO.getLivreBySlug(slug);
 	}
 

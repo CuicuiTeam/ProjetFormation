@@ -31,11 +31,11 @@ public class MembreServiceImpl implements MembreService{
 	}
 
 	@Override
-	public void save(Membre m) {
+	public void save(Membre m) throws Exception{
 		membreDAO.save(m);
 	}
 
-	public String cryptageMdp(String password) {
+	public String cryptageMdp(String password) throws Exception{
 		String generatedPassword = null;
 	       try {
 	           MessageDigest md = MessageDigest.getInstance("SHA-512");
@@ -53,23 +53,25 @@ public class MembreServiceImpl implements MembreService{
 	}
 
 	@Override
-	public Membre get(int id) {
+	public Membre get(int id) throws Exception{
 		return membreDAO.get(id);
 	}
 
 	@Override
-	public Membre findByEmail(String email) {
+	public Membre findByEmail(String email) throws Exception{
 		return membreDAO.findMembreByEmail(email);
 	}
 
 	@Override
-	public void delete(Membre m) {
+	public void delete(Membre m) throws Exception{
 		membreDAO.delete(m);
 	}
 
 	@Override
-	public List<Membre> getAll() {
+	public List<Membre> getAll() throws Exception{
 		return membreDAO.getAll();
 	}
+	
+	
 
 }

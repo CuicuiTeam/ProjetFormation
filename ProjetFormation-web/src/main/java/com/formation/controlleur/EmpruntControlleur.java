@@ -13,30 +13,34 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.formation.dto.AuteurDTO;
-import com.formation.entities.Auteur;
+import com.formation.dto.EmpruntDTO;
+import com.formation.entities.Emprunt;
 import com.formation.exception.ServiceException;
-import com.formation.service.AuteurService;
+import com.formation.service.EmpruntService;
+import com.formation.service.MembreService;
 import com.formation.utils.ControllerConstants;
 import com.formation.utils.Resultat;
 
 @RestController
-public class AuteurControlleur {
+public class EmpruntControlleur {
 	@Autowired
-	private AuteurService auteurService;
+	private EmpruntService empruntService;
 
-	@GetMapping(value="/auteur")
-	private Resultat listerAuteurs() {
-		List<AuteurDTO> listeAuteurs = new ArrayList<AuteurDTO>();
+	@Autowired
+	private MembreService membreService;
+
+	@GetMapping(value="/emprunt")
+	private Resultat listerEmprunts() {
+		List<EmpruntDTO> listeEmprunts = new ArrayList<EmpruntDTO>();
 		Resultat resultat = new Resultat();
 		try {
-			List<Auteur> auteurs = auteurService.getAll();
+			List<Emprunt> emprunts = empruntService.getAll();
 
-			auteurs.forEach(a -> {
-				AuteurDTO auteurDto = new AuteurDTO(a.getNom(), a.getPrenom(), a.getBiographie(), a.getImagePath());
-				auteurDto.setId(a.getId());
-				listeAuteurs.add(auteurDto);
-				resultat.setPayload(listeAuteurs);
+			emprunts.forEach(e -> {
+				EmpruntDTO empruntDto = new EmpruntDTO(e.getDateEmprunt(), e.getDateRetour(), e.getMembre().getId());
+				empruntDto.setId(e.getId());
+				listeEmprunts.add(empruntDto);
+				resultat.setPayload(listeEmprunts);
 			});
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
@@ -49,18 +53,16 @@ public class AuteurControlleur {
 
 			e.printStackTrace();
 		}
-
 		return resultat;
 	}
 
-	@GetMapping(value="/auteur/{id}")
-	private Resultat getAuteur(@PathVariable(value="id") int id) {
+	@GetMapping(value="/emprunt/{id}")
+	private Resultat getEmprunt(@PathVariable(value="id") int id) {
 		Resultat resultat = new Resultat();
 		try {
-			Auteur auteur = auteurService.get(id);
-			AuteurDTO auteurDto = new AuteurDTO(auteur.getNom(), auteur.getPrenom(), auteur.getBiographie(), auteur.getImagePath());
-
-			resultat.setPayload(auteurDto);
+			Emprunt emprunt = empruntService.get(id);
+			EmpruntDTO empruntDto = new EmpruntDTO(emprunt.getDateEmprunt(), emprunt.getDateRetour(), emprunt.getMembre().getId());
+			resultat.setPayload(empruntDto);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 		} catch (ServiceException se) {
@@ -76,12 +78,12 @@ public class AuteurControlleur {
 
 	}
 
-	@PutMapping(value="/auteur", consumes=  MediaType.APPLICATION_JSON_VALUE)
-	private Resultat ajoutAuteur(@RequestBody AuteurDTO auteurDto) {
+	@PutMapping(value="/emprunt", consumes=  MediaType.APPLICATION_JSON_VALUE)
+	private Resultat ajoutEmprunt(@RequestBody EmpruntDTO empruntDto) {
 		Resultat resultat = new Resultat();
 		try {
-			Auteur auteur = new Auteur(auteurDto.getNom(), auteurDto.getPrenom(), auteurDto.getBiographie(), auteurDto.getImagePath());
-			auteurService.save(auteur);
+			Emprunt emprunt = new Emprunt(membreService.get(empruntDto.getMembreId()), empruntDto.getDateEmprunt(), empruntDto.getDateRetour());
+			empruntService.save(emprunt);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 
@@ -97,18 +99,16 @@ public class AuteurControlleur {
 		return resultat;
 	}
 
-
-	@PostMapping(value = "/auteur/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	private Resultat updateAuteur(@RequestBody AuteurDTO auteurDto, @PathVariable(value="id") int id){
+	@PostMapping(value = "/emprunt/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	private Resultat updateEmprunt(@RequestBody EmpruntDTO empruntDto, @PathVariable(value="id") int id){
 		Resultat resultat = new Resultat();
 		try {
-			Auteur auteur = auteurService.get(id);
-			auteur.setBiographie(auteurDto.getBiographie());
-			auteur.setNom(auteurDto.getNom());
-			auteur.setPrenom(auteurDto.getPrenom());
-			auteur.setImagePath(auteurDto.getImagePath());
+			Emprunt emprunt = empruntService.get(id);
+			emprunt.setMembre(membreService.get(empruntDto.getMembreId()));
+			emprunt.setDateEmprunt(empruntDto.getDateEmprunt());
+			emprunt.setDateRetour(empruntDto.getDateRetour());
 
-			auteurService.save(auteur);
+			empruntService.save(emprunt);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 
@@ -124,11 +124,11 @@ public class AuteurControlleur {
 		return resultat;
 	}
 
-	@DeleteMapping(value="/auteur/{id}")
-	private Resultat deleteAuteur(@PathVariable(value="id") int id) {
+	@DeleteMapping(value="/emprunt/{id}")
+	private Resultat deleteEmprunt(@PathVariable(value="id") int id) {
 		Resultat resultat = new Resultat();
 		try {
-			auteurService.delete(auteurService.get(id));
+			empruntService.delete(empruntService.get(id));
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 

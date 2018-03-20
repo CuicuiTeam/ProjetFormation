@@ -6,12 +6,12 @@ import com.formation.entities.Rayon;
 
 public interface RayonService {
 
-	public void save(Rayon r);
+	public void save(Rayon r) throws Exception;
 
-	public void delete(Rayon r);
+	public void delete(Rayon r) throws Exception;
 
-	public List<Rayon> getAll();
+	public List<Rayon> getAll() throws Exception;
 
-	public Rayon get(int id);
+	public Rayon get(int id) throws Exception;
 
 }
