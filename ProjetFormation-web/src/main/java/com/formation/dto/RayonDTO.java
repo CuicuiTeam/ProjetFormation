@@ -8,7 +8,7 @@ public class RayonDTO {
 	private String nom;
 	private String description;
 	private int nbrLivres;
-	private List<Integer> exemlplairesId;
+	private List<Integer> exemplairesId;
 	private int bibliothequeId;
 
 	public RayonDTO() {
@@ -20,7 +20,7 @@ public class RayonDTO {
 		this.nom = nom;
 		this.description = description;
 		this.nbrLivres = nbrLivres;
-		this.exemlplairesId = exemlplairesId;
+		this.exemplairesId = exemplairesId;
 		this.bibliothequeId = bibliothequeId;
 	}
 
@@ -56,12 +56,12 @@ public class RayonDTO {
 		this.nbrLivres = nbrLivres;
 	}
 
-	public List<Integer> getExemlplairesId() {
-		return exemlplairesId;
+	public List<Integer> getExemplairesId() {
+		return exemplairesId;
 	}
 
-	public void setExemlplairesId(List<Integer> exemlplairesId) {
-		this.exemlplairesId = exemlplairesId;
+	public void setExemplairesId(List<Integer> exemlplairesId) {
+		this.exemplairesId = exemlplairesId;
 	}
 
 	public int getBibliothequeId() {
