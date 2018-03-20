@@ -19,51 +19,110 @@ import com.formation.dto.MembreDTO;
 import com.formation.entities.Categorie;
 import com.formation.entities.Inscription;
 import com.formation.entities.Membre;
+import com.formation.exception.ServiceException;
 import com.formation.service.CategorieService;
 import com.formation.service.LivreService;
+import com.formation.utils.ControllerConstants;
+import com.formation.utils.Resultat;
 
 @RestController
 public class CategorieControlleur {
-	
+
 	@Autowired
 	private CategorieService categorieService;
-	
+
 	@Autowired
 	private LivreService livreService;
-	
-	@PutMapping(value = "/categorie")
-	public void ajoutCategorie(@RequestBody CategorieDTO categorieDto) {
-		
-		Categorie newCategorie = new Categorie(categorieDto.getNom(), categorieDto.getDescription());
-		categorieService.save(newCategorie);
-	}
-	
-	@GetMapping(value = "/categorie")
-	public List<CategorieDTO> listerCategories() {
-		List<CategorieDTO> resultats = new ArrayList<CategorieDTO>();
-		List<Categorie> listeCategorie = categorieService.getAll();
-		
-		listeCategorie.forEach(categorie -> {
-			CategorieDTO categorieDto = new CategorieDTO(categorie.getNom(), categorie.getDescription());
-			categorieDto.setId(categorie.getId());
-			resultats.add(categorieDto);
-		});
-		
-		return resultats;
-	}
-	
-	@PostMapping(value = "/categorie/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	   public void updateCategorie(@RequestBody CategorieDTO categorieDto, @PathVariable(value="id") int id){
 
-	       Categorie categorie = categorieService.get(id);
-	       categorie.setNom(categorieDto.getNom());
-	       categorie.setDescription(categorieDto.getDescription());
-	       categorieService.save(categorie);
-	   }
-	
+	@PutMapping(value = "/categorie")
+	public Resultat ajoutCategorie(@RequestBody CategorieDTO categorieDto) {
+		Resultat resultat = new Resultat();
+		try {
+			Categorie newCategorie = new Categorie(categorieDto.getNom(), categorieDto.getDescription());
+			categorieService.save(newCategorie);
+			resultat.setSuccess(true);
+			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+
+		} catch (ServiceException se) {
+			resultat.setSuccess(false);
+			resultat.setMessage(se.getMessage());
+		} catch (Exception e) {
+			resultat.setSuccess(false);
+			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+
+			e.printStackTrace();
+		}
+		return resultat;
+	}
+
+	@GetMapping(value = "/categorie")
+	public Resultat listerCategories() {
+		List<CategorieDTO> listeCategories = new ArrayList<CategorieDTO>();
+		Resultat resultat = new Resultat();
+		try {
+			List<Categorie> listeCategorie = categorieService.getAll();
+
+			listeCategorie.forEach(categorie -> {
+				CategorieDTO categorieDto = new CategorieDTO(categorie.getNom(), categorie.getDescription());
+				categorieDto.setId(categorie.getId());
+				listeCategories.add(categorieDto);
+				resultat.setPayload(listeCategories);
+			});
+			resultat.setSuccess(true);
+			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+		} catch (ServiceException se) {
+			resultat.setSuccess(false);
+			resultat.setMessage(se.getMessage());
+		} catch (Exception e) {
+			resultat.setSuccess(false);
+			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+
+			e.printStackTrace();
+		}
+		return resultat;
+	}
+
+	@PostMapping(value = "/categorie/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Resultat updateCategorie(@RequestBody CategorieDTO categorieDto, @PathVariable(value="id") int id){
+		Resultat resultat = new Resultat();
+		try {
+			Categorie categorie = categorieService.get(id);
+			categorie.setNom(categorieDto.getNom());
+			categorie.setDescription(categorieDto.getDescription());
+			categorieService.save(categorie);
+			resultat.setSuccess(true);
+			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+
+		} catch (ServiceException se) {
+			resultat.setSuccess(false);
+			resultat.setMessage(se.getMessage());
+		} catch (Exception e) {
+			resultat.setSuccess(false);
+			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+
+			e.printStackTrace();
+		}
+		return resultat;
+	}
+
 	@DeleteMapping(value="/categorie/{id}")
-    private void deleteCategorie(@PathVariable(value="id") int id) {
-        categorieService.delete(categorieService.get(id));
-    }
+	private Resultat deleteCategorie(@PathVariable(value="id") int id) {
+		Resultat resultat = new Resultat();
+		try {
+			categorieService.delete(categorieService.get(id));
+			resultat.setSuccess(true);
+			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+
+		} catch (ServiceException se) {
+			resultat.setSuccess(false);
+			resultat.setMessage(se.getMessage());
+		} catch (Exception e) {
+			resultat.setSuccess(false);
+			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+
+			e.printStackTrace();
+		}
+		return resultat;
+	}
 
 }

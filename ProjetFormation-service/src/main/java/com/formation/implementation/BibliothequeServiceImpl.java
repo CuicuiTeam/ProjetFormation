@@ -1,6 +1,7 @@
 package com.formation.implementation;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -19,28 +20,30 @@ public class BibliothequeServiceImpl implements BibliothequeService {
 	private BibliothequeDAO bibliothequeDAO;
 	
 	@Override
-	public List<Bibliotheque> getAll() {
+	public List<Bibliotheque> getAll()  throws Exception{
 		return bibliothequeDAO.getAll();
 	}
 
 	@Override
-	public void save(Bibliotheque biblio) {
+	public void save(Bibliotheque biblio)  throws Exception{
 		// TODO Auto-generated method stub
 		bibliothequeDAO.save(biblio);
 	}
 
 	@Override
-	public Bibliotheque get(int id) {
+	public Bibliotheque get(int id)  throws Exception{
 		// TODO Auto-generated method stub
 		return bibliothequeDAO.get(id);
 	}
 
 	@Override
-	public void delete(Bibliotheque biblio) {
+	public void delete(Bibliotheque biblio)  throws Exception{
 		// TODO Auto-generated method stub
 		bibliothequeDAO.delete(biblio);
 
 	} 
+	
+	
 	
 
 

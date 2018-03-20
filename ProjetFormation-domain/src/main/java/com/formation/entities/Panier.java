@@ -54,5 +54,15 @@ public class Panier implements Serializable{
 	public int getId() {
 		return id;
 	}
+	
+	public Membre getMembre() {
+		return membre;
+	}
+
+	public void setMembre(Membre membre) {
+		this.membre = membre;
+	}
+	
+	
 
 }

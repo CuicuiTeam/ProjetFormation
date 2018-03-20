@@ -13,30 +13,37 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.formation.dto.AuteurDTO;
-import com.formation.entities.Auteur;
+import com.formation.dto.EmpruntDTO;
+import com.formation.dto.PanierDTO;
+import com.formation.entities.Emprunt;
+import com.formation.entities.Panier;
 import com.formation.exception.ServiceException;
-import com.formation.service.AuteurService;
+import com.formation.service.MembreService;
+import com.formation.service.PanierService;
 import com.formation.utils.ControllerConstants;
 import com.formation.utils.Resultat;
 
 @RestController
-public class AuteurControlleur {
-	@Autowired
-	private AuteurService auteurService;
+public class PanierControlleur {
 
-	@GetMapping(value="/auteur")
-	private Resultat listerAuteurs() {
-		List<AuteurDTO> listeAuteurs = new ArrayList<AuteurDTO>();
+	@Autowired
+	private PanierService panierService;
+
+	@Autowired
+	private MembreService membreService;
+
+	@GetMapping(value="/panier")
+	private Resultat listerPaniers() {
+		List<PanierDTO> listePaniers = new ArrayList<PanierDTO>();
 		Resultat resultat = new Resultat();
 		try {
-			List<Auteur> auteurs = auteurService.getAll();
+			List<Panier> paniers = panierService.getAll();
 
-			auteurs.forEach(a -> {
-				AuteurDTO auteurDto = new AuteurDTO(a.getNom(), a.getPrenom(), a.getBiographie(), a.getImagePath());
-				auteurDto.setId(a.getId());
-				listeAuteurs.add(auteurDto);
-				resultat.setPayload(listeAuteurs);
+			paniers.forEach(p -> {
+				PanierDTO panierDto = new PanierDTO(p.getDateCreation(), p.getDateLivraison(), p.getMembre().getId());
+				panierDto.setId(p.getId());
+				listePaniers.add(panierDto);
+				resultat.setPayload(listePaniers);
 			});
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
@@ -49,18 +56,16 @@ public class AuteurControlleur {
 
 			e.printStackTrace();
 		}
-
 		return resultat;
 	}
 
-	@GetMapping(value="/auteur/{id}")
-	private Resultat getAuteur(@PathVariable(value="id") int id) {
+	@GetMapping(value="/panier/{id}")
+	private Resultat getPanier(@PathVariable(value="id") int id) {
 		Resultat resultat = new Resultat();
 		try {
-			Auteur auteur = auteurService.get(id);
-			AuteurDTO auteurDto = new AuteurDTO(auteur.getNom(), auteur.getPrenom(), auteur.getBiographie(), auteur.getImagePath());
-
-			resultat.setPayload(auteurDto);
+			Panier panier = panierService.get(id);
+			PanierDTO panierDto = new PanierDTO(panier.getDateCreation(), panier.getDateLivraison(), panier.getMembre().getId());
+			resultat.setPayload(panierDto);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 		} catch (ServiceException se) {
@@ -76,12 +81,13 @@ public class AuteurControlleur {
 
 	}
 
-	@PutMapping(value="/auteur", consumes=  MediaType.APPLICATION_JSON_VALUE)
-	private Resultat ajoutAuteur(@RequestBody AuteurDTO auteurDto) {
+	@PutMapping(value="/panier", consumes=  MediaType.APPLICATION_JSON_VALUE)
+	private Resultat ajoutPanier(@RequestBody PanierDTO panierDto) {
 		Resultat resultat = new Resultat();
 		try {
-			Auteur auteur = new Auteur(auteurDto.getNom(), auteurDto.getPrenom(), auteurDto.getBiographie(), auteurDto.getImagePath());
-			auteurService.save(auteur);
+			Panier panier = new Panier(panierDto.getDateCreation(), panierDto.getDateLivraison());
+			panier.setMembre(membreService.get(panierDto.getMembreId()));
+			panierService.save(panier);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 
@@ -97,18 +103,16 @@ public class AuteurControlleur {
 		return resultat;
 	}
 
-
-	@PostMapping(value = "/auteur/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	private Resultat updateAuteur(@RequestBody AuteurDTO auteurDto, @PathVariable(value="id") int id){
+	@PostMapping(value = "/panier/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	private Resultat updatePanier(@RequestBody PanierDTO panierDto, @PathVariable(value="id") int id){
 		Resultat resultat = new Resultat();
 		try {
-			Auteur auteur = auteurService.get(id);
-			auteur.setBiographie(auteurDto.getBiographie());
-			auteur.setNom(auteurDto.getNom());
-			auteur.setPrenom(auteurDto.getPrenom());
-			auteur.setImagePath(auteurDto.getImagePath());
+			Panier panier = panierService.get(id);
+			panier.setMembre(membreService.get(panierDto.getMembreId()));
+			panier.setDateCreation(panierDto.getDateCreation());
+			panier.setDateLivraison(panierDto.getDateLivraison());
 
-			auteurService.save(auteur);
+			panierService.save(panier);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 
@@ -124,11 +128,11 @@ public class AuteurControlleur {
 		return resultat;
 	}
 
-	@DeleteMapping(value="/auteur/{id}")
-	private Resultat deleteAuteur(@PathVariable(value="id") int id) {
+	@DeleteMapping(value="/panier/{id}")
+	private Resultat deletePanier(@PathVariable(value="id") int id) {
 		Resultat resultat = new Resultat();
 		try {
-			auteurService.delete(auteurService.get(id));
+			panierService.delete(panierService.get(id));
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 

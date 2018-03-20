@@ -49,7 +49,6 @@ public class MembreDAOImpl extends DAOPrincipalImpl<Membre> implements MembreDAO
 		List<Membre> membres = super.getAll();
 		for (Membre membre : membres) {
 			Hibernate.initialize(membre.getInscriptions());
-			Hibernate.initialize(membre.getAuthorities());
 			Hibernate.initialize(membre.getExemplaires());
 			Hibernate.initialize(membre.getPaniers());
 			Hibernate.initialize(membre.getEmprunts());

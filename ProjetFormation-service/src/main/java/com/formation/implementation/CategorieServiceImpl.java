@@ -20,26 +20,26 @@ public class CategorieServiceImpl implements CategorieService {
 	private CategorieDAO categorieDAO;
 	
 	@Override
-	public Categorie getCategorieByNom(String nom) {
+	public Categorie getCategorieByNom(String nom)  throws Exception{
 		// TODO Auto-generated method stub
 		return categorieDAO.getCategorieByNom(nom);
 	}
 
 	@Override
-	public Categorie get(int id) {
+	public Categorie get(int id)  throws Exception{
 		// TODO Auto-generated method stub
 		return categorieDAO.get(id);
 	}
 	
-	public void save(Categorie c) {
+	public void save(Categorie c) throws Exception {
 		categorieDAO.save(c);
 	}
 
-	public List<Categorie> getAll(){
+	public List<Categorie> getAll() throws Exception{
 		return categorieDAO.getAll();
 	}
 	
-	public void delete(Categorie c) {
+	public void delete(Categorie c)  throws Exception{
 		categorieDAO.delete(c);
 	}
 }

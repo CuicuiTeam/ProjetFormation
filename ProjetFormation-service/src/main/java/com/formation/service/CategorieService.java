@@ -7,13 +7,13 @@ import com.formation.entities.Membre;
 
 public interface CategorieService {
 
-	public Categorie getCategorieByNom(String nom);
+	public Categorie getCategorieByNom(String nom) throws Exception;
 
-	public Categorie get(int id);
+	public Categorie get(int id) throws Exception;
 	
-	public void save(Categorie c);
+	public void save(Categorie c) throws Exception;
 	
-	public List<Categorie> getAll();
+	public List<Categorie> getAll() throws Exception;
 	
-	public void delete(Categorie c);
+	public void delete(Categorie c) throws Exception;
 }

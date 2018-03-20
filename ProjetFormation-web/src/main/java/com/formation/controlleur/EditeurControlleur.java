@@ -17,7 +17,10 @@ import com.formation.dto.CategorieDTO;
 import com.formation.dto.EditeurDTO;
 import com.formation.entities.Categorie;
 import com.formation.entities.Editeur;
+import com.formation.exception.ServiceException;
 import com.formation.service.EditeurService;
+import com.formation.utils.ControllerConstants;
+import com.formation.utils.Resultat;
 
 @RestController
 public class EditeurControlleur {
@@ -26,38 +29,96 @@ public class EditeurControlleur {
 	private EditeurService editeurService;
 
 	@PutMapping(value = "/editeur")
-	public void ajoutEditeur(@RequestBody EditeurDTO editeurDto) {
+	public Resultat ajoutEditeur(@RequestBody EditeurDTO editeurDto) {
+		Resultat resultat = new Resultat();
+		try {
+			Editeur newEditeur = new Editeur(editeurDto.getNom(), editeurDto.getAdresse());
+			editeurService.save(newEditeur);
+			resultat.setSuccess(true);
+			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 
-		Editeur newEditeur = new Editeur(editeurDto.getNom(), editeurDto.getAdresse());
-		editeurService.save(newEditeur);
+		} catch (ServiceException se) {
+			resultat.setSuccess(false);
+			resultat.setMessage(se.getMessage());
+		} catch (Exception e) {
+			resultat.setSuccess(false);
+			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+
+			e.printStackTrace();
+		}
+		return resultat;
 	}
 
 	@GetMapping(value = "/editeur")
-	public List<EditeurDTO> listerEditeurs() {
-		List<EditeurDTO> resultats = new ArrayList<EditeurDTO>();
-		List<Editeur> listeEditeurs = editeurService.getAll();
+	public Resultat listerEditeurs() {
+		List<EditeurDTO> listeEditeur = new ArrayList<EditeurDTO>();
+		Resultat resultat = new Resultat();
+		try {
+			List<Editeur> listeEditeurs = editeurService.getAll();
 
-		listeEditeurs.forEach(editeur -> {
-			EditeurDTO editeurDto = new EditeurDTO(editeur.getNom(), editeur.getAdresse());
-			editeurDto.setId(editeur.getId());
-			resultats.add(editeurDto);
-		});
+			listeEditeurs.forEach(editeur -> {
+				EditeurDTO editeurDto = new EditeurDTO(editeur.getNom(), editeur.getAdresse());
+				editeurDto.setId(editeur.getId());
+				listeEditeur.add(editeurDto);
+				resultat.setPayload(listeEditeur);
 
-		return resultats;
+			});
+			resultat.setSuccess(true);
+			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+		} catch (ServiceException se) {
+			resultat.setSuccess(false);
+			resultat.setMessage(se.getMessage());
+		} catch (Exception e) {
+			resultat.setSuccess(false);
+			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+
+			e.printStackTrace();
+		}
+
+		return resultat;
 	}
 
 	@PostMapping(value = "/editeur/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void updateEditeur(@RequestBody EditeurDTO editeurDto, @PathVariable(value = "id") int id) {
+	public Resultat updateEditeur(@RequestBody EditeurDTO editeurDto, @PathVariable(value = "id") int id) {
+		Resultat resultat = new Resultat();
+		try {
+			Editeur editeur = editeurService.get(id);
+			editeur.setNom(editeurDto.getNom());
+			editeur.setAdresse(editeurDto.getAdresse());
+			editeurService.save(editeur);
+			resultat.setSuccess(true);
+			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 
-		Editeur editeur = editeurService.get(id);
-		editeur.setNom(editeurDto.getNom());
-		editeur.setAdresse(editeurDto.getAdresse());
-		editeurService.save(editeur);
+		} catch (ServiceException se) {
+			resultat.setSuccess(false);
+			resultat.setMessage(se.getMessage());
+		} catch (Exception e) {
+			resultat.setSuccess(false);
+			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+
+			e.printStackTrace();
+		}
+		return resultat;
 	}
 
 	@DeleteMapping(value = "/editeur/{id}")
-	private void deleteEditeur(@PathVariable(value = "id") int id) {
-		editeurService.delete(editeurService.get(id));
+	private Resultat deleteEditeur(@PathVariable(value = "id") int id) {
+		Resultat resultat = new Resultat();
+		try {
+			editeurService.delete(editeurService.get(id));
+			resultat.setSuccess(true);
+			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+
+		} catch (ServiceException se) {
+			resultat.setSuccess(false);
+			resultat.setMessage(se.getMessage());
+		} catch (Exception e) {
+			resultat.setSuccess(false);
+			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+
+			e.printStackTrace();
+		}
+		return resultat;
 	}
 
 }
