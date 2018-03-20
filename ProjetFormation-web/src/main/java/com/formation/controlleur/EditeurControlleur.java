@@ -13,30 +13,55 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.formation.dto.AuteurDTO;
-import com.formation.entities.Auteur;
+import com.formation.dto.CategorieDTO;
+import com.formation.dto.EditeurDTO;
+import com.formation.entities.Categorie;
+import com.formation.entities.Editeur;
 import com.formation.exception.ServiceException;
-import com.formation.service.AuteurService;
+import com.formation.service.EditeurService;
 import com.formation.utils.ControllerConstants;
 import com.formation.utils.Resultat;
 
 @RestController
-public class AuteurControlleur {
-	@Autowired
-	private AuteurService auteurService;
+public class EditeurControlleur {
 
-	@GetMapping(value="/auteur")
-	private Resultat listerAuteurs() {
-		List<AuteurDTO> listeAuteurs = new ArrayList<AuteurDTO>();
+	@Autowired
+	private EditeurService editeurService;
+
+	@PutMapping(value = "/editeur")
+	public Resultat ajoutEditeur(@RequestBody EditeurDTO editeurDto) {
 		Resultat resultat = new Resultat();
 		try {
-			List<Auteur> auteurs = auteurService.getAll();
+			Editeur newEditeur = new Editeur(editeurDto.getNom(), editeurDto.getAdresse());
+			editeurService.save(newEditeur);
+			resultat.setSuccess(true);
+			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 
-			auteurs.forEach(a -> {
-				AuteurDTO auteurDto = new AuteurDTO(a.getNom(), a.getPrenom(), a.getBiographie(), a.getImagePath());
-				auteurDto.setId(a.getId());
-				listeAuteurs.add(auteurDto);
-				resultat.setPayload(listeAuteurs);
+		} catch (ServiceException se) {
+			resultat.setSuccess(false);
+			resultat.setMessage(se.getMessage());
+		} catch (Exception e) {
+			resultat.setSuccess(false);
+			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+
+			e.printStackTrace();
+		}
+		return resultat;
+	}
+
+	@GetMapping(value = "/editeur")
+	public Resultat listerEditeurs() {
+		List<EditeurDTO> listeEditeur = new ArrayList<EditeurDTO>();
+		Resultat resultat = new Resultat();
+		try {
+			List<Editeur> listeEditeurs = editeurService.getAll();
+
+			listeEditeurs.forEach(editeur -> {
+				EditeurDTO editeurDto = new EditeurDTO(editeur.getNom(), editeur.getAdresse());
+				editeurDto.setId(editeur.getId());
+				listeEditeur.add(editeurDto);
+				resultat.setPayload(listeEditeur);
+
 			});
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
@@ -53,35 +78,14 @@ public class AuteurControlleur {
 		return resultat;
 	}
 
-	@GetMapping(value="/auteur/{id}")
-	private Resultat getAuteur(@PathVariable(value="id") int id) {
+	@PostMapping(value = "/editeur/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Resultat updateEditeur(@RequestBody EditeurDTO editeurDto, @PathVariable(value = "id") int id) {
 		Resultat resultat = new Resultat();
 		try {
-			Auteur auteur = auteurService.get(id);
-			AuteurDTO auteurDto = new AuteurDTO(auteur.getNom(), auteur.getPrenom(), auteur.getBiographie(), auteur.getImagePath());
-
-			resultat.setPayload(auteurDto);
-			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
-		} catch (ServiceException se) {
-			resultat.setSuccess(false);
-			resultat.setMessage(se.getMessage());
-		} catch (Exception e) {
-			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
-
-			e.printStackTrace();
-		}
-		return resultat;
-
-	}
-
-	@PutMapping(value="/auteur", consumes=  MediaType.APPLICATION_JSON_VALUE)
-	private Resultat ajoutAuteur(@RequestBody AuteurDTO auteurDto) {
-		Resultat resultat = new Resultat();
-		try {
-			Auteur auteur = new Auteur(auteurDto.getNom(), auteurDto.getPrenom(), auteurDto.getBiographie(), auteurDto.getImagePath());
-			auteurService.save(auteur);
+			Editeur editeur = editeurService.get(id);
+			editeur.setNom(editeurDto.getNom());
+			editeur.setAdresse(editeurDto.getAdresse());
+			editeurService.save(editeur);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 
@@ -97,18 +101,11 @@ public class AuteurControlleur {
 		return resultat;
 	}
 
-
-	@PostMapping(value = "/auteur/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	private Resultat updateAuteur(@RequestBody AuteurDTO auteurDto, @PathVariable(value="id") int id){
+	@DeleteMapping(value = "/editeur/{id}")
+	private Resultat deleteEditeur(@PathVariable(value = "id") int id) {
 		Resultat resultat = new Resultat();
 		try {
-			Auteur auteur = auteurService.get(id);
-			auteur.setBiographie(auteurDto.getBiographie());
-			auteur.setNom(auteurDto.getNom());
-			auteur.setPrenom(auteurDto.getPrenom());
-			auteur.setImagePath(auteurDto.getImagePath());
-
-			auteurService.save(auteur);
+			editeurService.delete(editeurService.get(id));
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 
@@ -124,23 +121,4 @@ public class AuteurControlleur {
 		return resultat;
 	}
 
-	@DeleteMapping(value="/auteur/{id}")
-	private Resultat deleteAuteur(@PathVariable(value="id") int id) {
-		Resultat resultat = new Resultat();
-		try {
-			auteurService.delete(auteurService.get(id));
-			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
-
-		} catch (ServiceException se) {
-			resultat.setSuccess(false);
-			resultat.setMessage(se.getMessage());
-		} catch (Exception e) {
-			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
-
-			e.printStackTrace();
-		}
-		return resultat;
-	}
 }

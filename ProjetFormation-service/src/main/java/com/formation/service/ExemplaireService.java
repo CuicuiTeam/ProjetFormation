@@ -7,10 +7,10 @@ import com.formation.entities.Exemplaire;
 
 public interface ExemplaireService {
 
-	public Exemplaire get(int id);
-	public void save(Exemplaire exemplaire);
-	public void delete(Exemplaire exemplaire);
-	public List<Exemplaire> getAll();
+	public Exemplaire get(int id) throws Exception;
+	public void save(Exemplaire exemplaire) throws Exception;
+	public void delete(Exemplaire exemplaire) throws Exception;
+	public List<Exemplaire> getAll() throws Exception;
 
-	public List<Exemplaire> getExemplaireById(List<Integer> ids);
+	public List<Exemplaire> getExemplaireById(List<Integer> ids) throws Exception;
 }

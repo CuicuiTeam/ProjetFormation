@@ -6,11 +6,15 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.formation.dao.EmpruntDAO;
 import com.formation.entities.Emprunt;
 import com.formation.service.EmpruntService;
-
+@Service
+@Transactional
+@Service
+@Transactional
 @Service
 @Transactional
 public class EmpruntServiceImpl implements EmpruntService{
@@ -19,22 +23,22 @@ public class EmpruntServiceImpl implements EmpruntService{
 	private EmpruntDAO empruntDao;
 
 	@Override
-	public Emprunt get(int id) {
+	public Emprunt get(int id)  throws Exception{
 		return empruntDao.get(id);
 	}
 
 	@Override
-	public void save(Emprunt emprunt) {
+	public void save(Emprunt emprunt)  throws Exception{
 		empruntDao.save(emprunt);
 	}
 
 	@Override
-	public void delete(Emprunt emprunt) {
+	public void delete(Emprunt emprunt)  throws Exception{
 		empruntDao.delete(emprunt);
 	}
 
 	@Override
-	public List<Emprunt> getAll() {
+	public List<Emprunt> getAll()  throws Exception{
 		return empruntDao.getAll();
 	}
 

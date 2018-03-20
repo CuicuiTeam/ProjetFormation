@@ -24,6 +24,12 @@ public class Inscription implements Serializable{
 	private Membre membre;
 	
 	private Date dateInscription;
+	
+	
+
+	public Inscription() {
+		
+	}
 
 	public Inscription(Bibliotheque bibliotheque, Membre membre, Date dateInscription) {
 		this.bibliotheque = bibliotheque;
@@ -54,7 +60,11 @@ public class Inscription implements Serializable{
 	public void setDateInscription(Date dateInscription) {
 		this.dateInscription = dateInscription;
 	}
+
+	public int getId() {
+		return id;
+	}
 	
-	
+
 
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.formation.dao.EditeurDAO;
+import com.formation.entities.Categorie;
 import com.formation.entities.Editeur;
 import com.formation.service.EditeurService;
 
@@ -19,13 +20,20 @@ public class EditeurServiceImpl implements EditeurService {
 	private EditeurDAO editeurDAO;
 
 	@Override
-	public List<Editeur> getAll() {
+	public List<Editeur> getAll()  throws Exception{
 		// TODO Auto-generated method stub
 		return editeurDAO.getAll();
 	}
 
-	public Editeur get(int id) {
+	public Editeur get(int id)  throws Exception{
 		return editeurDAO.get(id);
 	}
 
+	public void save(Editeur e)  throws Exception{
+		editeurDAO.save(e);
+	}
+	
+	public void delete(Editeur e)  throws Exception{
+		editeurDAO.delete(e);
+	}
 }
