@@ -35,8 +35,8 @@ public class WebConfig implements WebMvcConfigurer{
 	}
 
 	@Override
-	public void addCorsMappings(CorsRegistry arg0) {
-		// TODO Auto-generated method stub
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**").allowedOrigins("http://localhost:4200");
 		
 	}
 

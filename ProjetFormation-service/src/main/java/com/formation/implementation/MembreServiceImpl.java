@@ -24,7 +24,7 @@ public class MembreServiceImpl implements MembreService{
 	
 	@Override
 	public Membre identification(String email, String password) throws Exception{
-		if (membreDAO.identification(email, cryptageMdp(password)) != null)
+		if (membreDAO.identification(email, cryptageMdp(password)) == null)
 				throw new ServiceException(ErrorConstants.ACCOUNT_NOT_EXISTING);
 		else
 			return membreDAO.findMembreByEmail(email);
