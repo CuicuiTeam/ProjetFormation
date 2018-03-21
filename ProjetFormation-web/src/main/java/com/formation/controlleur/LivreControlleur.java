@@ -120,12 +120,12 @@ public class LivreControlleur {
 		try {
 			Livre newLivre = new Livre(livreDto.getTitre(), livreDto.getDescription(), livreDto.getPrix(),
 					livreDto.getDatePublication(), livreDto.getImagePath(), livreDto.isPeriodic(), livreDto.isPopular());
-			newLivre.setEditeur(editeurService.get(livreDto.getEditeurId()));
-			newLivre.setCategorie(categorieService.get(livreDto.getCategorieId()));
-			newLivre.setAuteurs(auteurService.getAuteursById(livreDto.getAuteursId()));
-
+//			newLivre.setEditeur(editeurService.get(livreDto.getEditeurId()));
+//			newLivre.setCategorie(categorieService.get(livreDto.getCategorieId()));
+//			newLivre.setAuteurs(auteurService.getAuteursById(livreDto.getAuteursId()));
 			livreService.save(newLivre);
-			resultat.setSuccess(true);
+			resultat.setPayload(livreDto);
+			resultat.setSuccess(true); 
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 
 		} catch (ServiceException se) {
