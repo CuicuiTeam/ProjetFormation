@@ -50,10 +50,12 @@ public class MembreControlleur {
 			Membre newMembre = new Membre(membreDto.getNom(), membreDto.getPrenom(), membreDto.getEmail(),
 					membreDto.getPassword(), membreDto.getAdresse(), membreDto.getVille(), membreDto.getCodePostal(),
 					membreDto.getTelephone(), membreDto.isAdmin());
-			newMembre.setInscriptions(inscriptionService.getInscriptionById(membreDto.getInscriptionsId()));
+//			newMembre.setInscriptions(inscriptionService.getInscriptionById(membreDto.getInscriptionsId()));
+			newMembre.setPassword(membreService.cryptageMdp(newMembre.getPassword()));
 			membreService.save(newMembre);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setPayload(newMembre);
 
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);

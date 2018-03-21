@@ -25,7 +25,7 @@ public class MembreDTO {
 
 	public MembreDTO( String nom, String prenom, String password, String adresse,
 			String ville, String codePostal, String telephone, String email, boolean isAdmin) {
-		this.inscriptionsId = inscriptionsId;
+//		this.inscriptionsId = inscriptionsId;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.password = password;
