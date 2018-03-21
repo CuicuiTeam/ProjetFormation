@@ -119,7 +119,7 @@ public class LivreControlleur {
 		Resultat resultat = new Resultat();
 		try {
 			List<Livre> listeLivres = livreService.getAll();
-
+ 
 			listeLivres.forEach(livre -> {
 				LivreDTO livreDto = new LivreDTO(livre.getTitre(), livre.getDescription(), livre.getPrix(),
 						livre.getDatePublication(), livre.getImagePath(), livre.isPopular(), livre.isPeriodic(),
