@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.formation.dto.MembreDTO;
+import com.formation.entities.Membre;
 import com.formation.exception.ServiceException;
 import com.formation.service.MembreService;
 import com.formation.utils.ControllerConstants;
@@ -23,9 +25,11 @@ public class LoginControlleur {
 	private Resultat connexionMembre(@RequestBody IdentifiantsVM identifiants) {
 		Resultat resultat = new Resultat();
 		try {
-			membreService.identification(identifiants.getEmail(), identifiants.getPassword());
+			Membre membre = membreService.identification(identifiants.getEmail(), identifiants.getPassword());
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			MembreDTO membreDto = new MembreDTO(membre.getNom(), membre.getPrenom(), "", membre.getAdresse(), membre.getVille(), membre.getCodePostal(), membre.getTelephone(), membre.getEmail(), membre.isAdmin());
+			resultat.setPayload(membreDto);
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
