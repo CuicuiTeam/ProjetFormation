@@ -1,11 +1,16 @@
 package com.formation.dto;
 
+import java.util.List;
+
+import com.formation.entities.Livre;
+
 public class AuteurDTO {
 	private int id;
 	private String nom;
 	private String prenom;
 	private String biographie;
 	private String imagePath;
+	private List<Livre> livres;
 	
 	public AuteurDTO() {
 	}
@@ -57,5 +62,14 @@ public class AuteurDTO {
 		this.id = id;
 	}
 
+	public List<Livre> getLivres() {
+		return livres;
+	}
+
+	public void setLivres(List<Livre> livres) {
+		this.livres = livres;
+	}
+
+	
 	
 }
