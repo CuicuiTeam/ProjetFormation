@@ -161,12 +161,12 @@ public class LivreControlleur {
 		try {
 			Livre newLivre = new Livre(livreDto.getTitre(), livreDto.getDescription(), livreDto.getPrix(),
 					livreDto.getDatePublication(), livreDto.getImagePath(), livreDto.isPeriodic(), livreDto.isPopular());
-			newLivre.setEditeur(editeurService.get(livreDto.getEditeurId()));
-			newLivre.setCategorie(categorieService.get(livreDto.getCategorieId()));
-			newLivre.setAuteurs(auteurService.getAuteursById(livreDto.getAuteursId()));
-
+//			newLivre.setEditeur(editeurService.get(livreDto.getEditeurId()));
+//			newLivre.setCategorie(categorieService.get(livreDto.getCategorieId()));
+//			newLivre.setAuteurs(auteurService.getAuteursById(livreDto.getAuteursId()));
 			livreService.save(newLivre);
-			resultat.setSuccess(true);
+			resultat.setPayload(livreDto);
+			resultat.setSuccess(true); 
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 
 		} catch (ServiceException se) {
@@ -243,7 +243,9 @@ public class LivreControlleur {
 	@RequestMapping(value = "/image", method = RequestMethod.GET)
 	public void getImageAsByteArray(@RequestParam String imagePath, HttpServletResponse response,
 			HttpServletRequest request) throws IOException {
-		InputStream in = request.getServletContext().getResourceAsStream("/webapp/ressources/images/" + imagePath);
+		System.out.println(imagePath);
+		InputStream in = request.getServletContext().getResourceAsStream("/ressources/images/" + imagePath);
+		System.out.println("=======" + in);
 		response.setContentType(MediaType.IMAGE_JPEG_VALUE);
 		IOUtils.copy(in, response.getOutputStream());
 	}
