@@ -80,6 +80,38 @@ public class LivreControlleur {
 		return new Livre();
 	}
 
+	@GetMapping(value = "/livre/recomandes")
+	public Resultat listerRecommandes() {
+		List<LivreDTO> listeLivre = new ArrayList<LivreDTO>();
+		Resultat resultat = new Resultat();
+		try {
+			List<Livre> listeLivres = livreService.getLivreRecommandes();
+
+			listeLivres.forEach(livre -> {
+				LivreDTO livreDto = new LivreDTO(livre.getTitre(), livre.getDescription(), livre.getPrix(),
+						livre.getDatePublication(), livre.getImagePath(), livre.isPopular(), livre.isPeriodic(),
+						livre.getEditeur().getId(), livre.getCategorie().getId());
+				livreDto.setId(livre.getId());
+				List<Integer> authorIds = new ArrayList<Integer>();
+				livre.getAuteurs().forEach(auteur -> authorIds.add(auteur.getId()));
+				livreDto.setAuteursId(authorIds);
+
+				listeLivre.add(livreDto);
+				resultat.setPayload(listeLivre);
+			});
+			resultat.setSuccess(true);
+			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+		} catch (ServiceException se) {
+			resultat.setSuccess(false);
+			resultat.setMessage(se.getMessage());
+		} catch (Exception e) {
+			resultat.setSuccess(false);
+			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+
+			e.printStackTrace();
+		}
+		return resultat;
+	}
 
 	@GetMapping(value = "/livre")
 	public Resultat listerLivres() {
