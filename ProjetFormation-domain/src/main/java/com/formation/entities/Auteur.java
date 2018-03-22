@@ -87,5 +87,10 @@ public class Auteur implements Serializable {
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	
 }

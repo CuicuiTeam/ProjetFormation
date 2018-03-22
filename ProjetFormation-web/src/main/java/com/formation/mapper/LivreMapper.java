@@ -3,13 +3,18 @@ package com.formation.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.formation.dto.AuteurDTO;
 import com.formation.dto.LivreDTO;
 import com.formation.entities.Livre;
 
 @Component
 public class LivreMapper {
+	
+	@Autowired
+	private AuteurMapper auteurMapper;
 
 	public LivreDTO livreToLivreDTO(Livre livre) {
 		LivreDTO livreDto = new LivreDTO();
@@ -23,12 +28,18 @@ public class LivreMapper {
 		livreDto.setPeriodic(livre.isPeriodic());
 		livreDto.setEditeurId(livre.getEditeur().getId());
 		livreDto.setCategorieId(livre.getCategorie().getId());
-		List<Integer> auteurId = new ArrayList<>();
-		livre.getAuteurs().forEach(a -> auteurId.add(a.getId()));
-		livreDto.setAuteursId(auteurId);
+		List<AuteurDTO> auteurs = new ArrayList<>();
+		livre.getAuteurs().forEach(a -> auteurs.add(auteurMapper.toDTO(a)));
 
 		return livreDto;
 
+	}
+	
+	public Livre toLivre(LivreDTO livreDto) {
+		Livre livre = new Livre(livreDto.getTitre(), livreDto.getDescription(), livreDto.getPrix(), livreDto.getDatePublication(), livreDto.getImagePath(), livreDto.isPopular(), livreDto.isPeriodic());
+		livre.setId(livreDto.getId());
+		livre.setAuteurs(auteurMapper.toAuteurs(livreDto.getAuteurs()));
+		return livre;
 	}
 
 	public List<LivreDTO> toDTOs(List<Livre> livres) {
@@ -41,6 +52,12 @@ public class LivreMapper {
 
 		return dtos;
 
+	}
+	
+	public List<Livre> toLivres(List<LivreDTO> livresDTO){
+		List<Livre> livres = new ArrayList<>();
+		livresDTO.forEach(l -> livres.add(this.toLivre(l)));
+		return livres;
 	}
 
 }
