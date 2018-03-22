@@ -9,4 +9,5 @@ public interface PanierService {
 	public void save(Panier panier) throws Exception;
 	public void delete(Panier panier) throws Exception;
 	public List<Panier> getAll() throws Exception;
+
 }

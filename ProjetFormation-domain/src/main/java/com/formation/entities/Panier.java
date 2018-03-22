@@ -1,6 +1,7 @@
 package com.formation.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -61,6 +62,21 @@ public class Panier implements Serializable{
 
 	public void setMembre(Membre membre) {
 		this.membre = membre;
+	}
+
+	public List<Livre> getLivres() {
+		if (livres == null) {
+			return new ArrayList<Livre>();
+		}
+		return livres;
+	}
+
+	public void setLivres(List<Livre> livres) {
+		this.livres = livres;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	
