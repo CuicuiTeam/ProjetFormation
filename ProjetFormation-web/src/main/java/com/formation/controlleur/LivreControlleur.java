@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.formation.dto.AuteurDTO;
 import com.formation.dto.LivreDTO;
 import com.formation.entities.Auteur;
 import com.formation.entities.Livre;
@@ -153,6 +154,30 @@ public class LivreControlleur {
 			e.printStackTrace();
 		}
 		return resultat;
+	}
+	
+	@GetMapping(value = "/livre/{id}")
+	private Resultat getLivre(@PathVariable(value = "id") int id) {
+		Resultat resultat = new Resultat();
+		try {
+			Livre livre = livreService.get(id);
+			LivreDTO livreDto = new LivreDTO(livre.getTitre(), livre.getDescription(), livre.getPrix(),
+					livre.getDatePublication(),livre.getImagePath(), livre.isPopular(), livre.isPeriodic(),
+					livre.getEditeur().getId(), livre.getCategorie().getId() );
+			resultat.setPayload(livreDto);
+			resultat.setSuccess(true);
+			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+		} catch (ServiceException se) {
+			resultat.setSuccess(false);
+			resultat.setMessage(se.getMessage());
+		} catch (Exception e) {
+			resultat.setSuccess(false);
+			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+
+			e.printStackTrace();
+		}
+		return resultat;
+
 	}
 
 	@PutMapping(value = "/livre", consumes = MediaType.APPLICATION_JSON_VALUE)
