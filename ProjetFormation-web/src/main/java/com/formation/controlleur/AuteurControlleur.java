@@ -38,9 +38,10 @@ public class AuteurControlleur {
 
 	@Autowired
 	private LivreService livreService;
-
+	
 	@Autowired
-	LivreMapper livreMapper;
+	private LivreMapper livreMapper;
+
 
 	@GetMapping(value = "/auteur")
 	private Resultat listerAuteurs() {

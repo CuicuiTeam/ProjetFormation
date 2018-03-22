@@ -18,11 +18,12 @@ public class EditeurMapper {
 		
 	}
 	
-	public EditeurDTO toDTOs(Editeur editeur) {
-		EditeurDTO dtos = new EditeurDTO();
-//		dtos.add(editeurToEditeurDTO(editeur));
-		
-		return dtos;
+	public Editeur editeurDtoTOEditeur(EditeurDTO editeurDto) {
+		Editeur editeur = new Editeur();
+		editeur.setAdresse(editeurDto.getAdresse());
+		editeur.setId(editeurDto.getId());
+		editeur.setNom(editeurDto.getNom());
+		return editeur;
 	}
 
 }

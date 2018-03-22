@@ -3,6 +3,7 @@ package com.formation.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.formation.dto.LivreDTO;
@@ -10,6 +11,9 @@ import com.formation.entities.Livre;
 
 @Component
 public class LivreMapper {
+	
+	@Autowired
+	private EditeurMapper editeurMapper;
 
 	public LivreDTO livreToLivreDTO(Livre livre) {
 		LivreDTO livreDto = new LivreDTO();
@@ -21,7 +25,7 @@ public class LivreMapper {
 		livreDto.setImagePath(livre.getImagePath());
 		livreDto.setPopular(livre.isPopular());
 		livreDto.setPeriodic(livre.isPeriodic());
-		livreDto.setEditeurId(livre.getEditeur().getId());
+		livreDto.setEditeurDto(editeurMapper.editeurToEditeurDTO(livre.getEditeur()));
 		livreDto.setCategorieId(livre.getCategorie().getId());
 		List<Integer> auteurId = new ArrayList<>();
 		livre.getAuteurs().forEach(a -> auteurId.add(a.getId()));
