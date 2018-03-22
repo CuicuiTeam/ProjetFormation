@@ -28,7 +28,9 @@ import com.formation.dto.LivreDTO;
 import com.formation.entities.Auteur;
 import com.formation.entities.Livre;
 import com.formation.exception.ServiceException;
+import com.formation.mapper.AuteurMapper;
 import com.formation.mapper.EditeurMapper;
+import com.formation.mapper.LivreMapper;
 import com.formation.service.AuteurService;
 import com.formation.service.CategorieService;
 import com.formation.service.EditeurService;
@@ -53,6 +55,12 @@ public class LivreControlleur {
 	
 	@Autowired
 	EditeurMapper editeurMapper;
+	
+	@Autowired
+	AuteurMapper auteurMapper;
+	
+	@Autowired
+	LivreMapper livreMapper;
 
 	//	@RequestMapping("/periodiques")
 	//	private String listePeriodiques(Model model) {
@@ -96,23 +104,12 @@ public class LivreControlleur {
 
 	@GetMapping(value = "/livre/recommandes")
 	public Resultat listerRecommandes() {
-		List<LivreDTO> listeLivre = new ArrayList<LivreDTO>();
+		List<LivreDTO> listeLivre = new ArrayList<>();
 		Resultat resultat = new Resultat();
 		try {
 			List<Livre> listeLivres = livreService.getLivreRecommandes();
-
-			listeLivres.forEach(livre -> {
-				LivreDTO livreDto = new LivreDTO(livre.getTitre(), livre.getDescription(), livre.getPrix(),
-						livre.getDatePublication(), livre.getImagePath(), livre.isPopular(), livre.isPeriodic(),
-						editeurMapper.editeurToEditeurDTO(livre.getEditeur()), livre.getCategorie().getId());
-				livreDto.setId(livre.getId());
-				List<Integer> authorIds = new ArrayList<Integer>();
-				livre.getAuteurs().forEach(auteur -> authorIds.add(auteur.getId()));
-				livreDto.setAuteursId(authorIds);
-
-				listeLivre.add(livreDto);
-				resultat.setPayload(listeLivre);
-			});
+			listeLivre = livreMapper.toDTOs(listeLivres);
+			resultat.setPayload(listeLivre);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 		} catch (ServiceException se) {
@@ -139,9 +136,9 @@ public class LivreControlleur {
 						livre.getDatePublication(), livre.getImagePath(), livre.isPopular(), livre.isPeriodic(),
 						editeurMapper.editeurToEditeurDTO(livre.getEditeur()), livre.getCategorie().getId());
 				livreDto.setId(livre.getId());
-				List<Integer> authorIds = new ArrayList<Integer>();
-				livre.getAuteurs().forEach(auteur -> authorIds.add(auteur.getId()));
-				livreDto.setAuteursId(authorIds);
+				List<AuteurDTO> auteursDto = new ArrayList<>();
+				livre.getAuteurs().forEach(auteur -> auteursDto.add(auteurMapper.toDTO(auteur)));
+				livreDto.setAuteurs(auteursDto);
 
 				listeLivre.add(livreDto);
 				resultat.setPayload(listeLivre);
@@ -225,9 +222,14 @@ public class LivreControlleur {
 			livre.setEditeur(editeurService.get(livreDto.getEditeurDto().getId()));
 			livre.setCategorie(categorieService.get(livreDto.getCategorieId()));
 			List<Auteur> auteurs = new ArrayList<>();
-			for (int i = 0; i < livreDto.getAuteursId().size(); i++) {
-				auteurs.add(auteurService.get(i));
-			}
+			livreDto.getAuteurs().forEach(a -> {
+				try {
+					auteurs.add(auteurService.get(a.getId()));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
 			livre.setAuteurs(auteurs);
 
 			livreService.save(livre);
