@@ -16,6 +16,9 @@ public class LivreMapper {
 	@Autowired
 	private AuteurMapper auteurMapper;
 
+	@Autowired
+	private EditeurMapper editeurMapper;
+
 	public LivreDTO livreToLivreDTO(Livre livre) {
 		LivreDTO livreDto = new LivreDTO();
 		livreDto.setId(livre.getId());
@@ -26,7 +29,7 @@ public class LivreMapper {
 		livreDto.setImagePath(livre.getImagePath());
 		livreDto.setPopular(livre.isPopular());
 		livreDto.setPeriodic(livre.isPeriodic());
-		livreDto.setEditeurId(livre.getEditeur().getId());
+		livreDto.setEditeurDto(editeurMapper.editeurToEditeurDTO(livre.getEditeur()));
 		livreDto.setCategorieId(livre.getCategorie().getId());
 		List<AuteurDTO> auteurs = new ArrayList<>();
 		livre.getAuteurs().forEach(a -> auteurs.add(auteurMapper.toDTO(a)));

@@ -66,4 +66,10 @@ public class Editeur implements Serializable {
 		this.livres = livres;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
+
 }

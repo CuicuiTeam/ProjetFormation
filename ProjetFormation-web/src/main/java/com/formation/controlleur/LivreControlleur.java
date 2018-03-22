@@ -28,6 +28,7 @@ import com.formation.dto.LivreDTO;
 import com.formation.entities.Auteur;
 import com.formation.entities.Livre;
 import com.formation.exception.ServiceException;
+import com.formation.mapper.EditeurMapper;
 import com.formation.service.AuteurService;
 import com.formation.service.CategorieService;
 import com.formation.service.EditeurService;
@@ -49,6 +50,9 @@ public class LivreControlleur {
 
 	@Autowired
 	private EditeurService editeurService;
+	
+	@Autowired
+	EditeurMapper editeurMapper;
 
 	//	@RequestMapping("/periodiques")
 	//	private String listePeriodiques(Model model) {
@@ -100,7 +104,7 @@ public class LivreControlleur {
 			listeLivres.forEach(livre -> {
 				LivreDTO livreDto = new LivreDTO(livre.getTitre(), livre.getDescription(), livre.getPrix(),
 						livre.getDatePublication(), livre.getImagePath(), livre.isPopular(), livre.isPeriodic(),
-						0, 0);
+						editeurMapper.editeurToEditeurDTO(livre.getEditeur()), livre.getCategorie().getId());
 				livreDto.setId(livre.getId());
 				List<Integer> authorIds = new ArrayList<Integer>();
 				livre.getAuteurs().forEach(auteur -> authorIds.add(auteur.getId()));
@@ -133,7 +137,7 @@ public class LivreControlleur {
 			listeLivres.forEach(livre -> {
 				LivreDTO livreDto = new LivreDTO(livre.getTitre(), livre.getDescription(), livre.getPrix(),
 						livre.getDatePublication(), livre.getImagePath(), livre.isPopular(), livre.isPeriodic(),
-						livre.getEditeur().getId(), livre.getCategorie().getId());
+						editeurMapper.editeurToEditeurDTO(livre.getEditeur()), livre.getCategorie().getId());
 				livreDto.setId(livre.getId());
 				List<Integer> authorIds = new ArrayList<Integer>();
 				livre.getAuteurs().forEach(auteur -> authorIds.add(auteur.getId()));
@@ -163,7 +167,7 @@ public class LivreControlleur {
 			Livre livre = livreService.get(id);
 			LivreDTO livreDto = new LivreDTO(livre.getTitre(), livre.getDescription(), livre.getPrix(),
 					livre.getDatePublication(),livre.getImagePath(), livre.isPopular(), livre.isPeriodic(),
-					livre.getEditeur().getId(), livre.getCategorie().getId() );
+					editeurMapper.editeurToEditeurDTO(livre.getEditeur()), livre.getCategorie().getId() );
 			resultat.setPayload(livreDto);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
@@ -218,7 +222,7 @@ public class LivreControlleur {
 			livre.setDatePublication(livreDto.getDatePublication());
 			livre.setPopular(livreDto.isPopular());
 			livre.setImagePath(livreDto.getImagePath());
-			livre.setEditeur(editeurService.get(livreDto.getEditeurId()));
+			livre.setEditeur(editeurService.get(livreDto.getEditeurDto().getId()));
 			livre.setCategorie(categorieService.get(livreDto.getCategorieId()));
 			List<Auteur> auteurs = new ArrayList<>();
 			for (int i = 0; i < livreDto.getAuteursId().size(); i++) {
