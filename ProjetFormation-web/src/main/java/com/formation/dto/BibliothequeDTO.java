@@ -9,8 +9,8 @@ public class BibliothequeDTO {
 
 	}
 
-	public BibliothequeDTO(String nom, String adresse) {
-
+	public BibliothequeDTO(int id, String nom, String adresse) {
+		this.id = id;
 		this.nom = nom;
 		this.adresse = adresse;
 	}

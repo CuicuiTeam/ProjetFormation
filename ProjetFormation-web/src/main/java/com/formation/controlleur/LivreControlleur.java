@@ -99,7 +99,7 @@ public class LivreControlleur {
 			listeLivres.forEach(livre -> {
 				LivreDTO livreDto = new LivreDTO(livre.getTitre(), livre.getDescription(), livre.getPrix(),
 						livre.getDatePublication(), livre.getImagePath(), livre.isPopular(), livre.isPeriodic(),
-						livre.getEditeur().getId(), livre.getCategorie().getId());
+						0, 0);
 				livreDto.setId(livre.getId());
 				List<Integer> authorIds = new ArrayList<Integer>();
 				livre.getAuteurs().forEach(auteur -> authorIds.add(auteur.getId()));
@@ -160,7 +160,7 @@ public class LivreControlleur {
 		Resultat resultat = new Resultat();
 		try {
 			Livre newLivre = new Livre(livreDto.getTitre(), livreDto.getDescription(), livreDto.getPrix(),
-					livreDto.getDatePublication(), livreDto.getImagePath(), livreDto.isPeriodic(), livreDto.isPopular());
+					livreDto.getDatePublication(), livreDto.getImagePath(), livreDto.isPopular(), livreDto.isPeriodic());
 //			newLivre.setEditeur(editeurService.get(livreDto.getEditeurId()));
 //			newLivre.setCategorie(categorieService.get(livreDto.getCategorieId()));
 //			newLivre.setAuteurs(auteurService.getAuteursById(livreDto.getAuteursId()));
