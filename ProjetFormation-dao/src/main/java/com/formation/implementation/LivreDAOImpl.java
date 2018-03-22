@@ -3,6 +3,7 @@ package com.formation.implementation;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -39,8 +40,13 @@ public class LivreDAOImpl extends DAOPrincipalImpl<Livre> implements LivreDAO {
 	@Override
 	public List<Livre> getLivreByAuteur(Auteur auteur) {
 		// TODO Auto-generated method stub
-		return (List<Livre>) sessionFactory.getCurrentSession()
+		List<Livre> livres =  (List<Livre>) sessionFactory.getCurrentSession()
 				.createQuery("SELECT L FROM Livre L JOIN L.auteurs a WHERE a.id =:idAuteur").setParameter("idAuteur", auteur.getId()).getResultList();
+		for (Livre livre : livres) {
+			Hibernate.initialize(livre.getAuteurs());
+		}
+		return livres;
+		
 	}
 
 	@SuppressWarnings("unchecked")
