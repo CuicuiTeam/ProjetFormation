@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,7 @@ public class LoginControlleur {
 	private MembreService membreService;
 	
 	@Autowired MembreMapper membreMapper;
+
 
 
 	@PostMapping(value = "/connexion")
@@ -47,6 +49,21 @@ public class LoginControlleur {
 
 			e.printStackTrace();
 		}
+
+		return resultat;
+
+	}
+	
+	@PostMapping(value="/deconnexion", consumes=  MediaType.APPLICATION_JSON_VALUE)
+	private Resultat deconnexionMembre(HttpServletRequest request) {
+		Resultat resultat = new Resultat();
+		
+		HttpSession session = request.getSession();
+		session.invalidate();
+		
+		resultat.setSuccess(true);
+		resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+		resultat.setPayload("Logout OK");
 
 		return resultat;
 

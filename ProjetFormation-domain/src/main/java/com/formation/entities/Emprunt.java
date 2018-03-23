@@ -92,6 +92,4 @@ public class Emprunt implements Serializable{
 		this.dateRetour = dateRetour;
 	}
 	
-	
-
 }
