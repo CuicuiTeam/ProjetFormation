@@ -150,13 +150,6 @@ public class MembreDTO {
 
 	
 
-	@Override
-	public String toString() {
-		return "MembreDTO [inscriptionsId=" + inscriptionsId + ", bibliothequesId=" + bibliothequesId + ", id=" + id
-				+ ", nom=" + nom + ", prenom=" + prenom + ", password=" + password + ", adresse=" + adresse + ", ville="
-				+ ville + ", codePostal=" + codePostal + ", telephone=" + telephone + ", email=" + email + ", isAdmin="
-				+ isAdmin + "]";
-	}
 	
 	
 	

@@ -25,7 +25,7 @@ public class Panier implements Serializable{
 	@ManyToOne
 	private Membre membre;
 	
-	@ManyToMany(mappedBy = "panier")
+	@ManyToMany(mappedBy = "paniers")
 	private List<Livre> livres;
 
 	public Panier() {

@@ -1,5 +1,8 @@
 package com.formation.controlleur;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,16 +25,15 @@ public class LoginControlleur {
 
 
 	@PostMapping(value = "/connexion")
-	private Resultat connexionMembre(@RequestBody IdentifiantsVM identifiants) {
+	private Resultat connexionMembre(@RequestBody IdentifiantsVM identifiants, HttpServletRequest request) {
 		Resultat resultat = new Resultat();
 		try {
 			Membre membre = membreService.identification(identifiants.getEmail(), identifiants.getPassword());
 			HttpSession session = request.getSession();
-			MembreDTO membreDto = new MembreDTO(membre.getId(), membre.getNom(), membre.getPrenom(), "", membre.getAdresse(), membre.getVille(), membre.getCodePostal(), membre.getTelephone(), membre.getEmail(), membre.isAdmin());
-			session.setAttribute(ControllerConstants.MEMBRE_SESSION, membreDto);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 			MembreDTO membreDto = new MembreDTO(membre.getNom(), membre.getPrenom(), "", membre.getAdresse(), membre.getVille(), membre.getCodePostal(), membre.getTelephone(), membre.getEmail(), membre.isAdmin());
+			session.setAttribute(ControllerConstants.MEMBRE_SESSION, membreDto);
 			resultat.setPayload(membreDto);
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
