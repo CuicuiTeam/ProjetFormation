@@ -27,6 +27,7 @@ public class LoginControlleur {
 	@Autowired MembreMapper membreMapper;
 
 
+
 	@PostMapping(value = "/connexion")
 	private Resultat connexionMembre(@RequestBody IdentifiantsVM identifiants, HttpServletRequest request) {
 		Resultat resultat = new Resultat();

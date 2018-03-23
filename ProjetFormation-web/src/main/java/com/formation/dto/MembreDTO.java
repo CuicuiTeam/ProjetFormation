@@ -1,6 +1,5 @@
 package com.formation.dto;
 
-import java.io.Serializable;
 import java.util.List;
 
 

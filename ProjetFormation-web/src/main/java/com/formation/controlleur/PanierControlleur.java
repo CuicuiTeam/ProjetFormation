@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.formation.dto.LivreDTO;
 import com.formation.dto.MembreDTO;
 import com.formation.dto.PanierDTO;
-import com.formation.entities.Livre;
 import com.formation.entities.Panier;
 import com.formation.exception.ServiceException;
+import com.formation.mapper.LivreMapper;
 import com.formation.mapper.MembreMapper;
 import com.formation.mapper.PanierMapper;
 import com.formation.service.LivreService;
@@ -48,39 +49,60 @@ public class PanierControlleur {
 	@Autowired
 	private MembreMapper membreMapper;
 
+	@Autowired
+	private LivreMapper livreMapper;
+
 	@GetMapping(value="/panier")
-	private Resultat listerPaniers() {
-		List<PanierDTO> listePaniers = new ArrayList<PanierDTO>();
+	private Resultat listePanier(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
 		Resultat resultat = new Resultat();
 		try {
-			List<Panier> paniers = panierService.getAll();
-
-			paniers.forEach(p -> {
-				PanierDTO panierDto = new PanierDTO(p.getDateCreation(), p.getDateLivraison(), p.getMembre().getId());
-				panierDto.setId(p.getId());
-				listePaniers.add(panierDto);
-				resultat.setPayload(listePaniers);
-			});
+			PanierDTO panierDTO = (PanierDTO) session.getAttribute(ControllerConstants.PANIER_SESSION);
+			resultat.setPayload(panierDTO);
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
-		} catch (ServiceException se) {
-			resultat.setSuccess(false);
-			resultat.setMessage(se.getMessage());
+			resultat.setMessage(ControllerConstants.PANIER_LISTE);
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
-
+			resultat.setMessage(ControllerConstants.PANIER_LISTE_ERROR);
 			e.printStackTrace();
 		}
-		return resultat;
-	}
+			return resultat;
+		}
+
+	// @GetMapping(value="/panier")
+	// private Resultat listerPaniers() {
+	// List<PanierDTO> listePaniers = new ArrayList<PanierDTO>();
+	// Resultat resultat = new Resultat();
+	// try {
+	// List<Panier> paniers = panierService.getAll();
+	// paniers.forEach(p -> {
+	// PanierDTO panierDto = new PanierDTO(p.getDateCreation(),
+	// p.getDateLivraison(), p.getMembre().getId());
+	// panierDto.setId(p.getId());
+	// listePaniers.add(panierDto);
+	// resultat.setPayload(listePaniers);
+	// });
+	// resultat.setSuccess(true);
+	// resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+	// } catch (ServiceException se) {
+	// resultat.setSuccess(false);
+	// resultat.setMessage(se.getMessage());
+	// } catch (Exception e) {
+	// resultat.setSuccess(false);
+	// resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+	//
+	// e.printStackTrace();
+	// }
+	// return resultat;
+	// }
 
 	@GetMapping(value="/panier/{id}")
 	private Resultat getPanier(@PathVariable(value="id") int id) {
 		Resultat resultat = new Resultat();
 		try {
 			Panier panier = panierService.get(id);
-			PanierDTO panierDto = new PanierDTO(panier.getDateCreation(), panier.getDateLivraison(), panier.getMembre().getId());
+			PanierDTO panierDto = panierMapper.toDTO(panier);
 			resultat.setPayload(panierDto);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
@@ -172,20 +194,21 @@ public class PanierControlleur {
 		try {
 			MembreDTO membreDTO = (MembreDTO) session.getAttribute(ControllerConstants.MEMBRE_SESSION);
 			System.out.println(membreDTO);
-			Panier panier = null;
+			PanierDTO panierDTO = null;
 			if (session.getAttribute(ControllerConstants.PANIER_SESSION) == null) {
-				panier = new Panier();
+				panierDTO = new PanierDTO();
 			} else {
-				panier = (Panier) session.getAttribute(ControllerConstants.PANIER_SESSION);
+				panierDTO = (PanierDTO) session.getAttribute(ControllerConstants.PANIER_SESSION);
 			}
-			List<Livre> pLivres = panier.getLivres();
-			pLivres.add(livreService.get(idLivre));
-			panier.setLivres(pLivres);
-			panier.setMembre(membreMapper.toMembre(membreDTO));
-			session.setAttribute(ControllerConstants.PANIER_SESSION, panier);
+			List<LivreDTO> pLivres = panierDTO.getLivres() == null ? new ArrayList<LivreDTO>() : panierDTO.getLivres();
+			pLivres.add(livreMapper.livreToLivreDTO(livreService.get(idLivre)));
+			panierDTO.setLivres(pLivres);
+			panierDTO.setMembreId(membreDTO.getId());
+			session.setAttribute(ControllerConstants.PANIER_SESSION, panierDTO);
+			panierService.save(panierMapper.toPanier(panierDTO));
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.AJOUT_LIVRE_PANIER_SUCCESS);
-			resultat.setPayload(panierMapper.toDTO(panier));
+			resultat.setPayload(panierDTO);
 		} catch (Exception e) {
 			resultat.setSuccess(false);
 			resultat.setMessage(ControllerConstants.AJOUT_LIVRE_PANIER_ERROR);
