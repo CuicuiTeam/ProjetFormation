@@ -21,11 +21,14 @@ public class LoginControlleur {
 	private MembreService membreService;
 
 
-	@PostMapping(value="/connexion", consumes=  MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/connexion")
 	private Resultat connexionMembre(@RequestBody IdentifiantsVM identifiants) {
 		Resultat resultat = new Resultat();
 		try {
 			Membre membre = membreService.identification(identifiants.getEmail(), identifiants.getPassword());
+			HttpSession session = request.getSession();
+			MembreDTO membreDto = new MembreDTO(membre.getId(), membre.getNom(), membre.getPrenom(), "", membre.getAdresse(), membre.getVille(), membre.getCodePostal(), membre.getTelephone(), membre.getEmail(), membre.isAdmin());
+			session.setAttribute(ControllerConstants.MEMBRE_SESSION, membreDto);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 			MembreDTO membreDto = new MembreDTO(membre.getNom(), membre.getPrenom(), "", membre.getAdresse(), membre.getVille(), membre.getCodePostal(), membre.getTelephone(), membre.getEmail(), membre.isAdmin());

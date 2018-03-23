@@ -1,12 +1,14 @@
 package com.formation.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class PanierDTO {
 	private int id;
 	private Date dateCreation;
 	private Date dateLivraison;
 	private int membreId;
+	private List<Integer> livreIds;
 	
 	
 	public PanierDTO() {
@@ -22,6 +24,14 @@ public class PanierDTO {
 
 	public int getId() {
 		return id;
+	}
+
+	public List<Integer> getLivreIds() {
+		return livreIds;
+	}
+
+	public void setLivreIds(List<Integer> livreIds) {
+		this.livreIds = livreIds;
 	}
 
 

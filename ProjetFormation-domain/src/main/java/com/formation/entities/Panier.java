@@ -1,6 +1,7 @@
 package com.formation.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,8 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Panier implements Serializable{
@@ -24,7 +25,7 @@ public class Panier implements Serializable{
 	@ManyToOne
 	private Membre membre;
 	
-	@OneToMany(mappedBy = "panier")
+	@ManyToMany(mappedBy = "panier")
 	private List<Livre> livres;
 
 	public Panier() {
@@ -61,6 +62,21 @@ public class Panier implements Serializable{
 
 	public void setMembre(Membre membre) {
 		this.membre = membre;
+	}
+
+	public List<Livre> getLivres() {
+		if (livres == null) {
+			return new ArrayList<Livre>();
+		}
+		return livres;
+	}
+
+	public void setLivres(List<Livre> livres) {
+		this.livres = livres;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

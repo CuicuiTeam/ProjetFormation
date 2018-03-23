@@ -274,7 +274,6 @@ public class LivreControlleur {
 			HttpServletRequest request) throws IOException {
 		System.out.println(imagePath);
 		InputStream in = request.getServletContext().getResourceAsStream("/ressources/images/" + imagePath);
-		System.out.println("=======" + in);
 		response.setContentType(MediaType.IMAGE_JPEG_VALUE);
 		IOUtils.copy(in, response.getOutputStream());
 	}
