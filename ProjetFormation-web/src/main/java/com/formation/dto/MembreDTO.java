@@ -1,12 +1,12 @@
 package com.formation.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 
 public class MembreDTO {
 	
 	private List<Integer> inscriptionsId;
-	private List<Integer> bibliothequesId;
 	private int id;
 	private String nom;
 	private String prenom;
@@ -23,9 +23,9 @@ public class MembreDTO {
 	}
 
 
-	public MembreDTO(int id, String nom, String prenom, String password, String adresse,
+	public MembreDTO( String nom, String prenom, String password, String adresse,
 			String ville, String codePostal, String telephone, String email, boolean isAdmin) {
-		this.id = id;
+//		this.inscriptionsId = inscriptionsId;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.password = password;
@@ -148,15 +148,9 @@ public class MembreDTO {
 	}
 
 
-	public List<Integer> getBibliothequesId() {
-		return bibliothequesId;
-	}
+	
 
-
-	public void setBibliothequesId(List<Integer> bibliothequesId) {
-		this.bibliothequesId = bibliothequesId;
-	}
-
+	
 	
 	
 }

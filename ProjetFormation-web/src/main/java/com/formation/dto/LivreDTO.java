@@ -15,7 +15,7 @@ public class LivreDTO {
 	private boolean isPeriodic;
 	private EditeurDTO editeurDto;
 	private int categorieId;
-	private List<AuteurDTO> auteurs;
+	private List<Integer> auteursId;
 	private int id;
 
 	public LivreDTO() {
@@ -109,12 +109,12 @@ public class LivreDTO {
 		this.categorieId = categorieId;
 	}
 
-	public List<AuteurDTO> getAuteurs() {
-		return auteurs;
+	public List<Integer> getAuteursId() {
+		return auteursId;
 	}
 
-	public void setAuteurs(List<AuteurDTO> auteurs) {
-		this.auteurs = auteurs;
+	public void setAuteursId(List<Integer> auteursId) {
+		this.auteursId = auteursId;
 	}
 
 	public EditeurDTO getEditeurDto() {

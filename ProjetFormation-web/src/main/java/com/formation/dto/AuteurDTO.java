@@ -2,6 +2,8 @@ package com.formation.dto;
 
 import java.util.List;
 
+import com.formation.entities.Livre;
+
 public class AuteurDTO {
 	private int id;
 	private String nom;

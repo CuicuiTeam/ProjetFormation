@@ -34,7 +34,7 @@ public class BibliothequeControlleur {
 
 			bibliotheques.forEach(bibliotheque -> {
 
-				BibliothequeDTO biblioDto = new BibliothequeDTO(bibliotheque.getId(), bibliotheque.getNom(), bibliotheque.getAdresse());
+				BibliothequeDTO biblioDto = new BibliothequeDTO(bibliotheque.getNom(), bibliotheque.getAdresse());
 				biblioDto.setId(bibliotheque.getId());
 				listeBibliotheques.add(biblioDto);
 				resultat.setPayload(listeBibliotheques);

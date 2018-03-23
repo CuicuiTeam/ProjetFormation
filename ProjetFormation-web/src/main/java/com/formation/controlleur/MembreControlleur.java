@@ -1,24 +1,32 @@
 package com.formation.controlleur;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.formation.dto.MembreDTO;
 import com.formation.entities.Inscription;
 import com.formation.entities.Membre;
 import com.formation.exception.ServiceException;
-import com.formation.service.BibliothequeService;
 import com.formation.service.InscriptionService;
 import com.formation.service.MembreService;
 import com.formation.utils.ControllerConstants;
@@ -39,20 +47,12 @@ public class MembreControlleur {
 	public Resultat ajoutMembre(@RequestBody MembreDTO membreDto) {
 		Resultat resultat = new Resultat();
 		try {
-			Membre newMembre = new Membre(membreDto.getNom(), membreDto.getPrenom(), membreDto.getEmail(), membreDto.getPassword(), membreDto.getAdresse(), membreDto.getVille(), membreDto.getCodePostal(), membreDto.getTelephone(), membreDto.isAdmin());
-//			List<Inscription> inscriptionsMembre = null;
-//			membreDto.getBibliothequesId().forEach(b -> {
-//				try {
-//					inscriptionsMembre.add(new Inscription(bibliothequeService.get(b), newMembre, new Date()));
-//				} catch (Exception e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			});
-//			newMembre.setInscriptions(inscriptionsMembre);
+			Membre newMembre = new Membre(membreDto.getNom(), membreDto.getPrenom(), membreDto.getEmail(),
+					membreDto.getPassword(), membreDto.getAdresse(), membreDto.getVille(), membreDto.getCodePostal(),
+					membreDto.getTelephone(), membreDto.isAdmin());
+//			newMembre.setInscriptions(inscriptionService.getInscriptionById(membreDto.getInscriptionsId()));
 			newMembre.setPassword(membreService.cryptageMdp(newMembre.getPassword()));
 			membreService.save(newMembre);
-			resultat.setPayload(membreDto);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 			resultat.setPayload(newMembre);
@@ -76,9 +76,10 @@ public class MembreControlleur {
 		try {
 			List<Membre> listeMembres = membreService.getAll();
 
-
-			listeMembres.forEach(membre -> {			
-				MembreDTO membreDto = new MembreDTO(membre.getId(), membre.getNom(), membre.getPrenom(), membre.getPassword(), membre.getAdresse(), membre.getVille(), membre.getCodePostal(), membre.getTelephone(), membre.getEmail(), membre.isAdmin());
+			listeMembres.forEach(membre -> {
+				MembreDTO membreDto = new MembreDTO(membre.getNom(), membre.getPrenom(), membre.getPassword(),
+						membre.getAdresse(), membre.getVille(), membre.getCodePostal(), membre.getTelephone(),
+						membre.getEmail(), membre.isAdmin());
 				List<Integer> inscriptionIds = new ArrayList<Integer>();
 
 				membre.getInscriptions().forEach(inscription -> inscriptionIds.add(inscription.getId()));
