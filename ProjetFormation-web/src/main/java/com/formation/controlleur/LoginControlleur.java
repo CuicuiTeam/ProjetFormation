@@ -22,6 +22,8 @@ public class LoginControlleur {
 
 	@Autowired
 	private MembreService membreService;
+	
+	@Autowired MembreMapper membreMapper;
 
 	@Autowired
 	private MembreMapper membreMapper;

@@ -21,12 +21,12 @@ public class MembreMapper {
 		membreDTO.setEmail(membre.getEmail());
 		membreDTO.setId(membre.getId());
 		List<Integer> ids = new ArrayList<Integer>();
-		for (Inscription inscription : membre.getInscriptions()) {
-
-			ids.add(inscription.getId());
-
-		}
-		membreDTO.setInscriptionsId(ids);
+//		for (Inscription inscription : membre.getInscriptions()) {
+//
+//			ids.add(inscription.getId());
+//
+//		}
+//		membreDTO.setInscriptionsId(ids);
 		membreDTO.setNom(membre.getNom());
 		membreDTO.setPrenom(membre.getPrenom());
 		membreDTO.setTelephone(membre.getTelephone());
