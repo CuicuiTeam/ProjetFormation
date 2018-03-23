@@ -8,7 +8,8 @@ public class PanierDTO {
 	private Date dateCreation;
 	private Date dateLivraison;
 	private int membreId;
-	private List<Integer> livreIds;
+	// private List<Integer> livreIds;
+	private List<LivreDTO> livres;
 	
 	
 	public PanierDTO() {
@@ -26,14 +27,17 @@ public class PanierDTO {
 		return id;
 	}
 
-	public List<Integer> getLivreIds() {
-		return livreIds;
+
+
+
+
+	public List<LivreDTO> getLivres() {
+		return livres;
 	}
 
-	public void setLivreIds(List<Integer> livreIds) {
-		this.livreIds = livreIds;
+	public void setLivres(List<LivreDTO> livres) {
+		this.livres = livres;
 	}
-
 
 	public void setId(int id) {
 		this.id = id;

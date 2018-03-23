@@ -25,8 +25,6 @@ public class LoginControlleur {
 	
 	@Autowired MembreMapper membreMapper;
 
-	@Autowired
-	private MembreMapper membreMapper;
 
 
 	@PostMapping(value = "/connexion")
