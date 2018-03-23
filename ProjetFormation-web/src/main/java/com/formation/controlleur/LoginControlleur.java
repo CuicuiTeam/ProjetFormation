@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.formation.dto.MembreDTO;
 import com.formation.entities.Membre;
 import com.formation.exception.ServiceException;
+import com.formation.mapper.MembreMapper;
 import com.formation.service.MembreService;
 import com.formation.utils.ControllerConstants;
 import com.formation.utils.Resultat;
@@ -22,6 +22,8 @@ public class LoginControlleur {
 
 	@Autowired
 	private MembreService membreService;
+	
+	@Autowired MembreMapper membreMapper;
 
 
 	@PostMapping(value = "/connexion")
@@ -30,9 +32,10 @@ public class LoginControlleur {
 		try {
 			Membre membre = membreService.identification(identifiants.getEmail(), identifiants.getPassword());
 			HttpSession session = request.getSession();
+			MembreDTO membreDto = membreMapper.toDto(membre);
+			session.setAttribute(ControllerConstants.MEMBRE_SESSION, membreDto);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
-			MembreDTO membreDto = new MembreDTO(membre.getNom(), membre.getPrenom(), "", membre.getAdresse(), membre.getVille(), membre.getCodePostal(), membre.getTelephone(), membre.getEmail(), membre.isAdmin());
 			session.setAttribute(ControllerConstants.MEMBRE_SESSION, membreDto);
 			resultat.setPayload(membreDto);
 		} catch (ServiceException se) {
