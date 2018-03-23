@@ -9,8 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Panier implements Serializable{
@@ -25,7 +25,7 @@ public class Panier implements Serializable{
 	@ManyToOne
 	private Membre membre;
 	
-	@OneToMany(mappedBy = "panier")
+	@ManyToMany(mappedBy = "panier")
 	private List<Livre> livres;
 
 	public Panier() {

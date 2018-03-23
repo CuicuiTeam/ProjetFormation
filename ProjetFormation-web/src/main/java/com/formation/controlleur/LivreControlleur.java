@@ -99,7 +99,7 @@ public class LivreControlleur {
 			listeLivres.forEach(livre -> {
 				LivreDTO livreDto = new LivreDTO(livre.getTitre(), livre.getDescription(), livre.getPrix(),
 						livre.getDatePublication(), livre.getImagePath(), livre.isPopular(), livre.isPeriodic(),
-						0, 0);
+						livre.getEditeur().getId(), livre.getCategorie().getId());
 				livreDto.setId(livre.getId());
 				List<Integer> authorIds = new ArrayList<Integer>();
 				livre.getAuteurs().forEach(auteur -> authorIds.add(auteur.getId()));
@@ -160,7 +160,8 @@ public class LivreControlleur {
 		Resultat resultat = new Resultat();
 		try {
 			Livre newLivre = new Livre(livreDto.getTitre(), livreDto.getDescription(), livreDto.getPrix(),
-					livreDto.getDatePublication(), livreDto.getImagePath(), livreDto.isPopular(), livreDto.isPeriodic());
+					livreDto.getDatePublication(), livreDto.getImagePath(), livreDto.isPeriodic(),
+					livreDto.isPopular());
 //			newLivre.setEditeur(editeurService.get(livreDto.getEditeurId()));
 //			newLivre.setCategorie(categorieService.get(livreDto.getCategorieId()));
 //			newLivre.setAuteurs(auteurService.getAuteursById(livreDto.getAuteursId()));
@@ -245,7 +246,6 @@ public class LivreControlleur {
 			HttpServletRequest request) throws IOException {
 		System.out.println(imagePath);
 		InputStream in = request.getServletContext().getResourceAsStream("/ressources/images/" + imagePath);
-		System.out.println("=======" + in);
 		response.setContentType(MediaType.IMAGE_JPEG_VALUE);
 		IOUtils.copy(in, response.getOutputStream());
 	}

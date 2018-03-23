@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.formation.dto.MembreDTO;
 import com.formation.dto.PanierDTO;
 import com.formation.entities.Livre;
-import com.formation.entities.Membre;
 import com.formation.entities.Panier;
 import com.formation.exception.ServiceException;
+import com.formation.mapper.MembreMapper;
 import com.formation.mapper.PanierMapper;
 import com.formation.service.LivreService;
 import com.formation.service.MembreService;
@@ -43,6 +44,9 @@ public class PanierControlleur {
 
 	@Autowired
 	private PanierMapper panierMapper;
+
+	@Autowired
+	private MembreMapper membreMapper;
 
 	@GetMapping(value="/panier")
 	private Resultat listerPaniers() {
@@ -160,13 +164,14 @@ public class PanierControlleur {
 		return resultat;
 	}
 
-	@PostMapping(value = "/panier")
+	@PostMapping(value = "/panier/addbook")
 	private Resultat addToPanier(HttpServletRequest request, @RequestParam int idLivre) {
 
 		HttpSession session = request.getSession();
 		Resultat resultat = new Resultat();
 		try {
-			Membre membre = (Membre) session.getAttribute(ControllerConstants.MEMBRE_SESSION);
+			MembreDTO membreDTO = (MembreDTO) session.getAttribute(ControllerConstants.MEMBRE_SESSION);
+			System.out.println(membreDTO);
 			Panier panier = null;
 			if (session.getAttribute(ControllerConstants.PANIER_SESSION) == null) {
 				panier = new Panier();
@@ -174,10 +179,9 @@ public class PanierControlleur {
 				panier = (Panier) session.getAttribute(ControllerConstants.PANIER_SESSION);
 			}
 			List<Livre> pLivres = panier.getLivres();
-
 			pLivres.add(livreService.get(idLivre));
 			panier.setLivres(pLivres);
-			panier.setMembre(membre);
+			panier.setMembre(membreMapper.toMembre(membreDTO));
 			session.setAttribute(ControllerConstants.PANIER_SESSION, panier);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.AJOUT_LIVRE_PANIER_SUCCESS);

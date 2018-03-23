@@ -11,13 +11,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Type;
-
-import com.github.slugify.Slugify;
 
 @Entity
 public class Livre implements Serializable {
@@ -47,8 +47,10 @@ public class Livre implements Serializable {
 	@OneToMany(mappedBy = "livre")
 	private List<Exemplaire> exemplaires;
 
-	@ManyToOne
-	private Panier panier;
+	@ManyToMany
+	@JoinTable(name = "livre_panier", joinColumns = { @JoinColumn(name = "panier_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "livre_id") })
+	private List<Panier> paniers;
 
 	public List<Exemplaire> getExemplaires() {
 		return exemplaires;
@@ -58,12 +60,12 @@ public class Livre implements Serializable {
 		this.exemplaires = exemplaires;
 	}
 
-	public Panier getPanier() {
-		return panier;
+	public List<Panier> getPaniers() {
+		return paniers;
 	}
 
-	public void setPanier(Panier panier) {
-		this.panier = panier;
+	public void setPaniers(List<Panier> paniers) {
+		this.paniers = paniers;
 	}
 
 	public Editeur getEditeur() {
