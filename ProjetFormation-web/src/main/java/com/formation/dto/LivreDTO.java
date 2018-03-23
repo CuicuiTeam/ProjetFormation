@@ -3,6 +3,8 @@ package com.formation.dto;
 import java.sql.Date;
 import java.util.List;
 
+import com.formation.entities.Editeur;
+
 public class LivreDTO {
 	private String titre;
 	private String description;
@@ -11,7 +13,7 @@ public class LivreDTO {
 	private String imagePath;
 	private boolean isPopular;
 	private boolean isPeriodic;
-	private int editeurId;
+	private EditeurDTO editeurDto;
 	private int categorieId;
 	private List<Integer> auteursId;
 	private int id;
@@ -21,7 +23,7 @@ public class LivreDTO {
 	}
 
 	public LivreDTO(String titre, String description, double prix, Date datePublication, String imagePath,
-			boolean isPopular, boolean isPeriodic, int editeurId, int categorieId) {
+			boolean isPopular, boolean isPeriodic, EditeurDTO editeurDto, int categorieId) {
 		this.titre = titre;
 		this.description = description;
 		this.prix = prix;
@@ -29,7 +31,7 @@ public class LivreDTO {
 		this.imagePath = imagePath;
 		this.isPopular = isPopular;
 		this.isPeriodic = isPeriodic;
-		this.editeurId = editeurId;
+		this.editeurDto = editeurDto;
 		this.categorieId = categorieId;
 	}
 
@@ -97,13 +99,7 @@ public class LivreDTO {
 		this.isPeriodic = isPeriodic;
 	}
 
-	public int getEditeurId() {
-		return editeurId;
-	}
-
-	public void setEditeurId(int editeurId) {
-		this.editeurId = editeurId;
-	}
+	
 
 	public int getCategorieId() {
 		return categorieId;
@@ -119,6 +115,14 @@ public class LivreDTO {
 
 	public void setAuteursId(List<Integer> auteursId) {
 		this.auteursId = auteursId;
+	}
+
+	public EditeurDTO getEditeurDto() {
+		return editeurDto;
+	}
+
+	public void setEditeurDto(EditeurDTO editeurDto) {
+		this.editeurDto = editeurDto;
 	}
 
 }

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.formation.dto.AuteurDTO;
 import com.formation.entities.Auteur;
 import com.formation.exception.ServiceException;
+import com.formation.mapper.LivreMapper;
 import com.formation.service.AuteurService;
 import com.formation.service.LivreService;
 import com.formation.utils.ControllerConstants;
@@ -34,11 +35,15 @@ import com.formation.utils.Resultat;
 public class AuteurControlleur {
 	@Autowired
 	private AuteurService auteurService;
-	
+
 	@Autowired
 	private LivreService livreService;
+	
+	@Autowired
+	private LivreMapper livreMapper;
 
-	@GetMapping(value="/auteur")
+
+	@GetMapping(value = "/auteur")
 	private Resultat listerAuteurs() {
 		List<AuteurDTO> listeAuteurs = new ArrayList<AuteurDTO>();
 		Resultat resultat = new Resultat();
@@ -66,13 +71,14 @@ public class AuteurControlleur {
 		return resultat;
 	}
 
-	@GetMapping(value="/auteur/{id}")
-	private Resultat getAuteur(@PathVariable(value="id") int id) {
+	@GetMapping(value = "/auteur/{id}")
+	private Resultat getAuteur(@PathVariable(value = "id") int id) {
 		Resultat resultat = new Resultat();
 		try {
 			Auteur auteur = auteurService.get(id);
-			AuteurDTO auteurDto = new AuteurDTO(auteur.getNom(), auteur.getPrenom(), auteur.getBiographie(), auteur.getImagePath());
-			auteurDto.setLivres(livreService.getLivreByAuteur(auteur));
+			AuteurDTO auteurDto = new AuteurDTO(auteur.getNom(), auteur.getPrenom(), auteur.getBiographie(),
+					auteur.getImagePath());
+			auteurDto.setLivres(livreMapper.toDTOs(livreService.getLivreByAuteur(auteur)));
 			resultat.setPayload(auteurDto);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
@@ -89,11 +95,12 @@ public class AuteurControlleur {
 
 	}
 
-	@PutMapping(value="/auteur", consumes=  MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value = "/auteur", consumes = MediaType.APPLICATION_JSON_VALUE)
 	private Resultat ajoutAuteur(@RequestBody AuteurDTO auteurDto) {
 		Resultat resultat = new Resultat();
 		try {
-			Auteur auteur = new Auteur(auteurDto.getNom(), auteurDto.getPrenom(), auteurDto.getBiographie(), auteurDto.getImagePath());
+			Auteur auteur = new Auteur(auteurDto.getNom(), auteurDto.getPrenom(), auteurDto.getBiographie(),
+					auteurDto.getImagePath());
 			auteurService.save(auteur);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
@@ -110,9 +117,8 @@ public class AuteurControlleur {
 		return resultat;
 	}
 
-
 	@PostMapping(value = "/auteur/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	private Resultat updateAuteur(@RequestBody AuteurDTO auteurDto, @PathVariable(value="id") int id){
+	private Resultat updateAuteur(@RequestBody AuteurDTO auteurDto, @PathVariable(value = "id") int id) {
 		Resultat resultat = new Resultat();
 		try {
 			Auteur auteur = auteurService.get(id);
@@ -137,8 +143,8 @@ public class AuteurControlleur {
 		return resultat;
 	}
 
-	@DeleteMapping(value="/auteur/{id}")
-	private Resultat deleteAuteur(@PathVariable(value="id") int id) {
+	@DeleteMapping(value = "/auteur/{id}")
+	private Resultat deleteAuteur(@PathVariable(value = "id") int id) {
 		Resultat resultat = new Resultat();
 		try {
 			auteurService.delete(auteurService.get(id));
@@ -156,7 +162,7 @@ public class AuteurControlleur {
 		}
 		return resultat;
 	}
-	
+
 	@RequestMapping(value = "/imageauteur", method = RequestMethod.GET)
 	public void getImageAsByteArray(@RequestParam String imagePath, HttpServletResponse response,
 			HttpServletRequest request) throws IOException {
@@ -166,6 +172,5 @@ public class AuteurControlleur {
 		response.setContentType(MediaType.IMAGE_JPEG_VALUE);
 		IOUtils.copy(in, response.getOutputStream());
 	}
-	
-	
+
 }
