@@ -23,10 +23,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.formation.dto.AuteurDTO;
 import com.formation.dto.LivreDTO;
 import com.formation.entities.Auteur;
-import com.formation.entities.Categorie;
 import com.formation.entities.Livre;
 import com.formation.exception.ServiceException;
 import com.formation.mapper.EditeurMapper;
@@ -103,17 +101,46 @@ public class LivreControlleur {
 			List<Livre> listeLivres = livreService.getLivreRecommandes();
 
 			listeLivres.forEach(livre -> {
-				LivreDTO livreDto = new LivreDTO(livre.getTitre(), livre.getDescription(), livre.getPrix(),
-						livre.getDatePublication(), livre.getImagePath(), livre.isPopular(), livre.isPeriodic(),
-						(livre.getEditeur() != null)? editeurMapper.editeurToEditeurDTO(livre.getEditeur()) : null, (livre.getCategorie() != null)? livre.getCategorie().getId() : null);
+				LivreDTO livreDto = new LivreDTO(livre.getTitre(), livre.getDescription(), livre.getPrix(), livre.getDatePublication(), livre.getImagePath(), livre.isPopular(), livre.isPeriodic(), null , 0);
 				livreDto.setId(livre.getId());
 				List<Integer> authorIds = new ArrayList<Integer>();
 				livre.getAuteurs().forEach(auteur -> authorIds.add(auteur.getId()));
 				livreDto.setAuteursId(authorIds);
 
 				listeLivre.add(livreDto);
-				resultat.setPayload(listeLivre);
+				
 			});
+			resultat.setPayload(listeLivre);
+			resultat.setSuccess(true);
+			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+		} catch (ServiceException se) {
+			resultat.setSuccess(false);
+			resultat.setMessage(se.getMessage());
+		} catch (Exception e) {
+			resultat.setSuccess(false);
+			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+
+			e.printStackTrace();
+		}
+		return resultat;
+	}
+	
+	@GetMapping(value = "/recherche/{recherche}")
+	public Resultat recherche(@PathVariable(value = "recherche") String recherche) {
+		List<LivreDTO> livresDTO = new ArrayList<LivreDTO>();
+		Resultat resultat = new Resultat();
+		try {
+			List<Livre> livres = livreService.getLivreByRecherche(recherche);
+
+			livres.forEach(livre -> {
+				LivreDTO livreDto = new LivreDTO(livre.getTitre(), livre.getDescription(), livre.getPrix(), livre.getDatePublication(), livre.getImagePath(), livre.isPopular(), livre.isPeriodic(), null , 0);
+				livreDto.setId(livre.getId());
+				List<Integer> authorIds = new ArrayList<Integer>();
+				livre.getAuteurs().forEach(auteur -> authorIds.add(auteur.getId()));
+				livreDto.setAuteursId(authorIds);
+				livresDTO.add(livreDto);
+			});
+			resultat.setPayload(livresDTO);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 		} catch (ServiceException se) {
@@ -138,7 +165,7 @@ public class LivreControlleur {
 			listeLivres.forEach(livre -> {
 				LivreDTO livreDto = new LivreDTO(livre.getTitre(), livre.getDescription(), livre.getPrix(),
 						livre.getDatePublication(), livre.getImagePath(), livre.isPopular(), livre.isPeriodic(),
-						editeurMapper.editeurToEditeurDTO(livre.getEditeur()), livre.getCategorie().getId());
+						null, 0);
 				livreDto.setId(livre.getId());
 				List<Integer> authorIds = new ArrayList<Integer>();
 				livre.getAuteurs().forEach(auteur -> authorIds.add(auteur.getId()));
@@ -171,7 +198,7 @@ public class LivreControlleur {
 			listeLivres.forEach(livre -> {
 				LivreDTO livreDto = new LivreDTO(livre.getTitre(), livre.getDescription(), livre.getPrix(),
 						livre.getDatePublication(), livre.getImagePath(), livre.isPopular(), livre.isPeriodic(),
-						editeurMapper.editeurToEditeurDTO(livre.getEditeur()), livre.getCategorie().getId());
+						null, 0);
 				livreDto.setId(livre.getId());
 				List<Integer> authorIds = new ArrayList<Integer>();
 				livre.getAuteurs().forEach(auteur -> authorIds.add(auteur.getId()));
@@ -204,23 +231,23 @@ public class LivreControlleur {
 			listeLivres.forEach(livre -> {
 				LivreDTO livreDto = new LivreDTO(livre.getTitre(), livre.getDescription(), livre.getPrix(),
 						livre.getDatePublication(), livre.getImagePath(), livre.isPopular(), livre.isPeriodic(),
-						editeurMapper.editeurToEditeurDTO(livre.getEditeur()), livre.getCategorie().getId());
+						null, 0);
 				livreDto.setId(livre.getId());
 				List<Integer> authorIds = new ArrayList<Integer>();
 				livre.getAuteurs().forEach(auteur -> authorIds.add(auteur.getId()));
 				livreDto.setAuteursId(authorIds);
 
 				listeLivre.add(livreDto);
-				resultat.setPayload(listeLivre);
 			});
+			resultat.setPayload(listeLivre);
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage("Récupération des livres OK");
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage("Merde");
 
 			e.printStackTrace();
 		}
