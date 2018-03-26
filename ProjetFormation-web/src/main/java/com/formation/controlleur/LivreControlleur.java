@@ -105,7 +105,7 @@ public class LivreControlleur {
 			listeLivres.forEach(livre -> {
 				LivreDTO livreDto = new LivreDTO(livre.getTitre(), livre.getDescription(), livre.getPrix(),
 						livre.getDatePublication(), livre.getImagePath(), livre.isPopular(), livre.isPeriodic(),
-						editeurMapper.editeurToEditeurDTO(livre.getEditeur()), livre.getCategorie().getId());
+						(livre.getEditeur() != null)? editeurMapper.editeurToEditeurDTO(livre.getEditeur()) : null, (livre.getCategorie() != null)? livre.getCategorie().getId() : null);
 				livreDto.setId(livre.getId());
 				List<Integer> authorIds = new ArrayList<Integer>();
 				livre.getAuteurs().forEach(auteur -> authorIds.add(auteur.getId()));
