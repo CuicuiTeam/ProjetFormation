@@ -113,8 +113,9 @@ public class LivreControlleur {
 				
 
 				listeLivre.add(livreDto);
-				resultat.setPayload(listeLivre);
+				
 			});
+			resultat.setPayload(listeLivre);
 			resultat.setSuccess(true);
 			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
 		} catch (ServiceException se) {
@@ -129,7 +130,35 @@ public class LivreControlleur {
 		return resultat;
 	}
 	
-	
+	@GetMapping(value = "/recherche/{recherche}")
+	public Resultat recherche(@PathVariable(value = "recherche") String recherche) {
+		List<LivreDTO> livresDTO = new ArrayList<LivreDTO>();
+		Resultat resultat = new Resultat();
+		try {
+			List<Livre> livres = livreService.getLivreByRecherche(recherche);
+
+			livres.forEach(livre -> {
+				LivreDTO livreDto = new LivreDTO(livre.getTitre(), livre.getDescription(), livre.getPrix(), livre.getDatePublication(), livre.getImagePath(), livre.isPopular(), livre.isPeriodic(), null , 0);
+				livreDto.setId(livre.getId());
+				List<Integer> authorIds = new ArrayList<Integer>();
+				livre.getAuteurs().forEach(auteur -> authorIds.add(auteur.getId()));
+				livreDto.setAuteursId(authorIds);
+				livresDTO.add(livreDto);
+			});
+			resultat.setPayload(livresDTO);
+			resultat.setSuccess(true);
+			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+		} catch (ServiceException se) {
+			resultat.setSuccess(false);
+			resultat.setMessage(se.getMessage());
+		} catch (Exception e) {
+			resultat.setSuccess(false);
+			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+
+			e.printStackTrace();
+		}
+		return resultat;
+	}
 	
 	@GetMapping(value = "/livre/periodiques")
 	public Resultat listerPeriodiques() {
@@ -214,16 +243,16 @@ public class LivreControlleur {
 				
 
 				listeLivre.add(livreDto);
-				resultat.setPayload(listeLivre);
 			});
+			resultat.setPayload(listeLivre);
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage("Récupération des livres OK");
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage("Merde");
 
 			e.printStackTrace();
 		}
