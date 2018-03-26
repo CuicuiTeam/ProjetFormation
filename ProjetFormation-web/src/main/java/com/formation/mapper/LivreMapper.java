@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.formation.dto.AuteurDTO;
 import com.formation.dto.LivreDTO;
 import com.formation.entities.Livre;
 
@@ -14,6 +15,9 @@ public class LivreMapper {
 	
 	@Autowired
 	private EditeurMapper editeurMapper;
+	
+	@Autowired
+	private AuteurMapper auteurMapper;
 
 	public LivreDTO livreToLivreDTO(Livre livre) {
 		LivreDTO livreDto = new LivreDTO();
@@ -27,9 +31,10 @@ public class LivreMapper {
 		livreDto.setPeriodic(livre.isPeriodic());
 		livreDto.setEditeurDto(editeurMapper.editeurToEditeurDTO(livre.getEditeur()));
 		livreDto.setCategorieId(livre.getCategorie().getId());
-		List<Integer> auteurId = new ArrayList<>();
-		livre.getAuteurs().forEach(a -> auteurId.add(a.getId()));
-		livreDto.setAuteursId(auteurId);
+//		List<Integer> auteurId = new ArrayList<>();
+//		livre.getAuteurs().forEach(a -> auteurId.add(a.getId()));
+		List<AuteurDTO> auteurDtos = auteurMapper.toDTOs(livre.getAuteurs());
+		livreDto.setAuteurs(auteurDtos);
 
 		return livreDto;
 
