@@ -38,7 +38,6 @@ import com.formation.utils.ControllerConstants;
 import com.formation.utils.Resultat;
 
 @RestController
-//@CrossOrigin
 public class LivreControlleur {
 
 	@Autowired
