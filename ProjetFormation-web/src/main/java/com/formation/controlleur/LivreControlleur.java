@@ -240,9 +240,6 @@ public class LivreControlleur {
 //						editeurMapper.editeurToEditeurDTO(livre.getEditeur()), livre.getCategorie().getId());
 //				livreDto.setId(livre.getId());
 				LivreDTO livreDto = livreMapper.livreToLivreDTO(livre);
-				
-				
-
 				listeLivre.add(livreDto);
 			});
 			resultat.setPayload(listeLivre);
@@ -288,7 +285,7 @@ public class LivreControlleur {
 		Resultat resultat = new Resultat();
 		try {
 			Livre newLivre = new Livre(livreDto.getTitre(), livreDto.getDescription(), livreDto.getPrix(),
-					livreDto.getDatePublication(), livreDto.getImagePath(), livreDto.isPeriodic(), livreDto.isPopular());
+					livreDto.getDatePublication(), livreDto.getImagePath(), livreDto.isPopular(), livreDto.isPeriodic());
 //			newLivre.setEditeur(editeurService.get(livreDto.getEditeurId()));
 //			newLivre.setCategorie(categorieService.get(livreDto.getCategorieId()));
 //			newLivre.setAuteurs(auteurService.getAuteursById(livreDto.getAuteursId()));

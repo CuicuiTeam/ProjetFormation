@@ -29,8 +29,8 @@ public class LivreMapper {
 		livreDto.setImagePath(livre.getImagePath());
 		livreDto.setPopular(livre.isPopular());
 		livreDto.setPeriodic(livre.isPeriodic());
-		livreDto.setEditeurDto(editeurMapper.editeurToEditeurDTO(livre.getEditeur()));
-		livreDto.setCategorieId(livre.getCategorie().getId());
+		//livreDto.setEditeurDto(editeurMapper.editeurToEditeurDTO(livre.getEditeur()));
+		//livreDto.setCategorieId(livre.getCategorie().getId());
 //		List<Integer> auteurId = new ArrayList<>();
 //		livre.getAuteurs().forEach(a -> auteurId.add(a.getId()));
 		List<AuteurDTO> auteurDtos = auteurMapper.toDTOs(livre.getAuteurs());
