@@ -138,11 +138,12 @@ public class LivreControlleur {
 			List<Livre> livres = livreService.getLivreByRecherche(recherche);
 
 			livres.forEach(livre -> {
-				LivreDTO livreDto = new LivreDTO(livre.getTitre(), livre.getDescription(), livre.getPrix(), livre.getDatePublication(), livre.getImagePath(), livre.isPopular(), livre.isPeriodic(), null , 0);
-				livreDto.setId(livre.getId());
-				List<Integer> authorIds = new ArrayList<Integer>();
-				livre.getAuteurs().forEach(auteur -> authorIds.add(auteur.getId()));
-				livreDto.setAuteursId(authorIds);
+//				LivreDTO livreDto = new LivreDTO(livre.getTitre(), livre.getDescription(), livre.getPrix(), livre.getDatePublication(), livre.getImagePath(), livre.isPopular(), livre.isPeriodic(), null , 0);
+//				livreDto.setId(livre.getId());
+//				List<Integer> authorIds = new ArrayList<Integer>();
+//				livre.getAuteurs().forEach(auteur -> authorIds.add(auteur.getId()));
+//				livreDto.setAuteurs(auteurs);
+			LivreDTO livreDto = livreMapper.livreToLivreDTO(livre);
 				livresDTO.add(livreDto);
 			});
 			resultat.setPayload(livresDTO);
