@@ -48,7 +48,7 @@ public class AuteurControlleur {
 		List<AuteurDTO> listeAuteurs = new ArrayList<AuteurDTO>();
 		Resultat resultat = new Resultat();
 		try {
-			List<Auteur> auteurs = auteurService.getAll();
+			List<Auteur> auteurs = auteurService.getAuteurAll();
 
 			auteurs.forEach(a -> {
 				AuteurDTO auteurDto = new AuteurDTO(a.getNom(), a.getPrenom(), a.getBiographie(), a.getImagePath());
