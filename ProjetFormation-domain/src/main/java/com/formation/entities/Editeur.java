@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.github.slugify.Slugify;
-
 @Entity
 public class Editeur implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -2,10 +2,7 @@
 
 package com.formation.dao;
 
-import java.io.Serializable;
 import java.util.List;
-
-import com.formation.entities.Livre;
 
 public interface DAOPrincipal<T> {
 	

@@ -3,8 +3,6 @@ package com.formation.dto;
 import java.sql.Date;
 import java.util.List;
 
-import com.formation.entities.Editeur;
-
 public class LivreDTO {
 	private String titre;
 	private String description;

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,13 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.formation.dto.CategorieDTO;
-import com.formation.dto.MembreDTO;
 import com.formation.entities.Categorie;
-import com.formation.entities.Inscription;
-import com.formation.entities.Membre;
 import com.formation.exception.ServiceException;
 import com.formation.service.CategorieService;
-import com.formation.service.LivreService;
 import com.formation.utils.ControllerConstants;
 import com.formation.utils.Resultat;
 
@@ -31,9 +26,6 @@ public class CategorieControlleur {
 	@Autowired
 	private CategorieService categorieService;
 
-	@Autowired
-	private LivreService livreService;
-
 	@PutMapping(value = "/categorie")
 	public Resultat ajoutCategorie(@RequestBody CategorieDTO categorieDto) {
 		Resultat resultat = new Resultat();
@@ -41,14 +33,14 @@ public class CategorieControlleur {
 			Categorie newCategorie = new Categorie(categorieDto.getNom(), categorieDto.getDescription());
 			categorieService.save(newCategorie);
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.AJOUT_CATEGORIE_SUCCESS);
 
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.AJOUT_CATEGORIE_ERROR);
 
 			e.printStackTrace();
 		}
@@ -69,13 +61,13 @@ public class CategorieControlleur {
 				resultat.setPayload(listeCategories);
 			});
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.LISTE_CATEGORIE_SUCCESS);
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.LISTE_CATEGORIE_ERROR);
 
 			e.printStackTrace();
 		}
@@ -91,14 +83,14 @@ public class CategorieControlleur {
 			categorie.setDescription(categorieDto.getDescription());
 			categorieService.save(categorie);
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.MODIF_CATEGORIE_SUCCESS);
 
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.MODIF_CATEGORIE_ERROR);
 
 			e.printStackTrace();
 		}
@@ -111,14 +103,14 @@ public class CategorieControlleur {
 		try {
 			categorieService.delete(categorieService.get(id));
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.SUPPR_CATEGORIE_SUCCESS);
 
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.SUPPR_CATEGORIE_ERROR);
 
 			e.printStackTrace();
 		}

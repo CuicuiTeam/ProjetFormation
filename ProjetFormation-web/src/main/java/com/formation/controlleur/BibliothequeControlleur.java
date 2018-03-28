@@ -40,13 +40,13 @@ public class BibliothequeControlleur {
 				resultat.setPayload(listeBibliotheques);
 			});
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.LISTE_BIBLIO_SUCCESS);
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.LISTE_BIBLIO_ERROR);
 
 			e.printStackTrace();
 		}
@@ -61,13 +61,13 @@ public class BibliothequeControlleur {
 			Bibliotheque biblio = new Bibliotheque(biblioDto.getNom(), biblioDto.getAdresse());
 			bibliothequeService.save(biblio);
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.AJOUT_BIBLIO_SUCCESS);
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.AJOUT_BIBLIO_ERROR);
 
 			e.printStackTrace();
 		}
@@ -85,14 +85,14 @@ public class BibliothequeControlleur {
 
 			bibliothequeService.save(bibliotheque);
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.MODIF_BIBLIO_SUCCESS);
 
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.MODIF_BIBLIO_ERROR);
 
 			e.printStackTrace();
 		}
@@ -107,14 +107,14 @@ public class BibliothequeControlleur {
 			bibliotheque = bibliothequeService.get(biblioDto.getId());
 			bibliothequeService.delete(bibliotheque);
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.SUPPR_BIBLIO_SUCCESS);
 
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.SUPPR_BIBLIO_ERROR);
 
 			e.printStackTrace();
 		}

@@ -17,6 +17,7 @@ public abstract class DAOPrincipalImpl<T> implements DAOPrincipal<T>{
 	@Autowired
 	protected SessionFactory sessionFactory;
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public DAOPrincipalImpl() {
 		Type t = getClass().getGenericSuperclass();
 		ParameterizedType pt = (ParameterizedType) t;
@@ -27,6 +28,7 @@ public abstract class DAOPrincipalImpl<T> implements DAOPrincipal<T>{
 		sessionFactory.getCurrentSession().saveOrUpdate(t);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> getAll() {
 		return (List<T>)sessionFactory.getCurrentSession().createQuery("from "+ type.getName()).getResultList();

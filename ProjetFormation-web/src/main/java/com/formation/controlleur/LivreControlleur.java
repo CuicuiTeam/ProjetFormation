@@ -11,10 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,12 +23,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.formation.dto.LivreDTO;
-import com.formation.entities.Auteur;
 import com.formation.entities.Livre;
 import com.formation.exception.ServiceException;
 import com.formation.mapper.EditeurMapper;
 import com.formation.mapper.LivreMapper;
-import com.formation.service.AuteurService;
 import com.formation.service.CategorieService;
 import com.formation.service.EditeurService;
 import com.formation.service.LivreService;
@@ -44,9 +40,6 @@ public class LivreControlleur {
 	private LivreService livreService;
 
 	@Autowired
-	private AuteurService auteurService;
-
-	@Autowired
 	private CategorieService categorieService;
 
 	@Autowired
@@ -57,46 +50,6 @@ public class LivreControlleur {
 	
 	@Autowired
 	LivreMapper livreMapper;
-
-	//	@RequestMapping("/periodiques")
-	//	private String listePeriodiques(Model model) {
-	//
-	//		model.addAttribute("livres", livreService.getPeriodiques());
-	//		model.addAttribute("titre", "Périodiques");
-	//		return "accueil";
-	//	}
-	//
-	//	@RequestMapping("/categorie/{cat}")
-	//	private String listeByCategorie(@PathVariable(value = "cat") String cat, Model model) {
-	//		model.addAttribute("livres", livreService.getLivreByCat(categorieService.getCategorieByNom(cat)));
-	//		model.addAttribute("titre", categorieService.getCategorieByNom(cat).getNom());
-	//		return "accueil";
-	//	}
-
-	//	@RequestMapping("/auteur/{aut}")
-	//	private String listeByAuteur(@PathVariable(value = "aut") String aut, Model model) {
-	//
-	//		model.addAttribute("livres", livreService.getLivreByAuteur(auteurService.getAuteurBySlug(aut)));
-	//		model.addAttribute("titre",
-	//				auteurService.getAuteurBySlug(aut).getPrenom() + " " + auteurService.getAuteurBySlug(aut).getNom());
-	//		model.addAttribute("auteur", auteurService.getAuteurBySlug(aut));
-	//		return "auteur";
-	//
-	//	}
-
-	//	@RequestMapping(value = "/recherche", method = RequestMethod.POST)
-	//	private String resultatRecherche(HttpServletRequest request, Model model) {
-	//		String motRecherche = request.getParameter("motRecherche");
-	//		model.addAttribute("livres", livreService.getLivreByRecherche(motRecherche));
-	//		model.addAttribute("titre", "Recherche : " + motRecherche);
-	//		return "accueil";
-	//	}
-
-	@ModelAttribute("Livre")
-	public Livre getLivre() {
-
-		return new Livre();
-	}
 
 	@GetMapping(value = "/livre/recommandes")
 	public Resultat listerRecommandes() {
@@ -118,13 +71,13 @@ public class LivreControlleur {
 			});
 			resultat.setPayload(listeLivre);
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.LISTE_LIVRE_RECOMMANDE_SUCCESS);
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.LISTE_LIVRE_RECOMMANDE_ERROR);
 
 			e.printStackTrace();
 		}
@@ -149,13 +102,13 @@ public class LivreControlleur {
 			});
 			resultat.setPayload(livresDTO);
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.RECHERCHE_SUCCESS);
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.RECHERCHE_ERROR);
 
 			e.printStackTrace();
 		}
@@ -182,13 +135,13 @@ public class LivreControlleur {
 				resultat.setPayload(listeLivre);
 			});
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.LISTE_PERIODIQUE_SUCCESS);
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.LISTE_PERIODIQUE_ERROR);
 
 			e.printStackTrace();
 		}
@@ -215,13 +168,13 @@ public class LivreControlleur {
 				resultat.setPayload(listeLivre);
 			});
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.LISTE_PAR_CATEGORIE_SUCCESS);
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.LISTE_PAR_CATEGORIE_ERROR);
 
 			e.printStackTrace();
 		}
@@ -245,13 +198,13 @@ public class LivreControlleur {
 			});
 			resultat.setPayload(listeLivre);
 			resultat.setSuccess(true);
-			resultat.setMessage("Récupération des livres OK");
+			resultat.setMessage(ControllerConstants.LISTE_LIVRE_SUCCESS);
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage("Merde");
+			resultat.setMessage(ControllerConstants.LISTE_LIVRE_ERROR);
 
 			e.printStackTrace();
 		}
@@ -267,13 +220,13 @@ public class LivreControlleur {
 			LivreDTO livreDto = livreMapper.livreToLivreDTO(livre);
 			resultat.setPayload(livreDto);
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.LIVRE_SUCCESS);
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.LIVRE_ERROR);
 
 			e.printStackTrace();
 		}
@@ -293,14 +246,14 @@ public class LivreControlleur {
 			livreService.save(newLivre);
 			resultat.setPayload(livreDto);
 			resultat.setSuccess(true); 
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.AJOUT_LIVRE_SUCCESS);
 
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.AJOUT_LIVRE_ERROR);
 
 			e.printStackTrace();
 		}
@@ -330,14 +283,14 @@ public class LivreControlleur {
 
 			livreService.save(livre);
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.MODIF_LIVRE_SUCCESS);
 
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.MODIF_LIVRE_ERROR);
 
 			e.printStackTrace();
 		}
@@ -352,14 +305,14 @@ public class LivreControlleur {
 			Livre livre = livreService.get(id);
 			livreService.delete(livre);
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.SUPPR_LIVRE_SUCCESS);
 
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.SUPPR_LIVRE_ERROR);
 
 			e.printStackTrace();
 		}

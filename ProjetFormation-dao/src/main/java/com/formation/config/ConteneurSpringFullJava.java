@@ -68,11 +68,13 @@ public class ConteneurSpringFullJava {
                 setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
                 setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
                 setProperty("hibernate.globally_quoted_identifiers", "true");
-                setProperty("hibernate.c3p0.min_size", env.getProperty("hibernate.c3p0.min_size"));
-                setProperty("hibernate.c3p0.max_size", env.getProperty("hibernate.c3p0.max_size"));
-                setProperty("hibernate.c3p0.acquire_increment", env.getProperty("hibernate.c3p0.acquire_increment"));
-                setProperty("hibernate.c3p0.timeout", env.getProperty("hibernate.c3p0.timeout"));
-                setProperty("hibernate.c3p0.max_statements", env.getProperty("hibernate.c3p0.max_statements"));
+//                setProperty("hibernate.c3p0.min_size", env.getProperty("hibernate.c3p0.min_size"));
+//                setProperty("hibernate.c3p0.max_size", env.getProperty("hibernate.c3p0.max_size"));
+//                setProperty("hibernate.c3p0.acquire_increment", env.getProperty("hibernate.c3p0.acquire_increment"));
+//                setProperty("hibernate.c3p0.timeout", env.getProperty("hibernate.c3p0.timeout"));
+//                setProperty("hibernate.c3p0.max_statements", env.getProperty("hibernate.c3p0.max_statements"));
+                setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+                setProperty("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
             }
         };
     }

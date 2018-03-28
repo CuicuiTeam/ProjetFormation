@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.formation.dto.MembreDTO;
-import com.formation.entities.Inscription;
 import com.formation.entities.Membre;
 
 @Component
@@ -20,7 +19,7 @@ public class MembreMapper {
 		membreDTO.setCodePostal(membre.getCodePostal());
 		membreDTO.setEmail(membre.getEmail());
 		membreDTO.setId(membre.getId());
-		List<Integer> ids = new ArrayList<Integer>();
+		//List<Integer> ids = new ArrayList<Integer>();
 //		for (Inscription inscription : membre.getInscriptions()) {
 //
 //			ids.add(inscription.getId());

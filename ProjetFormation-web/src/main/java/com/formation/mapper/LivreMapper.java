@@ -13,8 +13,6 @@ import com.formation.entities.Livre;
 @Component
 public class LivreMapper {
 	
-	@Autowired
-	private EditeurMapper editeurMapper;
 	
 	@Autowired
 	private AuteurMapper auteurMapper;

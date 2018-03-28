@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.formation.dao.CategorieDAO;
 import com.formation.entities.Categorie;
-import com.formation.entities.Membre;
 import com.formation.service.CategorieService;
 
 @Service

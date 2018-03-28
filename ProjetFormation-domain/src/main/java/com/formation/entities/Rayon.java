@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.github.slugify.Slugify;
-
 @Entity
 public class Rayon implements Serializable {
 	

@@ -2,7 +2,6 @@ package com.formation.service;
 
 import java.util.List;
 
-import com.formation.entities.Categorie;
 import com.formation.entities.Editeur;
 
 public interface EditeurService {

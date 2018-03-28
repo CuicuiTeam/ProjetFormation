@@ -1,8 +1,9 @@
 package com.formation.implementation;
 
-import org.hibernate.SessionFactory;
 import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Repository;
+
 import com.formation.dao.InscriptionDAO;
 import com.formation.entities.Inscription;
 

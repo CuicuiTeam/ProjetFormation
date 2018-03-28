@@ -35,7 +35,8 @@ public class Livre implements Serializable {
 	private boolean isPopular;
 	private boolean isPeriodic;
 
-	@ManyToMany(fetch=FetchType.EAGER, mappedBy="livres")
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name = "livre_auteur", joinColumns = { @JoinColumn(name = "livre_id") }, inverseJoinColumns = { @JoinColumn(name = "auteur_id") })
 	private List<Auteur> auteurs;
 
 	@ManyToOne

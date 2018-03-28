@@ -1,15 +1,11 @@
 package com.formation.entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import com.github.slugify.Slugify;
 
 @Entity
 public class Categorie implements Serializable {
@@ -21,8 +17,8 @@ public class Categorie implements Serializable {
 
 	private String nom, description;
 
-	@OneToMany(mappedBy="categorie")
-	private List<Livre> livres;
+//	@OneToMany(mappedBy="categorie")
+//	private List<Livre> livres;
 
 	public Categorie() {
 
@@ -49,13 +45,13 @@ public class Categorie implements Serializable {
 		this.description = description;
 	}
 
-	public List<Livre> getLivres() {
-		return livres;
-	}
-
-	public void setLivres(List<Livre> livres) {
-		this.livres = livres;
-	}
+//	public List<Livre> getLivres() {
+//		return livres;
+//	}
+//
+//	public void setLivres(List<Livre> livres) {
+//		this.livres = livres;
+//	}
 
 	public int getId() {
 		return id;

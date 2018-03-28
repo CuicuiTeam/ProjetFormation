@@ -25,7 +25,5 @@ public interface LivreService {
 	public List<Livre> getAll() throws Exception;
 
 	public Livre get(int id) throws Exception;
-	
-	public Livre getLivreBySlug(String slug) throws Exception;
 
 }

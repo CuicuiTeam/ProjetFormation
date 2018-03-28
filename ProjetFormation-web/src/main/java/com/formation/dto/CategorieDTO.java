@@ -1,11 +1,5 @@
 package com.formation.dto;
 
-import java.util.List;
-
-import javax.persistence.OneToMany;
-
-import com.formation.entities.Livre;
-
 public class CategorieDTO {
 
 	private int id;

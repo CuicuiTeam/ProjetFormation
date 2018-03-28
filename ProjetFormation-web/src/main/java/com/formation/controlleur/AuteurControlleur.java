@@ -1,14 +1,8 @@
 package com.formation.controlleur;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,9 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.formation.dto.AuteurDTO;
@@ -57,13 +48,13 @@ public class AuteurControlleur {
 				resultat.setPayload(listeAuteurs);
 			});
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.LISTE_AUTEURS_SUCCESS);
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.LISTE_AUTEURS_ERROR);
 
 			e.printStackTrace();
 		}
@@ -81,13 +72,13 @@ public class AuteurControlleur {
 			auteurDto.setLivres(livreMapper.toDTOs(livreService.getLivreByAuteur(auteur)));
 			resultat.setPayload(auteurDto);
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.AUTEUR_SUCCESS);
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.AUTEUR_ERROR);
 
 			e.printStackTrace();
 		}
@@ -103,14 +94,14 @@ public class AuteurControlleur {
 					auteurDto.getImagePath());
 			auteurService.save(auteur);
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.AJOUT_AUTEUR_SUCCESS);
 
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.AJOUT_AUTEUR_ERROR);
 
 			e.printStackTrace();
 		}
@@ -129,14 +120,14 @@ public class AuteurControlleur {
 
 			auteurService.save(auteur);
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.MODIF_AUTEUR_SUCCESS);
 
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.MODIF_AUTEUR_ERROR);
 
 			e.printStackTrace();
 		}
@@ -149,28 +140,18 @@ public class AuteurControlleur {
 		try {
 			auteurService.delete(auteurService.get(id));
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.SUPPR_AUTEUR_SUCCESS);
 
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.SUPPR_AUTEUR_ERROR);
 
 			e.printStackTrace();
 		}
 		return resultat;
-	}
-
-	@RequestMapping(value = "/imageauteur", method = RequestMethod.GET)
-	public void getImageAsByteArray(@RequestParam String imagePath, HttpServletResponse response,
-			HttpServletRequest request) throws IOException {
-		System.out.println(imagePath);
-		InputStream in = request.getServletContext().getResourceAsStream("/ressources/images/" + imagePath);
-		System.out.println("=======" + in);
-		response.setContentType(MediaType.IMAGE_JPEG_VALUE);
-		IOUtils.copy(in, response.getOutputStream());
 	}
 
 }

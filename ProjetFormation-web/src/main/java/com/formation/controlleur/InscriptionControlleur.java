@@ -14,16 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.formation.dto.InscriptionDTO;
-import com.formation.entities.Exemplaire;
 import com.formation.entities.Inscription;
 import com.formation.exception.ServiceException;
 import com.formation.service.BibliothequeService;
 import com.formation.service.InscriptionService;
-import com.formation.service.InscriptionService;
 import com.formation.service.MembreService;
 import com.formation.utils.ControllerConstants;
 import com.formation.utils.Resultat;
-import com.formation.dto.InscriptionDTO;
 
 @RestController
 public class InscriptionControlleur {

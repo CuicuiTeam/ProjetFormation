@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.formation.dto.CategorieDTO;
 import com.formation.dto.EditeurDTO;
-import com.formation.entities.Categorie;
 import com.formation.entities.Editeur;
 import com.formation.exception.ServiceException;
 import com.formation.service.EditeurService;
@@ -35,14 +33,14 @@ public class EditeurControlleur {
 			Editeur newEditeur = new Editeur(editeurDto.getNom(), editeurDto.getAdresse());
 			editeurService.save(newEditeur);
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.AJOUT_EDITEUR_SUCCESS);
 
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.AJOUT_EDITEUR_ERROR);
 
 			e.printStackTrace();
 		}
@@ -64,13 +62,13 @@ public class EditeurControlleur {
 
 			});
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.LISTE_EDITEUR_SUCCESS);
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.LISTE_EDITEUR_ERROR);
 
 			e.printStackTrace();
 		}
@@ -87,14 +85,14 @@ public class EditeurControlleur {
 			editeur.setAdresse(editeurDto.getAdresse());
 			editeurService.save(editeur);
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.MODIF_EDITEUR_SUCCESS);
 
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.MODIF_EDITEUR_ERROR);
 
 			e.printStackTrace();
 		}
@@ -107,14 +105,14 @@ public class EditeurControlleur {
 		try {
 			editeurService.delete(editeurService.get(id));
 			resultat.setSuccess(true);
-			resultat.setMessage(ControllerConstants.LOGIN_SUCCESS);
+			resultat.setMessage(ControllerConstants.SUPPR_EDITEUR_SUCCESS);
 
 		} catch (ServiceException se) {
 			resultat.setSuccess(false);
 			resultat.setMessage(se.getMessage());
 		} catch (Exception e) {
 			resultat.setSuccess(false);
-			resultat.setMessage(ControllerConstants.LOGIN_ERROR);
+			resultat.setMessage(ControllerConstants.SUPPR_EDITEUR_ERROR);
 
 			e.printStackTrace();
 		}

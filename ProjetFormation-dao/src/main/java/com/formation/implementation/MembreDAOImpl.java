@@ -10,9 +10,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.formation.dao.MembreDAO;
-import com.formation.entities.Auteur;
-import com.formation.entities.Categorie;
-import com.formation.entities.Livre;
 import com.formation.entities.Membre;
 
 @Repository

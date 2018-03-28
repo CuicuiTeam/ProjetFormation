@@ -20,7 +20,6 @@ public class RayonDTO {
 		this.nom = nom;
 		this.description = description;
 		this.nbrLivres = nbrLivres;
-		this.exemplairesId = exemplairesId;
 		this.bibliothequeId = bibliothequeId;
 	}
 

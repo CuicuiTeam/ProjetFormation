@@ -3,7 +3,6 @@ package com.formation.service;
 import java.util.List;
 
 import com.formation.entities.Membre;
-import com.formation.exception.ServiceException;
 
 public interface MembreService {
 	
@@ -20,7 +19,5 @@ public interface MembreService {
 	public String cryptageMdp(String password) throws Exception;
 
 	public List<Membre> getAll() throws Exception;
-	
-
 
 }

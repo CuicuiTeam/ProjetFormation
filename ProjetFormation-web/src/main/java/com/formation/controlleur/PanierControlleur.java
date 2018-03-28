@@ -23,7 +23,6 @@ import com.formation.dto.PanierDTO;
 import com.formation.entities.Panier;
 import com.formation.exception.ServiceException;
 import com.formation.mapper.LivreMapper;
-import com.formation.mapper.MembreMapper;
 import com.formation.mapper.PanierMapper;
 import com.formation.service.LivreService;
 import com.formation.service.MembreService;
@@ -46,8 +45,6 @@ public class PanierControlleur {
 	@Autowired
 	private PanierMapper panierMapper;
 
-	@Autowired
-	private MembreMapper membreMapper;
 
 	@Autowired
 	private LivreMapper livreMapper;
