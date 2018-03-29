@@ -54,7 +54,7 @@ public class LivreDAOImpl extends DAOPrincipalImpl<Livre> implements LivreDAO {
 	public List<Livre> getLivreByRecherche(String recherche) {
 		// TODO Auto-generated method stub
 		return (List<Livre>) sessionFactory.getCurrentSession()
-				.createQuery("SELECT L FROM Livre L JOIN L.auteurs a WHERE L.titre LIKE :recherche OR L.description LIKE :recherche OR a.nom LIKE :recherche OR a.prenom LIKE :recherche ORDER BY a.nom ASC")
+				.createQuery("SELECT DISTINCT L FROM Livre L JOIN L.auteurs a WHERE L.titre LIKE :recherche OR L.description LIKE :recherche OR a.nom LIKE :recherche OR a.prenom LIKE :recherche ORDER BY a.nom ASC")
 				.setParameter("recherche", "%" + recherche + "%").getResultList();
 	}
 
